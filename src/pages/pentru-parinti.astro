@@ -1,0 +1,191 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Faq from "../components/Faq.astro";
+import { site, u } from "../data/site";
+
+const repere = [
+  {
+    varsta: "12 luni",
+    text: "Răspunde la nume, arată cu degetul spre ce vrea, spune una sau două vorbe cu sens.",
+  },
+  {
+    varsta: "18 luni",
+    text: "Are între 20 și 50 de cuvinte, urmează o instrucțiune simplă fără să îi arătați.",
+  },
+  {
+    varsta: "2 ani",
+    text: "Pune două cuvinte împreună, „mai apă”, „vine mama”. Înțelege mult mai mult decât spune.",
+  },
+  {
+    varsta: "3 ani",
+    text: "Vorbește în propoziții de trei sau patru cuvinte și este înțeles și de persoane din afara familiei.",
+  },
+  {
+    varsta: "4 ani",
+    text: "Povestește ce a făcut la grădiniță, pune întrebări, este înțeles de aproape oricine.",
+  },
+  {
+    varsta: "5 ani",
+    text: "Spune o întâmplare cu început și sfârșit, folosește propoziții lungi, se joacă pe roluri.",
+  },
+];
+
+const semnale = [
+  "La 15 luni nu arată cu degetul spre lucrurile care îl interesează.",
+  "La 2 ani nu pune două cuvinte împreună.",
+  "Pierde cuvinte pe care le avea deja sau nu mai răspunde la nume.",
+  "Nu se uită la dumneavoastră când îi vorbiți și nu caută privirea.",
+  "La 3 ani, cei din afara familiei nu îl înțeleg aproape deloc.",
+  "Are crize care durează peste 20 de minute, aproape zilnic, după vârsta de 3 ani.",
+];
+
+const pregatire = [
+  {
+    titlu: "Ce îi spuneți copilului",
+    text: "„Mergem la o doamnă care are multe jucării și cu care ne jucăm.” Atât. Nu îi spuneți că mergem să vedem de ce nu vorbește, pentru că intră în cabinet cu senzația că ceva e în neregulă cu el.",
+  },
+  {
+    titlu: "Ce aduceți cu dumneavoastră",
+    text: "Carnetul de vaccinări sau orice document medical relevant, evaluările anterioare dacă există și, dacă aveți, un scurt filmuleț de acasă în care copilul se joacă sau vorbește obișnuit.",
+  },
+  {
+    titlu: "La ce oră este bine să veniți",
+    text: "La ora la care copilul este de obicei odihnit și sătul. O evaluare făcută la ora somnului de prânz nu arată cum funcționează el în mod real.",
+  },
+  {
+    titlu: "Dacă plânge sau refuză",
+    text: "Este obișnuit și nu strică nimic. Prima întâlnire poate fi doar despre a se obișnui cu camera. Nu forțăm și nu pierdem ședința.",
+  },
+];
+
+const intrebari = [
+  {
+    q: "Copilul meu vorbește puțin, dar bunicii spun că e devreme. Cine are dreptate?",
+    a: "Ambele situații există. Sunt copii care încep să vorbească mai târziu și recuperează singuri, și copii la care întârzierea se adâncește. Diferența dintre ele nu se vede din afară, ci dintr-o evaluare. Dacă are peste doi ani și nu pune două cuvinte împreună, merită verificat acum, nu peste un an.",
+  },
+  {
+    q: "Cât durează o ședință și cât de des venim?",
+    a: "O ședință durează între 45 și 50 de minute. Pentru terapia de limbaj lucrăm de obicei de două ori pe săptămână, pentru intervenția comportamentală o dată pe săptămână, iar consilierea parentală se face la două săptămâni.",
+  },
+  {
+    q: "Trebuie să stau și eu în cameră?",
+    a: "La copiii mici, da, cel puțin la început. Pe măsură ce copilul se obișnuiește, rămâne singur cu mine, iar dumneavoastră primiți la final un rezumat a ce am lucrat și ce continuăm acasă.",
+  },
+  {
+    q: "Puneți diagnostice?",
+    a: "Evaluarea psihologică clinică descrie nivelul de dezvoltare și funcționarea copilului. Diagnosticul medical, acolo unde este cazul, îl pune medicul psihiatru pediatru, iar eu vă spun clar când este nevoie de o astfel de trimitere.",
+  },
+  {
+    q: "Se poate deconta prin CAS?",
+    a: "Ședințele din cabinet sunt private. Pentru copiii cu certificat de încadrare în grad de handicap există programe decontate, iar la prima discuție vă spun ce variante aveți în județ.",
+  },
+  {
+    q: "Lucrați și online?",
+    a: "Da, pentru consiliere parentală și pentru o parte din ședințele cu copiii mai mari. Evaluarea inițială a unui copil mic se face însă întotdeauna în cabinet.",
+  },
+  {
+    q: "Cât de repede se văd rezultate?",
+    a: "La limbaj, primele schimbări apar de obicei în șase până la opt săptămâni, dacă se lucrează și acasă. La comportament, uneori în trei săptămâni. Vă spun de la început ce este realist în situația copilului dumneavoastră.",
+  },
+  {
+    q: "Ce fac dacă tatăl sau bunicii nu sunt de acord să venim?",
+    a: "Veniți prima dată singur sau singură, fără copil. Discutăm situația și, dacă este cazul, vă ajut să explicați acasă ce presupune, de fapt, o evaluare.",
+  },
+];
+---
+
+<Layout
+  title={`Pentru părinți · ghid și întrebări frecvente · ${site.nume}`}
+  description="Repere de dezvoltare a limbajului pe vârste, semne care cer o evaluare, cum pregătiți copilul pentru prima ședință și răspunsuri la întrebările frecvente ale părinților."
+>
+  <section class="border-b border-line bg-mint-50">
+    <div class="wrap py-14 md:py-20">
+      <h1 class="h1 max-w-[16ch]">Pentru părinți</h1>
+      <p class="lead mt-5 max-w-2xl">
+        Cele mai multe telefoane încep la fel: „nu știu dacă exagerez”. Pagina asta există ca să
+        aveți la ce vă raporta înainte să sunați. Reperele de mai jos sunt orientative, nu
+        diagnostice, iar diferențele între copii de aceeași vârstă sunt normale.
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap py-16 md:py-24">
+    <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div>
+        <h2 class="h2">Repere de limbaj, pe vârste</h2>
+        <p class="mt-5 text-ink-soft">
+          Dacă bifați reperul de la vârsta copilului, cel mai probabil sunteți în grafic. Dacă
+          lipsește constant, merită o discuție.
+        </p>
+      </div>
+      <ul>
+        {
+          repere.map((r) => (
+            <li class="flex flex-col gap-1 border-b border-line py-4 sm:flex-row sm:gap-8">
+              <span class="w-24 shrink-0 font-serif text-[1.05rem] text-mint-900">{r.varsta}</span>
+              <span class="text-ink-soft">{r.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-mint-100 py-16 md:py-24">
+    <div class="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div>
+        <h2 class="h2 max-w-[15ch]">Situații în care nu mai așteptați</h2>
+        <p class="mt-5 max-w-md text-ink">
+          Oricare dintre semnele de mai jos înseamnă că e mai bine să faceți o evaluare acum, chiar
+          dacă totul se dovedește a fi în regulă.
+        </p>
+      </div>
+      <ul class="grid gap-x-10 sm:grid-cols-2">
+        {
+          semnale.map((s) => (
+            <li class="border-b border-mint-300 py-4 leading-relaxed">{s}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap py-16 md:py-24">
+    <div class="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
+      <img
+        src={u("/images/parinti-lectura.webp")}
+        width="1800"
+        height="1344"
+        alt="Fotoliu crem cu o carte deschisă, un pled verde împăturit și o cană de ceai pe un taburet de lemn"
+        loading="lazy"
+        class="aspect-[4/3] w-full rounded-card object-cover lg:sticky lg:top-28"
+      />
+      <div>
+        <h2 class="h2">Înainte de prima ședință</h2>
+        <div class="mt-8 grid gap-6">
+          {
+            pregatire.map((p) => (
+              <div class="border-t border-line pt-4">
+                <h3 class="font-serif text-[1.12rem]">{p.titlu}</h3>
+                <p class="mt-2 text-ink-soft">{p.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 md:py-24">
+    <div class="wrap grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
+      <h2 class="h2">Întrebări frecvente</h2>
+      <Faq intrebari={intrebari} />
+    </div>
+  </section>
+
+  <CtaBand
+    titlu="Tot nu sunteți sigur dacă e cazul?"
+    text="Sunați și povestiți-mi ce ați observat. Dacă e o etapă firească, vă spun asta și nu vă programez degeaba."
+  />
+</Layout>

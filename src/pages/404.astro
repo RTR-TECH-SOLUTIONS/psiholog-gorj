@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { site, nav, waLink, u } from "../data/site";
+---
+
+<Layout
+  title={`Pagina nu a fost găsită · ${site.nume}`}
+  description="Pagina căutată nu există. Reveniți la prima pagină sau scrieți-mi pe WhatsApp."
+>
+  <section class="bg-mint-50">
+    <div class="wrap grid gap-10 py-20 md:py-28 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:gap-16">
+      <div>
+        <p class="font-serif text-[1.05rem] text-mint-700">Eroare 404</p>
+        <h1 class="h1 mt-3 max-w-[16ch]">Pagina aceasta nu există</h1>
+        <p class="lead mt-5 max-w-lg text-ink">
+          Probabil linkul este greșit sau pagina a fost mutată. Mai jos găsiți tot ce este pe site.
+          Dacă vă grăbiți, scrieți-mi direct.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a class="btn btn-primary" href={u("/")}>Înapoi la prima pagină</a>
+          <a
+            class="btn btn-ghost"
+            href={waLink("Bună ziua, aș dori o programare pentru copilul meu.")}
+            target="_blank"
+            rel="noopener">Scrieți pe WhatsApp</a
+          >
+        </div>
+      </div>
+
+      <ul class="border-t border-line">
+        {
+          nav.map((l) => (
+            <li class="border-b border-line">
+              <a
+                href={l.href}
+                class="flex items-center justify-between py-4 transition-colors hover:text-mint-700"
+              >
+                <span class="font-serif text-[1.2rem]">{l.label}</span>
+                <span class="text-mint-700" aria-hidden="true">
+                  /
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,33 @@
+---
+import { site, waLink } from "../data/site";
+
+interface Props {
+  titlu?: string;
+  text?: string;
+}
+
+const {
+  titlu = "Nu sunteți sigur dacă este cazul să veniți?",
+  text = "Sunați și povestiți-mi pe scurt ce vă îngrijorează. Vă spun deschis dacă are sens o evaluare sau dacă e ceva firesc pentru vârsta copilului.",
+} = Astro.props;
+---
+
+<section class="bg-mint-100">
+  <div class="wrap grid gap-8 py-14 md:grid-cols-[1.3fr_1fr] md:items-center md:py-20">
+    <div>
+      <h2 class="h2">{titlu}</h2>
+      <p class="lead mt-4 max-w-xl text-ink">{text}</p>
+    </div>
+    <div class="flex flex-col gap-3 sm:flex-row md:flex-col md:items-end">
+      <a
+        class="btn btn-primary"
+        href={waLink("Bună ziua, aș dori să discutăm despre o programare.")}
+        target="_blank"
+        rel="noopener">Scrieți pe WhatsApp</a
+      >
+      <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}
+        >Sunați la {site.telefonAfisat}</a
+      >
+    </div>
+  </div>
+</section>

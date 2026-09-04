@@ -1,0 +1,61 @@
+---
+import { site, nav } from "../data/site";
+const an = new Date().getFullYear();
+---
+
+<footer class="border-t border-line bg-mint-50">
+  <div class="wrap grid gap-10 py-14 md:grid-cols-3 md:gap-12 md:py-16">
+    <div>
+      <p class="font-serif text-[1.4rem] leading-tight">{site.nume}</p>
+      <p class="mt-1 text-[0.72rem] uppercase tracking-[0.14em] text-ink-soft">
+        {site.titulatura}
+      </p>
+      <p class="mt-4 max-w-xs text-[0.95rem] text-ink-soft">
+        {site.subtitlu}, {site.oras}. Evaluare și terapie pentru copii, consiliere pentru
+        părinți.
+      </p>
+    </div>
+
+    <div class="text-[0.95rem]">
+      <h2 class="mb-3 font-sans text-[0.72rem] uppercase tracking-[0.14em] text-ink-soft">
+        Cabinet
+      </h2>
+      <address class="not-italic leading-relaxed">
+        {site.adresa}<br />
+        {site.judet}
+      </address>
+      <p class="mt-3 leading-relaxed">
+        <a class="link-u" href={`tel:${site.telefon.replace(/\s/g, "")}`}>{site.telefonAfisat}</a
+        ><br />
+        <a class="link-u" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+
+    <div class="text-[0.95rem]">
+      <h2 class="mb-3 font-sans text-[0.72rem] uppercase tracking-[0.14em] text-ink-soft">
+        Program
+      </h2>
+      <ul class="leading-relaxed">
+        {
+          site.program.map((p) => (
+            <li class="flex justify-between gap-6 border-b border-line/70 py-1.5 last:border-0">
+              <span>{p.zi}</span>
+              <span class="text-ink-soft">{p.ore}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-line/80">
+    <div
+      class="wrap flex flex-col gap-4 py-6 text-[0.88rem] text-ink-soft sm:flex-row sm:items-center sm:justify-between"
+    >
+      <nav aria-label="Navigare footer" class="flex flex-wrap gap-x-6 gap-y-2">
+        {nav.map((item) => <a class="hover:text-ink" href={item.href}>{item.label}</a>)}
+      </nav>
+      <p>&copy; {an} Cabinet individual de psihologie {site.nume}, {site.oras}.</p>
+    </div>
+  </div>
+</footer>

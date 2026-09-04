@@ -1,0 +1,404 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Faq from "../components/Faq.astro";
+import { site, waLink, u } from "../data/site";
+import { servicii } from "../data/servicii";
+
+const principale = servicii.filter((s) => s.imagine);
+const secundare = servicii.filter((s) => !s.imagine);
+
+const ingrijorari = [
+  "Are peste doi ani și încă nu vorbește sau spune foarte puține cuvinte.",
+  "Vorbește, dar îl înțelegeți doar dumneavoastră, nu și ceilalți.",
+  "Crizele durează mult și se repetă de câteva ori pe zi.",
+  "Se joacă singur și se ferește de ceilalți copii.",
+  "La grădiniță vi se spune că nu stă locului și nu urmează regulile.",
+  "A trecut printr-o schimbare mare: o mutare, o despărțire, o pierdere, un frate nou.",
+];
+
+const pasi = [
+  {
+    nr: "01",
+    titlu: "Discutăm la telefon",
+    text: "Îmi povestiți pe scurt ce vă îngrijorează. Stabilim dacă este nevoie de o evaluare, de o discuție doar cu dumneavoastră sau de o trimitere către alt specialist.",
+  },
+  {
+    nr: "02",
+    titlu: "Prima întâlnire, fără copil",
+    text: "Ne vedem doar noi doi, ca să pot afla istoricul dezvoltării fără ca cel mic să audă discuția despre el. Durează în jur de 50 de minute.",
+  },
+  {
+    nr: "03",
+    titlu: "Întâlnirea cu copilul",
+    text: "Copilul vine în cabinet și ne jucăm. Din joc adun informațiile de care am nevoie. La final primiți un plan clar, cu obiective și un termen la care le reevaluăm.",
+  },
+];
+
+// TODO(real): text de confirmat cu clienta. Sunt practici uzuale, dar trebuie să fie ale ei.
+const trimiteri = [
+  {
+    eticheta: "Auzul, întâi",
+    text: "Înainte să începem terapia limbajului vă cer un control ORL și o audiogramă. Un copil care aude prost nu are o problemă de limbaj, iar ședințele la mine nu ar schimba nimic.",
+  },
+  {
+    eticheta: "Medicație și diagnostic medical",
+    text: "Nu pun diagnostice medicale și nu recomand tratament. Când datele arată în direcția asta, vă îndrum către medicul neurolog sau psihiatru pediatru și continuăm împreună cu el.",
+  },
+  {
+    eticheta: "Logopedie propriu-zisă",
+    text: "Dacă problema ține strict de pronunția unor sunete la un copil care vorbește altfel bine, treaba este a logopedului. Vă spun la cine să mergeți.",
+  },
+  {
+    eticheta: "Când nu e nimic de intervenit",
+    text: "Se întâmplă des. Dacă după prima întâlnire consider că este o etapă firească de dezvoltare, vă spun asta și ne oprim. Nu încep o terapie care nu are ce să rezolve.",
+  },
+];
+
+const onlineMerge = [
+  "Consilierea parentală și ghidajul pentru ce faceți acasă.",
+  "Ședințele de plan și reevaluările, după ce ne-am văzut o dată în cabinet.",
+  "Întâlnirile cu adulții.",
+  "Situația în care un părinte este plecat din țară și vrea să rămână în temă.",
+];
+
+const onlineCabinet = [
+  "Prima evaluare a unui copil mic.",
+  "Terapia limbajului sub patru ani.",
+  "Orice presupune material de lucru pe masă, în fața copilului.",
+];
+
+// TODO(real): testimoniale de înlocuit cu unele reale, cu acordul părinților.
+const testimoniale = [
+  {
+    text: "Băiatul meu avea trei ani și jumătate și spunea cinci cuvinte. După patru luni de ședințe făcea propoziții scurte. Cel mai mult m-a ajutat că mi s-a explicat exact ce să fac acasă, în fiecare zi, fără să transform totul în lecție.",
+    autor: "A. M., mama unui băiețel de 4 ani",
+  },
+  {
+    text: "Am venit pentru crizele de la culcare, care țineau uneori și o oră. Nu ni s-a spus că exagerăm și nici nu ni s-au dat sfaturi generale. Am primit un plan, l-am ținut trei săptămâni și s-a schimbat.",
+    autor: "C. și R., părinții unei fetițe de 5 ani",
+  },
+  {
+    text: "Locuim la 50 de kilometri de Târgu Jiu și nu puteam veni săptămânal. Am făcut evaluarea în cabinet și restul întâlnirilor pe video. A mers, pentru că mie mi s-a explicat ce am de făcut, nu copilului.",
+    autor: "D. P., tatăl unui băiat de 6 ani",
+  },
+];
+
+const intrebari = [
+  {
+    q: "De la ce vârstă pot aduce copilul?",
+    a: "De la 2 ani. La vârstele mici, o parte importantă din lucru se face cu părintele, pentru că schimbarea se întâmplă în rutina de acasă, nu doar în cele 50 de minute din cabinet.",
+  },
+  {
+    q: "Cât durează o evaluare completă?",
+    a: "De obicei două sau trei întâlniri, plus o ședință separată în care vă explic rezultatele. Raportul scris ajunge la dumneavoastră în maximum cinci zile lucrătoare.",
+  },
+  {
+    q: "Trebuie să vin cu bilet de trimitere?",
+    a: "Nu. Pentru ședințele private nu aveți nevoie de trimitere. Dacă aveți deja evaluări sau documente de la medic, aduceți-le, ne ajută să nu repetăm ce s-a făcut.",
+  },
+  {
+    q: "Ce fac dacă nu sunt sigur că este ceva serios?",
+    a: "Sunați. Multe dintre îngrijorările părinților țin de o etapă firească de dezvoltare, iar o discuție de zece minute lămurește asta. Când chiar este nevoie de intervenție, cu cât începem mai devreme, cu atât e mai simplu.",
+  },
+];
+---
+
+<Layout
+  title={`${site.nume} · Psiholog copii ${site.oras}, ${site.judet}`}
+  description={`Evaluare psihologică, terapia limbajului și intervenție comportamentală pentru copii în ${site.oras}, ${site.judet}. Consiliere parentală și evaluare pentru adulți.`}
+>
+  <!-- Hero -->
+  <section class="bg-mint-100">
+    <div class="mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
+      <div class="order-2 flex items-center lg:order-1">
+        <div
+          class="w-full px-5 py-12 md:px-10 lg:py-24 xl:pl-[max(2.5rem,calc((100vw-72rem)/2))] xl:pr-16"
+        >
+          <h1 class="h1 max-w-[15ch]">Evaluare și terapie pentru copii, în {site.oras}</h1>
+          <p class="lead mt-6 max-w-lg text-ink">
+            Sunt {site.nume}, psiholog clinician. Lucrez cu copii de la 2 ani și cu părinții lor:
+            evaluare psihologică, stimularea limbajului, intervenție comportamentală. Prima
+            discuție este despre ce vă îngrijorează, nu despre etichete.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              class="btn btn-primary"
+              href={waLink("Bună ziua, aș dori o programare pentru copilul meu.")}
+              target="_blank"
+              rel="noopener">Programează o discuție</a
+            >
+            <a class="btn btn-ghost" href={u("/servicii")}>Vezi serviciile</a>
+          </div>
+          <p class="mt-8 text-[0.9rem] text-ink-soft">
+            Psiholog clinician cu drept de liberă practică, membru COPSI. Cabinet în {site.oras},
+            ședințe și online.
+          </p>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2">
+        <img
+          src={u("/images/hero-copil.webp")}
+          width="1800"
+          height="1344"
+          alt="Copil de patru ani așezat pe covor în cabinet, jucându-se cu un cub de sortat forme, alături de terapeut"
+          class="h-[38vh] w-full object-cover object-[60%_center] sm:h-[46vh] lg:h-full lg:min-h-[34rem]"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Bandă de încredere -->
+  <section class="border-b border-line">
+    <div class="wrap grid gap-y-6 py-8 sm:grid-cols-2 md:grid-cols-4 md:gap-x-8 md:py-9">
+      <div class="md:border-r md:border-line md:pr-8">
+        <p class="font-serif text-[1.6rem] leading-none">De la 2 ani</p>
+        <p class="mt-1.5 text-[0.92rem] text-ink-soft">vârsta de la care evaluez copiii</p>
+      </div>
+      <div class="md:border-r md:border-line md:pr-8">
+        <p class="font-serif text-[1.6rem] leading-none">COPSI</p>
+        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
+          psihologie clinică, drept de liberă practică
+        </p>
+      </div>
+      <div class="md:border-r md:border-line md:pr-8">
+        <p class="font-serif text-[1.6rem] leading-none">{site.oras}</p>
+        <p class="mt-1.5 text-[0.92rem] text-ink-soft">cabinet propriu, în județul {site.judet}</p>
+      </div>
+      <div>
+        <p class="font-serif text-[1.6rem] leading-none">Online</p>
+        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
+          pentru părinții din județ sau plecați din țară
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Îngrijorări -->
+  <section class="wrap py-16 md:py-24">
+    <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+      <div>
+        <h2 class="h2 max-w-[14ch]">Când merită să cereți o părere</h2>
+        <p class="mt-5 max-w-md text-ink-soft">
+          Nu toate lucrurile de mai jos înseamnă o problemă. Unele înseamnă doar o etapă. O
+          evaluare vă spune exact care dintre ele este cazul copilului dumneavoastră.
+        </p>
+      </div>
+      <ul class="grid gap-x-10 gap-y-0 sm:grid-cols-2">
+        {
+          ingrijorari.map((text) => (
+            <li class="border-b border-line py-4 text-[1rem] leading-relaxed">{text}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Servicii -->
+  <section class="bg-cream py-16 md:py-24">
+    <div class="wrap">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="h2">Cu ce vă pot ajuta</h2>
+        <a class="link-u text-[0.98rem]" href={u("/servicii")}>Toate serviciile și cum decurg</a>
+      </div>
+
+      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
+        {
+          principale.map((s) => (
+            <article class="flex h-full flex-col">
+              <a href={u(`/servicii#${s.slug}`)} class="group block">
+                <img
+                  src={u(s.imagine)}
+                  width="1800"
+                  height="1344"
+                  alt={s.imagineAlt}
+                  loading="lazy"
+                  class="aspect-[4/5] w-full rounded-card object-cover"
+                />
+                <h3 class="mt-5 font-serif text-[1.22rem] leading-snug">{s.titlu}</h3>
+              </a>
+              <p class="mt-2.5 text-[0.95rem] text-ink-soft">{s.scurt}</p>
+              <a class="link-u mt-auto inline-block pt-3.5 text-[0.92rem]" href={u(`/servicii#${s.slug}`)}>
+                Cum decurge
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-14 grid gap-8 border-t border-line pt-10 sm:grid-cols-2 md:gap-14">
+        {
+          secundare.map((s) => (
+            <article>
+              <h3 class="font-serif text-[1.22rem] leading-snug">{s.titlu}</h3>
+              <p class="mt-2 text-[0.96rem] text-ink-soft">{s.scurt}</p>
+              <a class="link-u mt-3 inline-block text-[0.92rem]" href={u(`/servicii#${s.slug}`)}>
+                Detalii
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Despre -->
+  <section class="wrap py-16 md:py-24">
+    <div class="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <!-- TODO(real): de înlocuit cu fotografia reală a clientei -->
+      <img
+        src={u("/images/portret-ana.webp")}
+        width="1120"
+        height="1500"
+        alt="Ana, psiholog clinician, așezată în fotoliul din cabinet"
+        loading="lazy"
+        class="aspect-[4/5] w-full rounded-card object-cover object-top"
+      />
+      <div>
+        <h2 class="h2">Despre mine</h2>
+        <p class="mt-5 text-ink-soft">
+          Lucrez cu copii, în cea mai mare parte cu cei care încep să vorbească târziu sau greu. Am
+          pornit din practica de psihologie clinică și am continuat cu formări în terapia
+          verbal-motorie a limbajului și în intervenția comportamentală, pentru că astea sunt
+          lucrurile cu care veneau părinții la mine cel mai des.
+        </p>
+        <p class="mt-4 text-ink-soft">
+          Nu lucrez cu diagnostice puse din ușă. Prima dată aflu cum arată o zi obișnuită acasă, ce
+          s-a încercat deja și ce vă doriți să se schimbe. De acolo construim.
+        </p>
+        <ul class="mt-7 grid gap-x-8 gap-y-2 text-[0.96rem] sm:grid-cols-2">
+          <li class="border-b border-line py-2">Psihologie clinică, drept de liberă practică</li>
+          <li class="border-b border-line py-2">Terapia VML, limbaj verbal-motor</li>
+          <li class="border-b border-line py-2">Intervenție comportamentală aplicată</li>
+          <li class="border-b border-line py-2">Consiliere parentală</li>
+        </ul>
+        <a class="btn btn-ghost mt-8" href={u("/despre")}>Formarea și felul în care lucrez</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cum decurge -->
+  <section class="bg-mint-50 py-16 md:py-24">
+    <div class="wrap">
+      <div class="grid items-end gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        <h2 class="h2 max-w-[18ch]">Cum decurge, de la primul telefon</h2>
+        <img
+          src={u("/images/hero-cabinet.webp")}
+          width="1800"
+          height="1005"
+          alt="Cabinetul: masă rotundă joasă, două scaune mici și rafturi cu jucării de lemn"
+          loading="lazy"
+          class="aspect-[16/10] w-full rounded-card object-cover"
+        />
+      </div>
+      <div class="mt-10 grid gap-10 md:grid-cols-3 md:gap-12">
+        {
+          pasi.map((p) => (
+            <div class="border-t border-mint-300 pt-5">
+              <p class="font-serif text-[0.95rem] text-mint-700">{p.nr}</p>
+              <h3 class="h3 mt-2">{p.titlu}</h3>
+              <p class="mt-3 text-[0.98rem] text-ink-soft">{p.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Când vă îndrum mai departe -->
+  <section class="wrap py-16 md:py-24">
+    <h2 class="h2 max-w-[20ch]">Ce nu fac și când vă îndrum mai departe</h2>
+    <p class="mt-5 max-w-2xl text-ink-soft">
+      Un psiholog nu rezolvă tot, iar unele lucruri se rezolvă în altă parte, mai repede. Prefer să
+      vă spun asta de la început decât să pierdeți luni de ședințe degeaba.
+    </p>
+    <dl class="mt-10 border-t border-line">
+      {
+        trimiteri.map((t) => (
+          <div class="grid gap-1.5 border-b border-line py-5 sm:grid-cols-[0.32fr_1fr] sm:gap-8 sm:py-6">
+            <dt class="font-serif text-[1.1rem] leading-snug">{t.eticheta}</dt>
+            <dd class="max-w-3xl text-[0.99rem] text-ink-soft">{t.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <!-- Ședințe online -->
+  <section class="bg-cream py-16 md:py-24">
+    <div class="wrap grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
+      <img
+        src={u("/images/sedinte-online.webp")}
+        width="1800"
+        height="1344"
+        alt="Ședință online: laptop deschis pe o masă de lemn, caiet de notițe alături, raft cu jucării de lemn în fundal"
+        loading="lazy"
+        class="aspect-[4/3] w-full rounded-card object-cover"
+      />
+      <div>
+        <h2 class="h2 max-w-[18ch]">Ședințe online, când drumul până la cabinet e prea lung</h2>
+        <p class="mt-5 max-w-xl text-ink-soft">
+          Județul e întins, iar mulți părinți lucrează în altă țară. Pentru situațiile astea lucrez
+          pe video, cu aceleași reguli ca în cabinet. Vă trebuie doar un telefon sau un laptop cu
+          cameră și o jumătate de oră în care să nu fiți întrerupt.
+        </p>
+        <div class="mt-8 grid gap-8 sm:grid-cols-2 sm:gap-10">
+          <div>
+            <h3 class="font-serif text-[1.05rem]">Merge bine online</h3>
+            <ul class="mt-3">
+              {
+                onlineMerge.map((t) => (
+                  <li class="border-b border-line py-2.5 text-[0.95rem] text-ink-soft">{t}</li>
+                ))
+              }
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-serif text-[1.05rem]">Se face doar în cabinet</h3>
+            <ul class="mt-3">
+              {
+                onlineCabinet.map((t) => (
+                  <li class="border-b border-line py-2.5 text-[0.95rem] text-ink-soft">{t}</li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimoniale -->
+  <section class="wrap py-16 md:py-24">
+    <h2 class="h2">Ce spun părinții</h2>
+    <div class="mt-10 grid gap-10 md:grid-cols-3 md:gap-10">
+      {
+        testimoniale.map((t) => (
+          <figure class="border-t border-line pt-6">
+            <blockquote class="font-serif text-[1.12rem] leading-relaxed md:text-[1.16rem]">
+              {t.text}
+            </blockquote>
+            <figcaption class="mt-4 text-[0.9rem] text-ink-soft">{t.autor}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="wrap pb-16 md:pb-24">
+    <div class="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
+      <h2 class="h2">Întrebări frecvente</h2>
+      <div>
+        <Faq intrebari={intrebari} />
+        <a class="link-u mt-6 inline-block text-[0.95rem]" href={u("/pentru-parinti")}
+          >Mai multe răspunsuri, în secțiunea pentru părinți</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

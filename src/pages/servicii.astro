@@ -1,0 +1,177 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { site, waLink, u } from "../data/site";
+import { servicii, publicLabels } from "../data/servicii";
+
+const filtre = [
+  { val: "toate", label: "Toate" },
+  { val: "copii", label: publicLabels.copii },
+  { val: "parinti", label: publicLabels.parinti },
+  { val: "adulti", label: publicLabels.adulti },
+];
+---
+
+<Layout
+  title={`Servicii · ${site.nume}, psiholog copii ${site.oras}`}
+  description="Evaluare psihologică clinică, stimularea limbajului și terapia VML, intervenție comportamentală, abilități sociale și emoționale, consiliere parentală și evaluare pentru adulți."
+>
+  <section class="border-b border-line bg-mint-50">
+    <div class="wrap py-14 md:py-20">
+      <h1 class="h1 max-w-[16ch]">Servicii</h1>
+      <p class="lead mt-5 max-w-2xl">
+        Fiecare serviciu de mai jos începe cu aceeași întrebare: ce anume vă îngrijorează, concret,
+        în ziua de azi. Mai jos găsiți pentru cine este potrivit fiecare, cum decurge și cât
+        durează.
+      </p>
+    </div>
+  </section>
+
+  <div class="wrap py-10 md:py-14">
+    <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filtrează serviciile">
+      {
+        filtre.map((f, i) => (
+          <button
+            type="button"
+            class="filtru rounded-btn border border-line px-4 py-2 text-[0.93rem] transition-colors hover:border-mint-500 aria-[pressed=true]:border-clay aria-[pressed=true]:bg-clay aria-[pressed=true]:text-white"
+            data-filtru={f.val}
+            aria-pressed={i === 0 ? "true" : "false"}
+          >
+            {f.label}
+          </button>
+        ))
+      }
+    </div>
+
+    <p class="sr-only" role="status" id="filtru-status"></p>
+
+    <div class="mt-12 flex flex-col gap-16 md:gap-24">
+      {
+        servicii.map((s, i) => (
+          <article id={s.slug} class="serviciu scroll-mt-28" data-public={s.public.join(" ")}>
+            <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+              <div class={s.imagine && i % 2 === 1 ? "lg:order-2" : ""}>
+                {s.imagine ? (
+                  <img
+                    src={u(s.imagine)}
+                    width="1800"
+                    height="1344"
+                    alt={s.imagineAlt}
+                    loading="lazy"
+                    class="aspect-[4/3] w-full rounded-card object-cover lg:sticky lg:top-28"
+                  />
+                ) : (
+                  <div class="lg:sticky lg:top-28">
+                    <p class="text-[0.85rem] text-mint-700">
+                      {s.public.map((p) => publicLabels[p]).join(" · ")}
+                    </p>
+                    <h2 class="h2 mt-3">{s.titlu}</h2>
+                    <p class="lead mt-4">{s.scurt}</p>
+                  </div>
+                )}
+              </div>
+
+              <div>
+                {s.imagine && (
+                  <>
+                    <p class="text-[0.85rem] text-mint-700">
+                      {s.public.map((p) => publicLabels[p]).join(" · ")}
+                    </p>
+                    <h2 class="h2 mt-3">{s.titlu}</h2>
+                    <p class="lead mt-4">{s.scurt}</p>
+                  </>
+                )}
+
+                <h3 class={`font-serif text-[1.1rem] ${s.imagine ? "mt-8" : ""}`}>
+                  Pentru cine este
+                </h3>
+                <p class="mt-2 max-w-2xl text-ink-soft">{s.pentruCine}</p>
+
+                <h3 class="mt-6 font-serif text-[1.1rem]">Cum decurge</h3>
+                <ol class="mt-2 max-w-2xl">
+                  {s.cumDecurge.map((pas, idx) => (
+                    <li class="flex gap-4 border-b border-line py-3 last:border-0">
+                      <span class="font-serif text-mint-700">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <span class="text-ink-soft">{pas}</span>
+                    </li>
+                  ))}
+                </ol>
+
+                <p class="mt-5 text-[0.95rem]">
+                  <span class="text-ink-soft">Durata:</span> {s.durata}
+                </p>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <p id="filtru-gol" hidden class="py-10 text-center text-ink-soft">
+      Nu am servicii listate pentru această categorie.
+    </p>
+  </div>
+
+  <!-- Durate și tarife -->
+  <!-- TODO(real): de înlocuit paragraful cu lista reală de tarife, după ce le comunică clienta. -->
+  <section class="border-t border-line bg-mint-50 py-16 md:py-20">
+    <div class="wrap grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+      <div>
+        <h2 class="h2 max-w-[14ch]">Cât durează și cât costă</h2>
+        <p class="mt-5 max-w-md text-ink-soft">
+          Tariful vi-l spun la telefon sau pe WhatsApp înainte de programare, ca să știți dinainte
+          la ce să vă așteptați. Discuția în care îmi povestiți ce se întâmplă nu se taxează. Plata
+          se face la fiecare ședință, în numerar sau prin transfer.
+        </p>
+        <a
+          class="btn btn-ghost mt-7"
+          href={waLink("Bună ziua, aș dori să știu tariful pentru o evaluare.")}
+          target="_blank"
+          rel="noopener">Întrebați de tarif pe WhatsApp</a
+        >
+      </div>
+      <dl class="border-t border-line">
+        {
+          servicii.map((s) => (
+            <div class="grid gap-1 border-b border-line py-4 sm:grid-cols-[1fr_1fr] sm:items-baseline sm:gap-8">
+              <dt class="font-serif text-[1.08rem] leading-snug">{s.titlu}</dt>
+              <dd class="text-[0.95rem] text-ink-soft">{s.durata}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <CtaBand
+    titlu="Nu știți de care dintre ele aveți nevoie?"
+    text="Este normal, iar alegerea nu vă aparține dumneavoastră. Sunați, îmi spuneți ce se întâmplă acasă și vă spun eu de unde ar fi bine să începem."
+  />
+</Layout>
+
+<script>
+  const butoane = document.querySelectorAll<HTMLButtonElement>(".filtru");
+  const articole = document.querySelectorAll<HTMLElement>(".serviciu");
+  const gol = document.getElementById("filtru-gol");
+  const status = document.getElementById("filtru-status");
+
+  butoane.forEach((buton) => {
+    buton.addEventListener("click", () => {
+      const val = buton.dataset.filtru ?? "toate";
+      butoane.forEach((b) => b.setAttribute("aria-pressed", String(b === buton)));
+
+      let vizibile = 0;
+      articole.forEach((art) => {
+        const publicuri = (art.dataset.public ?? "").split(" ");
+        const arata = val === "toate" || publicuri.includes(val);
+        art.hidden = !arata;
+        if (arata) vizibile++;
+      });
+
+      if (gol) gol.hidden = vizibile > 0;
+      if (status) status.textContent = `${vizibile} servicii afișate.`;
+    });
+  });
+</script>
