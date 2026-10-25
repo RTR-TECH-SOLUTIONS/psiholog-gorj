@@ -1,0 +1,80 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { site, u } from "../../data/site";
+
+export async function getStaticPaths() {
+  const articole = await getCollection("blog", ({ data }) => !data.ciorna);
+  return articole.map((articol) => ({ params: { slug: articol.id }, props: { articol } }));
+}
+
+const { articol } = Astro.props;
+const { Content } = await render(articol);
+
+const dataRo = articol.data.data.toLocaleDateString("ro-RO", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+const schemaArticol = {
+  "@type": "BlogPosting",
+  headline: articol.data.titlu,
+  description: articol.data.descriere,
+  datePublished: articol.data.data.toISOString(),
+  inLanguage: "ro-RO",
+  author: { "@type": "Person", name: articol.data.autor },
+  mainEntityOfPage: Astro.url.href,
+};
+---
+
+<Layout
+  title={`${articol.data.titlu} · ${site.nume}`}
+  description={articol.data.descriere}
+  noindex={!site.blogActiv}
+  schemaSuplimentar={schemaArticol}
+>
+  <article>
+    <section class="border-b border-line bg-mint-50">
+      <div class="wrap py-12 md:py-16">
+        <p class="text-[0.85rem] text-mint-700">
+          <a class="link-u" href={u("/blog")}>Articole pentru părinți</a>
+        </p>
+        <h1 class="h2 mt-3 max-w-[24ch]">{articol.data.titlu}</h1>
+        <p class="mt-4 text-[0.92rem] text-ink-soft">
+          <time datetime={articol.data.data.toISOString()}>{dataRo}</time> · {articol.data.autor}
+        </p>
+      </div>
+    </section>
+
+    {
+      articol.data.imagine && (
+        <div class="wrap pt-10 md:pt-14">
+          <Image
+            src={articol.data.imagine}
+            widths={[640, 960, 1280]}
+            sizes="(min-width: 1024px) 70vw, 100vw"
+            alt={articol.data.imagineAlt ?? ""}
+            loading="eager"
+            class="aspect-[16/9] w-full max-w-4xl rounded-card object-cover"
+          />
+        </div>
+      )
+    }
+
+    <section class="wrap py-12 md:py-16">
+      <div class="articol max-w-2xl">
+        <Content />
+      </div>
+
+      <p class="mt-12 max-w-2xl border-t border-line pt-6 text-[0.92rem] text-ink-soft">
+        Textul de mai sus este o informare generală și nu înlocuiește o evaluare. Dacă ceva din el
+        seamănă cu situația copilului dumneavoastră, sunați la {site.telefonAfisat}.
+      </p>
+    </section>
+  </article>
+
+  <CtaBand />
+</Layout>

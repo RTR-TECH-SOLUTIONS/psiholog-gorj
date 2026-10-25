@@ -1,0 +1,101 @@
+---
+import { site, u } from "../data/site";
+// Bannerul apare o singură dată, până când vizitatorul alege. Alegerea se ține în
+// localStorage, nu într-un cookie, ca site-ul să nu scrie nimic în cookie-uri de la sine.
+// Analytics se încarcă numai după un „Accept", și numai dacă există un ID configurat.
+---
+
+<div
+  id="banner-cookies"
+  hidden
+  role="region"
+  aria-label="Preferințe privind cookie-urile"
+  class="fixed inset-x-0 bottom-[4.6rem] z-40 border-t border-line bg-cream md:bottom-0"
+  data-ga={site.analyticsGa4}
+>
+  <div class="wrap flex flex-col gap-4 py-4 md:flex-row md:items-center md:justify-between md:gap-8">
+    <p class="max-w-2xl text-[0.92rem] text-ink-soft">
+      Site-ul nu folosește cookie-uri de reclamă. Aș vrea doar să văd, în mod anonim, câți părinți
+      ajung aici și ce citesc. Alegerea o schimbați oricând în{" "}
+      <a class="link-u" href={u("/cookies")}>politica de cookies</a>.
+    </p>
+    <div class="flex shrink-0 gap-3">
+      <button
+        type="button"
+        data-cookies="necesare"
+        class="rounded-btn border border-clay px-4 py-2 text-[0.92rem] font-medium text-clay transition-colors duration-200 hover:bg-clay hover:text-white"
+        >Doar necesare</button
+      >
+      <button
+        type="button"
+        data-cookies="toate"
+        class="rounded-btn bg-clay px-4 py-2 text-[0.92rem] font-medium text-white transition-colors duration-200 hover:bg-clay-dark"
+        >Sunt de acord</button
+      >
+    </div>
+  </div>
+</div>
+
+<script>
+  const CHEIE = "psihologgorj-cookies";
+  const banner = document.getElementById("banner-cookies");
+  if (banner) {
+    const idGa = banner.dataset.ga ?? "";
+
+    const porneste = () => {
+      if (!idGa || document.getElementById("ga-script")) return;
+      const s = document.createElement("script");
+      s.id = "ga-script";
+      s.async = true;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${idGa}`;
+      document.head.appendChild(s);
+      const w = window as any;
+      w.dataLayer = w.dataLayer || [];
+      w.gtag = function () {
+        w.dataLayer.push(arguments);
+      };
+      w.gtag("js", new Date());
+      w.gtag("config", idGa, { anonymize_ip: true });
+    };
+
+    const citeste = () => {
+      try {
+        return localStorage.getItem(CHEIE);
+      } catch {
+        return null;
+      }
+    };
+
+    const scrie = (valoare: string) => {
+      try {
+        localStorage.setItem(CHEIE, valoare);
+      } catch {
+        /* browser cu stocarea blocată: alegerea ține doar cât pagina */
+      }
+    };
+
+    const alegere = citeste();
+    if (alegere === "toate") porneste();
+    if (!alegere) banner.hidden = false;
+
+    banner.querySelectorAll<HTMLButtonElement>("[data-cookies]").forEach((buton) => {
+      buton.addEventListener("click", () => {
+        const valoare = buton.dataset.cookies === "toate" ? "toate" : "necesare";
+        scrie(valoare);
+        banner.hidden = true;
+        if (valoare === "toate") porneste();
+      });
+    });
+
+    // folosit de butonul din politica de cookies
+    (window as any).deschidePreferinteCookies = () => {
+      try {
+        localStorage.removeItem(CHEIE);
+      } catch {
+        /* nimic de făcut */
+      }
+      banner.hidden = false;
+      banner.scrollIntoView({ block: "nearest" });
+    };
+  }
+</script>

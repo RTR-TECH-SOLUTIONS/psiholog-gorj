@@ -1,5 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import heroCopil from "../assets/hero-copil.webp";
+import heroCabinet from "../assets/hero-cabinet.webp";
+import sedinteOnline from "../assets/sedinte-online.webp";
+import primaSedinta from "../assets/prima-sedinta.webp";
 import CtaBand from "../components/CtaBand.astro";
 import Faq from "../components/Faq.astro";
 import { site, waLink, u } from "../data/site";
@@ -55,39 +60,35 @@ const trimiteri = [
   },
 ];
 
-const onlineMerge = [
-  "Consilierea parentală și ghidajul pentru ce faceți acasă.",
-  "Ședințele de plan și reevaluările, după ce ne-am văzut o dată în cabinet.",
-  "Întâlnirile cu adulții.",
-  "Situația în care un părinte este plecat din țară și vrea să rămână în temă.",
+// Lista e cea trimisă de clientă pe 21 octombrie.
+const onlineActivitati = [
+  "Exerciții pentru dezvoltarea atenției și a memoriei.",
+  "Gestionarea emoțiilor.",
+  "Dezvoltarea abilităților sociale.",
+  "Activități pentru stimularea comunicării și a limbajului.",
 ];
 
-const onlineCabinet = [
-  "Prima evaluare a unui copil mic.",
-  "Terapia limbajului sub patru ani.",
-  "Orice presupune material de lucru pe masă, în fața copilului.",
-];
-
-// TODO(real): testimoniale de înlocuit cu unele reale, cu acordul părinților.
+// Recenzii lăsate de părinți pe La-Psiholog.ro, trimise de clientă pe 23 octombrie.
+// Textele sunt preluate cuvânt cu cuvânt, cu prenumele afișat acolo și luna recenziei.
 const testimoniale = [
   {
-    text: "Băiatul meu avea trei ani și jumătate și spunea cinci cuvinte. După patru luni de ședințe făcea propoziții scurte. Cel mai mult m-a ajutat că mi s-a explicat exact ce să fac acasă, în fiecare zi, fără să transform totul în lecție.",
-    autor: "A. M., mama unui băiețel de 4 ani",
+    text: "O persoană minunată, răbdătoare și de încredere, care oferă căldură și grijă reală copiilor. Atmosfera este pozitivă, comunicarea cu părinții foarte bună, iar impactul asupra dezvoltării copilului meu este clar vizibil. Recomand din suflet.",
+    autor: "Bianca, februarie 2026",
   },
   {
-    text: "Am venit pentru crizele de la culcare, care țineau uneori și o oră. Nu ni s-a spus că exagerăm și nici nu ni s-au dat sfaturi generale. Am primit un plan, l-am ținut trei săptămâni și s-a schimbat.",
-    autor: "C. și R., părinții unei fetițe de 5 ani",
+    text: "Un pedagog de recuperare minunat, cu mult suflet și răbdare. Copilul meu a evoluat enorm și vine cu drag la ședințe. Recomand din toată inima!",
+    autor: "Auraș, februarie 2026",
   },
   {
-    text: "Locuim la 50 de kilometri de Târgu Jiu și nu puteam veni săptămânal. Am făcut evaluarea în cabinet și restul întâlnirilor pe video. A mers, pentru că mie mi s-a explicat ce am de făcut, nu copilului.",
-    autor: "D. P., tatăl unui băiat de 6 ani",
+    text: "O persoană dedicată, rezultate vizibile și o atmosferă primitoare.",
+    autor: "Nicusor, ianuarie 2026",
   },
 ];
 
 const intrebari = [
   {
     q: "De la ce vârstă pot aduce copilul?",
-    a: "De la 2 ani. La vârstele mici, o parte importantă din lucru se face cu părintele, pentru că schimbarea se întâmplă în rutina de acasă, nu doar în cele 50 de minute din cabinet.",
+    a: "Depinde de serviciu. La terapia logopedică, vârsta optimă pentru corectarea pronunției este de 3-4 ani. La terapia VML nu există o limită de vârstă. Intervenția ABA poate începe de la vârste mici și poate continua la vârste mai mari, în funcție de nevoile copilului.",
   },
   {
     q: "Cât durează o evaluare completă?",
@@ -99,14 +100,15 @@ const intrebari = [
   },
   {
     q: "Ce fac dacă nu sunt sigur că este ceva serios?",
-    a: "Sunați. Multe dintre îngrijorările părinților țin de o etapă firească de dezvoltare, iar o discuție de zece minute lămurește asta. Când chiar este nevoie de intervenție, cu cât începem mai devreme, cu atât e mai simplu.",
+    a: "Sunați și povestiți-mi pe scurt ce vă îngrijorează. Multe dintre îngrijorările părinților țin de o etapă firească de dezvoltare, iar la telefon stabilim dacă are sens o evaluare la cabinet. Când chiar este nevoie de intervenție, cu cât începem mai devreme, cu atât e mai simplu.",
   },
 ];
 ---
 
 <Layout
-  title={`${site.nume} · Psiholog copii ${site.oras}, ${site.judet}`}
-  description={`Evaluare psihologică, terapia limbajului și intervenție comportamentală pentru copii în ${site.oras}, ${site.judet}. Consiliere parentală și evaluare pentru adulți.`}
+  title={`Psiholog copii ${site.oras} · Cabinet ${site.nume}`}
+  description={`Cabinet de psihologie pentru copii în ${site.oras}, ${site.judet}: evaluare și terapie logopedică, terapia VML și terapie ABA. Programări la telefon sau pe WhatsApp.`}
+  intrebari={intrebari}
 >
   <!-- Hero -->
   <section class="bg-mint-100">
@@ -117,9 +119,10 @@ const intrebari = [
         >
           <h1 class="h1 max-w-[15ch]">Evaluare și terapie pentru copii, în {site.oras}</h1>
           <p class="lead mt-6 max-w-lg text-ink">
-            Sunt {site.nume}, psiholog clinician. Lucrez cu copii de la 2 ani și cu părinții lor:
-            evaluare psihologică, stimularea limbajului, intervenție comportamentală. Prima
-            discuție este despre ce vă îngrijorează, nu despre etichete.
+            Sunt {site.nume}, psiholog clinician și pedagog de recuperare, cu peste 20 de ani de
+            lucru cu copiii. Evaluare și terapie logopedică, terapia VML și terapia ABA în
+            tulburarea de spectru autist. Prima discuție este despre ce vă îngrijorează, nu despre
+            etichete.
           </p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
@@ -128,22 +131,23 @@ const intrebari = [
               target="_blank"
               rel="noopener">Programează o discuție</a
             >
-            <a class="btn btn-ghost" href={u("/servicii")}>Vezi serviciile</a>
+            <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}>Sunați la {site.telefonAfisat}</a>
           </div>
           <p class="mt-8 text-[0.9rem] text-ink-soft">
-            Psiholog clinician cu drept de liberă practică, membru COPSI. Cabinet în {site.oras},
-            ședințe și online.
+            Drept de liberă practică, Colegiul Psihologilor din România. Cabinet în {site.oras}, pe
+            {" "}{site.adresaStrada}, cu ședințe și online.
           </p>
         </div>
       </div>
 
       <div class="order-1 lg:order-2">
-        <img
-          src={u("/images/hero-copil.webp")}
-          width="1800"
-          height="1344"
+        <Image
+          src={heroCopil}
+          widths={[640, 960, 1280, 1800]}
+          sizes="(min-width: 1024px) 52vw, 100vw"
           alt="Copil de patru ani așezat pe covor în cabinet, jucându-se cu un cub de sortat forme, alături de terapeut"
           class="h-[38vh] w-full object-cover object-[60%_center] sm:h-[46vh] lg:h-full lg:min-h-[34rem]"
+          loading="eager"
           fetchpriority="high"
         />
       </div>
@@ -154,23 +158,27 @@ const intrebari = [
   <section class="border-b border-line">
     <div class="wrap grid gap-y-6 py-8 sm:grid-cols-2 md:grid-cols-4 md:gap-x-8 md:py-9">
       <div class="md:border-r md:border-line md:pr-8">
-        <p class="font-serif text-[1.6rem] leading-none">De la 2 ani</p>
-        <p class="mt-1.5 text-[0.92rem] text-ink-soft">vârsta de la care evaluez copiii</p>
+        <p class="font-serif text-[1.6rem] leading-none">Peste 20 de ani</p>
+        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
+          de lucru cu copiii cu dizabilități și cu nevoi specifice de dezvoltare
+        </p>
       </div>
       <div class="md:border-r md:border-line md:pr-8">
-        <p class="font-serif text-[1.6rem] leading-none">COPSI</p>
+        <p class="font-serif text-[1.6rem] leading-none">Copii și adulți</p>
         <p class="mt-1.5 text-[0.92rem] text-ink-soft">
-          psihologie clinică, drept de liberă practică
+          la terapia logopedică și la terapia VML lucrez și cu adulți
         </p>
       </div>
       <div class="md:border-r md:border-line md:pr-8">
         <p class="font-serif text-[1.6rem] leading-none">{site.oras}</p>
-        <p class="mt-1.5 text-[0.92rem] text-ink-soft">cabinet propriu, în județul {site.judet}</p>
+        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
+          cabinet individual pe {site.adresaStrada}
+        </p>
       </div>
       <div>
         <p class="font-serif text-[1.6rem] leading-none">Online</p>
         <p class="mt-1.5 text-[0.92rem] text-ink-soft">
-          pentru părinții din județ sau plecați din țară
+          ședințele se desfășoară și online, după specificul intervenției
         </p>
       </div>
     </div>
@@ -201,18 +209,18 @@ const intrebari = [
     <div class="wrap">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <h2 class="h2">Cu ce vă pot ajuta</h2>
-        <a class="link-u text-[0.98rem]" href={u("/servicii")}>Toate serviciile și cum decurg</a>
+        <a class="link-u text-[0.98rem]" href={u("/servicii")}>Toate serviciile</a>
       </div>
 
-      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
+      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
         {
           principale.map((s) => (
             <article class="flex h-full flex-col">
               <a href={u(`/servicii#${s.slug}`)} class="group block">
-                <img
-                  src={u(s.imagine)}
-                  width="1800"
-                  height="1344"
+                <Image
+                  src={s.imagine}
+                  widths={[320, 480, 640, 900]}
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw"
                   alt={s.imagineAlt}
                   loading="lazy"
                   class="aspect-[4/5] w-full rounded-card object-cover"
@@ -221,14 +229,17 @@ const intrebari = [
               </a>
               <p class="mt-2.5 text-[0.95rem] text-ink-soft">{s.scurt}</p>
               <a class="link-u mt-auto inline-block pt-3.5 text-[0.92rem]" href={u(`/servicii#${s.slug}`)}>
-                Cum decurge
+                Detalii
               </a>
             </article>
           ))
         }
       </div>
 
-      <div class="mt-14 grid gap-8 border-t border-line pt-10 sm:grid-cols-2 md:gap-14">
+      <div
+        class="mt-14 grid gap-8 border-t border-line pt-10 sm:grid-cols-2 md:gap-14"
+        hidden={secundare.length === 0}
+      >
         {
           secundare.map((s) => (
             <article>
@@ -247,32 +258,34 @@ const intrebari = [
   <!-- Despre -->
   <section class="wrap py-16 md:py-24">
     <div class="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-      <!-- TODO(real): de înlocuit cu fotografia reală a clientei -->
-      <img
-        src={u("/images/portret-ana.webp")}
-        width="1120"
-        height="1500"
-        alt="Ana, psiholog clinician, așezată în fotoliul din cabinet"
+      <!-- Fotografie de ilustrație, potrivit Anexei 1 lit. G.3, până când clienta trimite
+           pozele ei. Nu punem un portret care nu este al ei. -->
+      <Image
+        src={primaSedinta}
+        widths={[480, 720, 960]}
+        sizes="(min-width: 1024px) 42vw, 100vw"
+        alt="Masa rotundă joasă din cabinet, cu două scaune mici, o foaie de desen și creioane colorate"
         loading="lazy"
-        class="aspect-[4/5] w-full rounded-card object-cover object-top"
+        class="aspect-[4/5] w-full rounded-card object-cover"
       />
       <div>
         <h2 class="h2">Despre mine</h2>
         <p class="mt-5 text-ink-soft">
-          Lucrez cu copii, în cea mai mare parte cu cei care încep să vorbească târziu sau greu. Am
-          pornit din practica de psihologie clinică și am continuat cu formări în terapia
-          verbal-motorie a limbajului și în intervenția comportamentală, pentru că astea sunt
-          lucrurile cu care veneau părinții la mine cel mai des.
+          Sunt psiholog clinician și pedagog de recuperare, cu o experiență de peste 20 de ani în
+          lucrul cu copiii cu dizabilități și cu nevoi specifice de dezvoltare. Pun accent pe
+          înțelegerea particularităților fiecărui copil și pe dezvoltarea abilităților care îl
+          ajută să comunice, să învețe și să se adapteze mai bine în viața de zi cu zi.
         </p>
         <p class="mt-4 text-ink-soft">
-          Nu lucrez cu diagnostice puse din ușă. Prima dată aflu cum arată o zi obișnuită acasă, ce
-          s-a încercat deja și ce vă doriți să se schimbe. De acolo construim.
+          Cred cu tărie că un diagnostic nu definește limitele unui copil, ci doar stabilește
+          punctul de plecare în terapie. În cabinetul meu, fiecare mic progres este o victorie
+          uriașă, obținută prin răbdare, consecvență și tehnici moderne.
         </p>
         <ul class="mt-7 grid gap-x-8 gap-y-2 text-[0.96rem] sm:grid-cols-2">
           <li class="border-b border-line py-2">Psihologie clinică, drept de liberă practică</li>
-          <li class="border-b border-line py-2">Terapia VML, limbaj verbal-motor</li>
-          <li class="border-b border-line py-2">Intervenție comportamentală aplicată</li>
-          <li class="border-b border-line py-2">Consiliere parentală</li>
+          <li class="border-b border-line py-2">Terapia VML, limbaj motor-verbal</li>
+          <li class="border-b border-line py-2">Intervenție comportamentală aplicată, ABA și TSA</li>
+          <li class="border-b border-line py-2">Evaluare și terapie logopedică</li>
         </ul>
         <a class="btn btn-ghost mt-8" href={u("/despre")}>Formarea și felul în care lucrez</a>
       </div>
@@ -284,10 +297,10 @@ const intrebari = [
     <div class="wrap">
       <div class="grid items-end gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         <h2 class="h2 max-w-[18ch]">Cum decurge, de la primul telefon</h2>
-        <img
-          src={u("/images/hero-cabinet.webp")}
-          width="1800"
-          height="1005"
+        <Image
+          src={heroCabinet}
+          widths={[480, 720, 1080, 1440]}
+          sizes="(min-width: 1024px) 44vw, 100vw"
           alt="Cabinetul: masă rotundă joasă, două scaune mici și rafturi cu jucării de lemn"
           loading="lazy"
           class="aspect-[16/10] w-full rounded-card object-cover"
@@ -329,10 +342,10 @@ const intrebari = [
   <!-- Ședințe online -->
   <section class="bg-cream py-16 md:py-24">
     <div class="wrap grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
-      <img
-        src={u("/images/sedinte-online.webp")}
-        width="1800"
-        height="1344"
+      <Image
+        src={sedinteOnline}
+        widths={[480, 720, 1080, 1440]}
+        sizes="(min-width: 1024px) 46vw, 100vw"
         alt="Ședință online: laptop deschis pe o masă de lemn, caiet de notițe alături, raft cu jucării de lemn în fundal"
         loading="lazy"
         class="aspect-[4/3] w-full rounded-card object-cover"
@@ -340,31 +353,24 @@ const intrebari = [
       <div>
         <h2 class="h2 max-w-[18ch]">Ședințe online, când drumul până la cabinet e prea lung</h2>
         <p class="mt-5 max-w-xl text-ink-soft">
-          Județul e întins, iar mulți părinți lucrează în altă țară. Pentru situațiile astea lucrez
-          pe video, cu aceleași reguli ca în cabinet. Vă trebuie doar un telefon sau un laptop cu
-          cameră și o jumătate de oră în care să nu fiți întrerupt.
+          Ședințele se desfășoară atât la cabinet, cât și online, în funcție de nevoile fiecărei
+          persoane și de specificul intervenției. Cele online sunt adaptate nevoilor și
+          particularităților fiecărei persoane, iar pentru ele vă trebuie doar un telefon sau un
+          laptop cu cameră și o jumătate de oră în care să nu fiți întrerupt.
         </p>
-        <div class="mt-8 grid gap-8 sm:grid-cols-2 sm:gap-10">
-          <div>
-            <h3 class="font-serif text-[1.05rem]">Merge bine online</h3>
-            <ul class="mt-3">
-              {
-                onlineMerge.map((t) => (
-                  <li class="border-b border-line py-2.5 text-[0.95rem] text-ink-soft">{t}</li>
-                ))
-              }
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-serif text-[1.05rem]">Se face doar în cabinet</h3>
-            <ul class="mt-3">
-              {
-                onlineCabinet.map((t) => (
-                  <li class="border-b border-line py-2.5 text-[0.95rem] text-ink-soft">{t}</li>
-                ))
-              }
-            </ul>
-          </div>
+        <div class="mt-8">
+          <h3 class="font-serif text-[1.05rem]">Ce lucrăm online</h3>
+          <ul class="mt-3 sm:grid sm:grid-cols-2 sm:gap-x-10">
+            {
+              onlineActivitati.map((t) => (
+                <li class="border-b border-line py-2.5 text-[0.95rem] text-ink-soft">{t}</li>
+              ))
+            }
+          </ul>
+          <p class="mt-6 max-w-xl text-[0.95rem] text-ink-soft">
+            Modalitatea de lucru se stabilește individual, în funcție de vârstă, de obiectivele
+            intervenției și de cât de potrivit este serviciul pentru formatul online.
+          </p>
         </div>
       </div>
     </div>
@@ -385,6 +391,9 @@ const intrebari = [
         ))
       }
     </div>
+    <p class="mt-10 text-[0.9rem] text-ink-soft">
+      Recenzii lăsate de părinți pe La-Psiholog.ro, preluate ca atare.
+    </p>
   </section>
 
   <!-- FAQ -->

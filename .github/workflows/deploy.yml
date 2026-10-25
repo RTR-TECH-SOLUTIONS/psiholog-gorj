@@ -22,6 +22,10 @@ jobs:
         uses: actions/checkout@v7
       - name: Install, build și upload
         uses: withastro/action@v6
+        # Demo-ul stă într-un subdirector pe GitHub Pages, deci se construiește
+        # varianta cu base. Build-ul implicit e acum cel pentru psihologgorj.ro.
+        env:
+          DEMO: "1"
 
   deploy:
     needs: build

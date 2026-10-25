@@ -1,18 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import contactIntrare from "../assets/contact-intrare.webp";
 import { site, waLink, u } from "../data/site";
 ---
 
 <Layout
-  title={`Contact și programări · ${site.nume}, ${site.oras}`}
-  description={`Cabinet de psihologie pentru copii în ${site.oras}, ${site.judet}. Programări la telefon, pe WhatsApp sau prin formular.`}
+  title={`Programări · Cabinet psihologie copii ${site.oras}`}
+  description={`Programări la telefon sau pe WhatsApp, la cabinetul din ${site.oras}, Strada 22 Decembrie 1989. Luni până vineri, 16:00-20:00, cu programare prealabilă.`}
 >
   <section class="border-b border-line bg-mint-50">
     <div class="wrap py-14 md:py-20">
       <h1 class="h1 max-w-[14ch]">Programări</h1>
       <p class="lead mt-5 max-w-2xl">
-        Cel mai simplu este să sunați. Dacă vă e mai ușor să scrieți, folosiți WhatsApp sau
-        formularul de mai jos, iar eu vă răspund în aceeași zi lucrătoare.
+        Cel mai simplu este să sunați. Dacă vă e mai ușor să scrieți, îmi lăsați un mesaj pe
+        WhatsApp și vă răspund în aceeași zi lucrătoare.
       </p>
       <div class="mt-8 flex flex-col gap-3 sm:flex-row">
         <a class="btn btn-primary" href={`tel:${site.telefon.replace(/\s/g, "")}`}
@@ -31,112 +33,58 @@ import { site, waLink, u } from "../data/site";
   <section class="wrap py-16 md:py-20">
     <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
       <div>
-        <h2 class="h2">Scrieți-mi câteva rânduri</h2>
+        <h2 class="h2">Cum luăm legătura</h2>
         <p class="mt-4 max-w-xl text-ink-soft">
-          Nu am nevoie de detalii medicale în mesaj. Îmi este de ajuns vârsta copilului și ce ați
-          observat, restul discutăm la telefon.
+          Site-ul nu are formular și nu strânge date despre copilul dumneavoastră. Programările le
+          fac eu, direct, la telefon sau pe WhatsApp.
         </p>
 
-        <form id="formular" class="mt-8 grid gap-5" novalidate>
-          <div class="grid gap-5 sm:grid-cols-2">
-            <div>
-              <label class="block text-[0.92rem]" for="nume">Numele dumneavoastră</label>
-              <input
-                class="mt-2 w-full rounded-btn border border-line bg-paper px-3.5 py-2.5 outline-none focus:border-mint-500"
-                type="text"
-                id="nume"
-                name="nume"
-                required
-                autocomplete="name"
-              />
-            </div>
-            <div>
-              <label class="block text-[0.92rem]" for="telefon">Telefon</label>
-              <input
-                class="mt-2 w-full rounded-btn border border-line bg-paper px-3.5 py-2.5 outline-none focus:border-mint-500"
-                type="tel"
-                id="telefon"
-                name="telefon"
-                required
-                autocomplete="tel"
-                inputmode="tel"
-              />
-            </div>
-          </div>
-
-          <div class="grid gap-5 sm:grid-cols-2">
-            <div>
-              <label class="block text-[0.92rem]" for="email"
-                >E-mail <span class="text-ink-soft">(opțional)</span></label
-              >
-              <input
-                class="mt-2 w-full rounded-btn border border-line bg-paper px-3.5 py-2.5 outline-none focus:border-mint-500"
-                type="email"
-                id="email"
-                name="email"
-                autocomplete="email"
-              />
-            </div>
-            <div>
-              <label class="block text-[0.92rem]" for="tip">Programarea este pentru</label>
-              <select
-                class="mt-2 w-full rounded-btn border border-line bg-paper px-3.5 py-2.5 outline-none focus:border-mint-500"
-                id="tip"
-                name="tip"
-              >
-                <option>Un copil</option>
-                <option>Discuție doar cu părinții</option>
-                <option>Un adult</option>
-                <option>Încă nu știu</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-[0.92rem]" for="mesaj">Ce ați observat</label>
-            <textarea
-              class="mt-2 w-full rounded-btn border border-line bg-paper px-3.5 py-2.5 outline-none focus:border-mint-500"
-              id="mesaj"
-              name="mesaj"
-              rows="5"
-              required
-              placeholder="De exemplu: băiat de 3 ani, spune în jur de 15 cuvinte, la grădiniță nu vorbește deloc."></textarea>
-          </div>
-
-          <p id="eroare" hidden class="text-[0.92rem] text-clay">
-            Vă rog completați numele, telefonul și câteva rânduri despre situație.
-          </p>
-
-          <div class="flex flex-wrap items-center gap-4">
-            <button class="btn btn-primary" type="submit">Trimite mesajul</button>
-            <p class="text-[0.86rem] text-ink-soft">
-              Datele rămân confidențiale și nu sunt folosite în alt scop.
+        <ol class="mt-8 max-w-xl">
+          <li class="border-t border-line py-5">
+            <p class="font-serif text-[1.1rem]">Sunați-mă</p>
+            <p class="mt-1.5 text-[0.95rem] text-ink-soft">
+              În timpul ședințelor nu răspund la telefon. Lăsați un mesaj sau un apel nepreluat și
+              vă sun eu, în aceeași zi lucrătoare.
             </p>
-          </div>
-
-          <p
-            id="succes"
-            hidden
-            role="status"
-            class="rounded-card border border-mint-300 bg-mint-50 px-4 py-3 text-[0.95rem]"
-          >
-            Mulțumesc, am primit mesajul. Vă sun în aceeași zi lucrătoare, în intervalul orar în
-            care lucrez.
-          </p>
-        </form>
+            <a class="btn btn-primary mt-4" href={`tel:${site.telefon.replace(/\s/g, "")}`}
+              >Sunați la {site.telefonAfisat}</a
+            >
+          </li>
+          <li class="border-t border-line py-5">
+            <p class="font-serif text-[1.1rem]">Sau scrieți-mi pe WhatsApp</p>
+            <p class="mt-1.5 text-[0.95rem] text-ink-soft">
+              Dacă vă este mai ușor în scris sau sunteți la serviciu, îmi scrieți și vă răspund
+              când termin ședința.
+            </p>
+            <a
+              class="btn btn-ghost mt-4"
+              href={waLink("Bună ziua, aș dori o programare la cabinet.")}
+              target="_blank"
+              rel="noopener">Scrieți pe WhatsApp</a
+            >
+          </li>
+          <li class="border-t border-b border-line py-5">
+            <p class="font-serif text-[1.1rem]">Ce îmi spuneți de la început</p>
+            <p class="mt-1.5 text-[0.95rem] text-ink-soft">
+              Vârsta copilului și ce ați observat, în două rânduri. Atât îmi trebuie ca să vă spun
+              dacă este cazul unei evaluări și cât durează. Nu am nevoie de detalii medicale în
+              scris, restul discutăm la telefon.
+            </p>
+          </li>
+        </ol>
       </div>
 
       <aside>
         <div class="rounded-card border border-line p-6 md:p-8">
           <h2 class="font-serif text-[1.45rem]">Cabinetul</h2>
           <address class="mt-4 not-italic leading-relaxed text-ink-soft">
-            {site.adresa}<br />
-            {site.judet}
+            {site.adresaStrada}<br />
+            {site.oras}, {site.judet}
           </address>
           <p class="mt-4 leading-relaxed">
             <a class="link-u" href={`tel:${site.telefon.replace(/\s/g, "")}`}>{site.telefonAfisat}</a
             ><br />
-            <a class="link-u" href={`mailto:${site.email}`}>{site.email}</a>
+            <a class="link-u" href={waLink("Bună ziua, aș dori o programare la cabinet.")} target="_blank" rel="noopener">WhatsApp</a>
           </p>
 
           <h3 class="mt-8 font-serif text-[1.15rem]">Program</h3>
@@ -150,16 +98,17 @@ import { site, waLink, u } from "../data/site";
               ))
             }
           </ul>
-          <p class="mt-4 text-[0.9rem] text-ink-soft">
+          <p class="mt-4 text-[0.9rem] text-ink-soft">{site.programNota}</p>
+          <p class="mt-3 text-[0.9rem] text-ink-soft">
             În timpul ședințelor nu răspund la telefon. Dacă nu vă răspund, lăsați un mesaj și vă
             sun eu.
           </p>
         </div>
 
-        <img
-          src={u("/images/contact-intrare.webp")}
-          width="1800"
-          height="1005"
+        <Image
+          src={contactIntrare}
+          widths={[480, 720, 1080]}
+          sizes="(min-width: 1024px) 34vw, 100vw"
           alt="Intrarea în cabinet: ușă din lemn deschisă, o banchetă și o plantă mare"
           loading="lazy"
           class="mt-6 aspect-[16/9] w-full rounded-card object-cover"
@@ -173,27 +122,44 @@ import { site, waLink, u } from "../data/site";
       <div>
         <h2 class="h2">Cum ajungeți</h2>
         <p class="mt-4 text-ink-soft">
-          Cabinetul este în centrul orașului {site.oras}, la câteva minute de mers pe jos de Parcul
-          Central.
+          Cabinetul este în {site.oras}, pe {site.adresaStrada}.
         </p>
 
         <ul class="mt-7">
           <li class="border-t border-mint-300 py-3.5">
-            <p class="font-serif text-[1.05rem]">Parcare</p>
+            <p class="font-serif text-[1.05rem]">Numai cu programare</p>
             <p class="mt-1 text-[0.95rem] text-ink-soft">
-              Loc de parcare pe stradă, în fața clădirii, de obicei liber în intervalul ședințelor.
+              Toate vizitele se fac exclusiv cu programare prealabilă, pentru un mediu liniștit și
+              atenție deplină fiecărui copil.
             </p>
           </li>
           <li class="border-t border-mint-300 py-3.5">
-            <p class="font-serif text-[1.05rem]">Intrarea</p>
+            <p class="font-serif text-[1.05rem]">Etajul 1, pe scări</p>
             <p class="mt-1 text-[0.95rem] text-ink-soft">
-              Intrarea este din stradă, la parter. Nu aveți scări de urcat cu căruciorul.
+              Cabinetul este la etajul 1, iar clădirea nu are lift. Dacă veniți cu un copil mic,
+              spuneți-mi la programare.
+            </p>
+          </li>
+          <li class="border-t border-mint-300 py-3.5">
+            <p class="font-serif text-[1.05rem]">Unde parcați</p>
+            <p class="mt-1 text-[0.95rem] text-ink-soft">
+              Pe toată strada există parcare cu plată, de luni până duminică, între orele 08:00 și
+              16:00. Cum în cursul săptămânii programul începe la 16:00, parcarea se plătește doar
+              la programările de sâmbătă și duminică.
+            </p>
+          </li>
+          <li class="border-t border-mint-300 py-3.5">
+            <p class="font-serif text-[1.05rem]">Programul cabinetului</p>
+            <p class="mt-1 text-[0.95rem] text-ink-soft">
+              Luni până vineri, între 16:00 și 20:00, interval gândit pentru orele de după școală
+              sau grădiniță. Sâmbăta și duminica, pe bază de programare stabilită din timp.
             </p>
           </li>
           <li class="border-t border-b border-mint-300 py-3.5">
-            <p class="font-serif text-[1.05rem]">Sala de așteptare</p>
+            <p class="font-serif text-[1.05rem]">Dacă nu puteți ajunge</p>
             <p class="mt-1 text-[0.95rem] text-ink-soft">
-              Există o zonă separată unde pot aștepta frații sau al doilea părinte.
+              Ședințele se desfășoară atât la cabinet, cât și online, în funcție de nevoile
+              fiecărei persoane și de specificul intervenției.
             </p>
           </li>
         </ul>
@@ -215,12 +181,14 @@ import { site, waLink, u } from "../data/site";
       </div>
 
       <div class="overflow-hidden rounded-card border border-line bg-paper">
-        <!-- TODO(real): de înlocuit cu coordonatele exacte ale cabinetului -->
+        <!-- Harta este centrată pe Strada 22 Decembrie 1989 (coordonate din OpenStreetMap).
+             TODO(real): de fixat punctul exact al clădirii, ideal din Google Business Profile. -->
         <iframe
           class="block h-[20rem] w-full md:h-[27rem]"
           title={`Harta cu localizarea cabinetului în ${site.oras}`}
           loading="lazy"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=23.2647%2C45.0295%2C23.2847%2C45.0395&layer=mapnik&marker=45.0345%2C23.2747"
+          referrerpolicy="no-referrer"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=23.2678%2C45.0332%2C23.2822%2C45.0392&layer=mapnik&marker=45.0362%2C23.2750"
         ></iframe>
         <div class="flex flex-wrap items-center justify-between gap-3 border-t border-line px-5 py-4">
           <address class="not-italic text-[0.95rem]">{site.adresa}</address>
@@ -233,29 +201,3 @@ import { site, waLink, u } from "../data/site";
   </section>
 
 </Layout>
-
-<script>
-  // TODO(real): la proiectul final, trimitere prin Resend sau salvare în Supabase.
-  const formular = document.getElementById("formular") as HTMLFormElement | null;
-  const succes = document.getElementById("succes");
-  const eroare = document.getElementById("eroare");
-
-  formular?.addEventListener("submit", (ev) => {
-    ev.preventDefault();
-    const date = new FormData(formular);
-    const nume = String(date.get("nume") ?? "").trim();
-    const telefon = String(date.get("telefon") ?? "").trim();
-    const mesaj = String(date.get("mesaj") ?? "").trim();
-
-    const valid = nume.length > 1 && telefon.replace(/\D/g, "").length >= 9 && mesaj.length > 9;
-
-    if (eroare) eroare.hidden = valid;
-    if (!valid) return;
-
-    formular.reset();
-    if (succes) {
-      succes.hidden = false;
-      succes.scrollIntoView({ block: "center", behavior: "smooth" });
-    }
-  });
-</script>

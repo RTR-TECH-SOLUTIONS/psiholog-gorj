@@ -7,7 +7,9 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 <header class="sticky top-0 z-40 border-b border-line/80 bg-paper/95 backdrop-blur">
   <div class="wrap flex h-[4.5rem] items-center justify-between gap-6 md:h-20">
     <a href={u("/")} class="flex flex-col leading-none">
-      <span class="font-serif text-[1.32rem] tracking-tight md:text-[1.45rem]">{site.nume}</span>
+      <span class="font-serif text-[1.08rem] tracking-tight sm:text-[1.32rem] md:text-[1.45rem]">
+        {site.nume}
+      </span>
       <span class="mt-1 text-[0.72rem] uppercase tracking-[0.14em] text-ink-soft"
         >{site.titulatura}</span
       >
@@ -34,9 +36,15 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
     <div class="flex items-center gap-3">
       <a
         href={`tel:${site.telefon.replace(/\s/g, "")}`}
-        class="hidden text-[0.95rem] text-ink-soft transition-colors hover:text-ink md:inline"
-        >{site.telefonAfisat}</a
+        class="hidden items-center gap-1.5 text-[0.95rem] text-ink-soft transition-colors hover:text-ink md:inline-flex"
       >
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+          <path
+            d="M6.6 2h2.2c.5 0 .93.34 1.05.83l.8 3.2c.1.42-.04.86-.37 1.13l-1.4 1.16a13.4 13.4 0 0 0 5.8 5.8l1.16-1.4c.27-.33.71-.47 1.13-.37l3.2.8c.49.12.83.55.83 1.05v2.2c0 1.1-.9 2-2 2C10.5 18.4 5.6 13.5 4.6 4c0-1.1.9-2 2-2Z"
+          ></path>
+        </svg>
+        {site.telefonAfisat}
+      </a>
       <a
         href={waLink(`Bună ziua, aș dori o programare la cabinet.`)}
         class="btn btn-primary hidden sm:inline-flex"

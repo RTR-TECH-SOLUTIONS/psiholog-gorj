@@ -1,0 +1,80 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { site, u } from "../../data/site";
+
+const articole = (await getCollection("blog", ({ data }) => !data.ciorna)).sort(
+  (a, b) => b.data.data.valueOf() - a.data.data.valueOf()
+);
+
+const dataRo = (d: Date) =>
+  d.toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Layout
+  title={`Articole pentru părinți · ${site.nume}, ${site.oras}`}
+  description="Explicații scurte despre dezvoltarea limbajului, comportament și felul în care decurge terapia, scrise pentru părinți."
+  noindex={!site.blogActiv}
+>
+  <section class="border-b border-line bg-mint-50">
+    <div class="wrap py-14 md:py-20">
+      <h1 class="h1 max-w-[16ch]">Articole pentru părinți</h1>
+      <p class="lead mt-5 max-w-2xl">
+        Lucrurile pe care le explic cel mai des în cabinet, scrise pe îndelete. Sunt informații
+        generale, nu sfaturi pentru un copil anume.
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap py-16 md:py-20">
+    {
+      articole.length === 0 ? (
+        <p class="max-w-2xl text-ink-soft">
+          Primele articole sunt în lucru. Până apar, găsiți răspunsuri la întrebările obișnuite în
+          <a class="link-u" href={u("/pentru-parinti")}>
+            secțiunea pentru părinți
+          </a>
+          .
+        </p>
+      ) : (
+        <div class="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+          {articole.map((articol) => (
+            <article class="flex h-full flex-col">
+              {articol.data.imagine && (
+                <a href={u(`/blog/${articol.id}`)}>
+                  <Image
+                    src={articol.data.imagine}
+                    widths={[320, 480, 720]}
+                    sizes="(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 100vw"
+                    alt={articol.data.imagineAlt ?? ""}
+                    loading="lazy"
+                    class="aspect-[4/3] w-full rounded-card object-cover"
+                  />
+                </a>
+              )}
+              <p class="mt-5 text-[0.85rem] text-mint-700">
+                <time datetime={articol.data.data.toISOString()}>{dataRo(articol.data.data)}</time>
+              </p>
+              <h2 class="mt-2 font-serif text-[1.25rem] leading-snug">
+                <a class="hover:text-clay" href={u(`/blog/${articol.id}`)}>
+                  {articol.data.titlu}
+                </a>
+              </h2>
+              <p class="mt-2.5 text-[0.95rem] text-ink-soft">{articol.data.descriere}</p>
+              <a
+                class="link-u mt-auto inline-block pt-3.5 text-[0.92rem]"
+                href={u(`/blog/${articol.id}`)}
+              >
+                Citiți articolul
+              </a>
+            </article>
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <CtaBand />
+</Layout>

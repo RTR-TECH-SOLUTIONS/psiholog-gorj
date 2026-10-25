@@ -1,118 +1,184 @@
+import type { ImageMetadata } from "astro";
+import imgLimbaj from "../assets/serviciu-limbaj.webp";
+import imgEvaluare from "../assets/serviciu-evaluare.webp";
+import imgComportament from "../assets/serviciu-comportament.webp";
+
 export type Public = "copii" | "parinti" | "adulti";
+
+// Un punct de listă: „label" este partea îngroșată dinaintea două puncte, în
+// textele trimise de clientă („Dezvoltarea comunicării: copilul să poată...").
+export type Punct = { label?: string; text: string };
 
 export type Serviciu = {
   slug: string;
   titlu: string;
+  motto?: string;
   scurt: string;
-  pentruCine: string;
-  cumDecurge: string[];
-  durata: string;
+  descriere?: string[];
+  pentruCine: Punct[];
+  ceUrmaresc: Punct[];
+  scopFinal?: string[];
+  delaVarsta?: string[];
   public: Public[];
-  imagine?: string;
+  imagine?: ImageMetadata;
   imagineAlt?: string;
+  // true = textul încă nu a venit de la clientă, ce scrie aici e provizoriu.
+  textProvizoriu?: boolean;
 };
 
+// Lista serviciilor este cea din contract, Anexa 1 lit. A.2.
+// Textele de la logopedie, terapia VML și ABA & TSA sunt ale clientei, primite
+// pe WhatsApp în 17, 18 și 19 octombrie 2026 (vezi materiale-primite.md din
+// dosarul contractului). Corectate doar la diacritice și punctuație, fără
+// schimbări de conținut.
+// Pe 19 octombrie a scris „Asta este tot la secțiunea Servicii", așa că pagina
+// are exact aceste trei servicii. Evaluarea psihologică clinică și intervenția
+// psihologică, trecute în Anexa 1 lit. A.2, au fost scoase la cererea ei.
 export const servicii: Serviciu[] = [
   {
-    slug: "evaluare-psihologica",
-    titlu: "Evaluare psihologică clinică",
+    slug: "logopedie",
+    titlu: "Evaluarea și terapia logopedică în tulburările de limbaj",
+    motto: "De pronunție și în plan lexico-grafic",
     scurt:
-      "Punctul de plecare pentru orice intervenție: o imagine clară a nivelului de dezvoltare al copilului, în limbaj, atenție, comportament și relaționare.",
-    pentruCine:
-      "Copii de la 2 ani, atunci când părintele sau educatoarea observă o întârziere în vorbire, dificultăți de atenție, comportamente greu de gestionat sau probleme de adaptare la grădiniță ori la școală.",
-    cumDecurge: [
-      "Interviu cu părintele despre istoricul dezvoltării, rutina de acasă și îngrijorările concrete.",
-      "Una sau două întâlniri de evaluare cu copilul, prin joc și probe standardizate potrivite vârstei.",
-      "Ședință de restituire: primiți raportul scris, explicat pe înțeles, cu recomandări și pașii următori.",
+      "Îmi propun să îl ajut pe copil să comunice mai clar, să învețe cu mai multă încredere și să își valorifice potențialul.",
+    pentruCine: [
+      {
+        text: "Copiilor preșcolari (3-6 ani) și școlari care întâmpină dificultăți de pronunție, citire sau scriere și care au nevoie de sprijin pentru dezvoltarea abilităților de comunicare și învățare.",
+      },
+      {
+        label: "Adulților",
+        text: "persoane care au rămas cu defecte de pronunție necorectate în copilărie sau pacienți care și-au pierdut claritatea articulării în urma unor traumatisme cerebrale, accidente vasculare cerebrale (AVC).",
+      },
     ],
-    durata: "2 – 3 întâlniri a câte 50 de minute",
-    public: ["copii"],
-    imagine: "/images/serviciu-evaluare.webp",
-    imagineAlt:
-      "Birou cu formulare de evaluare, creion și cuburi de test folosite la evaluarea copiilor",
-  },
-  {
-    slug: "terapia-limbajului-vml",
-    titlu: "Stimularea limbajului și terapia VML",
-    scurt:
-      "Terapie verbal-motorie a limbajului pentru copiii care nu au început să vorbească, vorbesc greu de înțeles sau au un vocabular mult sub vârsta lor.",
-    pentruCine:
-      "Copii cu întârziere în apariția limbajului, pronunție neclară, apraxie verbală sau vocabular redus. Lucrăm și cu copiii care au deja un diagnostic, și cu cei aflați încă în observație.",
-    cumDecurge: [
-      "Stabilim împreună obiective concrete: primele cuvinte funcționale, propoziții de două cuvinte, sunete țintă.",
-      "Ședințe scurte și ritmate, cu sprijin motor pentru articulare, imagini și joc structurat.",
-      "Primiți exerciții simple de făcut acasă, în rutina zilnică, nu ca temă în plus.",
+    ceUrmaresc: [
+      {
+        text: "Corectarea pronunției, dezvoltarea capacității de diferențiere a sunetelor, consolidarea vocabularului și îmbunătățirea deprinderilor de citire și scriere.",
+      },
     ],
-    durata: "Ședințe de 45 de minute, de obicei de două ori pe săptămână",
-    public: ["copii"],
-    imagine: "/images/serviciu-limbaj.webp",
+    delaVarsta: ["Vârsta optimă pentru corectarea propriu-zisă a pronunției este de 3-4 ani."],
+    public: ["copii", "adulti"],
+    imagine: imgLimbaj,
     imagineAlt:
       "Cartonașe cu imagini pentru terapia limbajului pe o masă de lemn, mâna unui copil atingând un cartonaș",
   },
   {
-    slug: "interventie-comportamentala",
-    titlu: "Intervenție comportamentală",
+    slug: "terapia-vml",
+    titlu: "Terapia VML, învățare verbală motorie",
+    // „scurt" e singura frază pe care am compus-o eu, din propriile ei formulări,
+    // ca să existe un rezumat pe prima pagină. Restul e textul ei.
     scurt:
-      "Program structurat pentru comportamentele care blochează viața de zi cu zi: crize prelungite, refuz, agresivitate, rutine rigide.",
-    pentruCine:
-      "Copii la care crizele apar zilnic, la masă, la culcare, la plecarea de acasă sau în locurile aglomerate, și părinți care simt că au încercat deja tot.",
-    cumDecurge: [
-      "Observăm împreună când apare comportamentul, ce îl declanșează și ce îl menține.",
-      "Construim un plan cu pași mici, aceleași reguli acasă și în cabinet.",
-      "Vă învăț tehnicile concrete și le exersăm împreună, până devin firești.",
+      "Pentru copiii și adulții care știu ce vor să spună, dar întâmpină dificultăți în planificarea și coordonarea mișcărilor necesare vorbirii.",
+    pentruCine: [
+      {
+        label: "Copiilor cu apraxie verbală",
+        text: "copiii care știu ce vor să spună, dar întâmpină dificultăți în planificarea și coordonarea mișcărilor necesare pentru a produce sunetele și cuvintele.",
+      },
+      {
+        label: "Copiilor cu dificultăți motorii ale vorbirii",
+        text: "copiilor care au dificultăți în formarea silabelor, combinarea sunetelor și pronunțarea consecventă a cuvintelor.",
+      },
+      {
+        label: "Adulților cu apraxie verbală dobândită",
+        text: "persoanelor care au dificultăți de planificare a vorbirii după o leziune cerebrală sau un accident vascular cerebral.",
+      },
     ],
-    durata: "Ședințe de 50 de minute, cu reevaluare la 6 săptămâni",
+    ceUrmaresc: [
+      { text: "Dezvoltarea capacității de a produce sunete, silabe și cuvinte." },
+      { text: "Îmbunătățirea planificării și coordonării mișcărilor implicate în vorbire." },
+      { text: "Creșterea clarității și inteligibilității vorbirii." },
+      {
+        text: "Facilitarea trecerii de la sunete și silabe la cuvinte și exprimare verbală funcțională.",
+      },
+      { text: "Dezvoltarea comunicării, în funcție de particularitățile persoanei." },
+    ],
+    delaVarsta: [
+      "Nu există o limită de vârstă. Poate fi luată în considerare în intervenția timpurie, la copiii mici, la copiii de vârstă școlară și la adulții cu apraxie verbală.",
+    ],
+    public: ["copii", "adulti"],
+    // TODO(real): imagine de ilustrație, de înlocuit cu o fotografie din cabinet.
+    imagine: imgEvaluare,
+    imagineAlt: "Caiet, creion și cuburi de lemn pe o masă deschisă la culoare, materiale de lucru din cabinet",
+  },
+  {
+    slug: "aba-tsa",
+    titlu: "Terapia ABA și intervenția în TSA",
+    motto: "Alături de copilul tău, pas cu pas",
+    scurt:
+      "În ședințe desfășurate unu-la-unu, transform micile reușite de zi cu zi în pași siguri spre independență.",
+    descriere: [
+      "Când ești părintele unui copil care se dezvoltă diferit, drumul poate părea plin de întrebări și incertitudini. Vreau să știi că nu ești singur în această călătorie. În cabinetul meu, nu privesc doar un diagnostic, ci descopăr un copil unic, cu un potențial extraordinar, și o familie care are nevoie de susținere și îndrumare.",
+      "Terapia ABA (Analiza Comportamentală Aplicată) este o metodă prin care creez o punte de comunicare cu copilul dumneavoastră. În ședințe desfășurate exclusiv în regim unu-la-unu (1:1), transform micile reușite de zi cu zi în pași siguri spre independență. În cadrul cabinetului meu, copilul dumneavoastră va beneficia în totalitate de întreaga mea atenție, experiență și energie, construind o relație stabilă de încredere, într-un mediu calm și familiar lui.",
+    ],
+    pentruCine: [
+      {
+        label: "Copiii și adolescenții cu Tulburare de Spectru Autist (TSA)",
+        text: "pentru dezvoltarea comunicării, interacțiunii sociale și autonomiei.",
+      },
+      {
+        label: "Copiii cu întârziere în dezvoltare",
+        text: "pentru învățarea unor abilități cognitive, practice și de comunicare.",
+      },
+      {
+        label: "Copiii cu dificultăți de comunicare",
+        text: "pentru dezvoltarea comunicării funcționale, inclusiv solicitarea ajutorului și exprimarea nevoilor.",
+      },
+      {
+        label: "Copiii cu comportamente problematice",
+        text: "pentru înțelegerea cauzelor comportamentelor și dezvoltarea unor alternative adecvate.",
+      },
+      {
+        label: "Micuții cu întârzieri în dezvoltarea neuropsihică sau de limbaj",
+        text: "care au nevoie de stimulare timpurie personalizată.",
+      },
+      {
+        text: "Copiii care întâmpină dificultăți de comportament (ADHD, tantrumuri intense, anxietate) sau dificultăți de adaptare și învățare.",
+      },
+      {
+        text: "Copiii care au nevoie să-și dezvolte abilitățile de autonomie și sociale, pentru a învăța să urmeze instrucțiuni, să aștepte, să împartă jucării și să participe la activități.",
+      },
+      {
+        label: "Părinți și bunici",
+        text: "terapia dă roade atunci când lucrăm împreună. De aceea, vă voi sprijini prin sesiuni de consiliere, training și tehnici practice, pentru ca mediul de acasă să devină cel mai bun spațiu de creștere. Suntem o echipă!",
+      },
+    ],
+    ceUrmaresc: [
+      {
+        label: "Dezvoltarea comunicării",
+        text: "copilul să poată cere ceea ce dorește, să exprime nevoi și să solicite ajutor.",
+      },
+      {
+        label: "Dezvoltarea atenției și a învățării",
+        text: "să urmărească instrucțiuni, să finalizeze sarcini și să învețe deprinderi noi.",
+      },
+      {
+        label: "Dezvoltarea abilităților sociale",
+        text: "să interacționeze cu alți copii, să aștepte rândul și să participe la jocuri comune.",
+      },
+      {
+        label: "Dezvoltarea autonomiei",
+        text: "să devină mai independent în activitățile cotidiene.",
+      },
+      {
+        label: "Dezvoltarea jocului",
+        text: "să învețe să se joace funcțional, să imite și să participe la jocuri reciproce.",
+      },
+      {
+        label: "Reducerea comportamentelor problematice",
+        text: "prin identificarea cauzelor și învățarea unor modalități alternative de comunicare și reglare.",
+      },
+    ],
+    scopFinal: [
+      "Creșterea independenței copilului, îmbunătățirea comunicării și participarea sa cât mai activă la viața de familie și la mediul social.",
+      "Obiectivele se stabilesc individual, în funcție de vârsta, nivelul de dezvoltare și nevoile copilului.",
+    ],
+    delaVarsta: [
+      "Intervenția poate începe de la vârste mici și poate continua la vârste mai mari, în funcție de nevoile și nivelul de dezvoltare al copilului.",
+      "Fiecare program este individualizat, cu obiective stabilite în funcție de abilitățile copilului și de prioritățile familiei, urmărind progresul și dezvoltarea independenței în viața de zi cu zi.",
+    ],
     public: ["copii", "parinti"],
-    imagine: "/images/serviciu-comportament.webp",
+    imagine: imgComportament,
     imagineAlt:
       "Copil la măsuța din cabinet construind cu cuburi colorate, alături de mâinile terapeutului",
-  },
-  {
-    slug: "abilitati-sociale-emotionale",
-    titlu: "Abilități sociale și emoționale",
-    scurt:
-      "Pentru copiii care se joacă singuri, se supără din nimic sau nu găsesc cuvintele pentru ce simt.",
-    pentruCine:
-      "Copii timizi sau, dimpotrivă, copleșiți de emoții intense, care intră greu în grup, se ceartă des cu ceilalți sau au anxietate de separare.",
-    cumDecurge: [
-      "Recunoaștem emoțiile prin joc, povești și situații desenate.",
-      "Exersăm cum se cere ajutor, cum se așteaptă rândul, cum se repară o ceartă.",
-      "Transferăm ce am exersat în grădiniță, școală și în relația cu frații.",
-    ],
-    durata: "Ședințe de 50 de minute, săptămânal",
-    public: ["copii"],
-    imagine: "/images/serviciu-emotii.webp",
-    imagineAlt: "Cartonașe cu fețe care exprimă emoții, așezate pe o măsuță din lemn deschis",
-  },
-  {
-    slug: "consiliere-parentala",
-    titlu: "Consiliere parentală",
-    scurt:
-      "Întâlniri doar cu părinții, pentru situațiile în care schimbarea începe de la ce se întâmplă acasă.",
-    pentruCine:
-      "Părinți care vor să înțeleagă ce e normal la vârsta copilului lor, cum să pună limite fără țipete, cum să vorbească despre divorț, despre un frate nou sau despre o pierdere.",
-    cumDecurge: [
-      "Discutăm situațiile reale din ultima săptămână, nu teorie generală.",
-      "Stabilim două sau trei schimbări mici, ușor de dus.",
-      "Revenim la ele la întâlnirea următoare și le ajustăm.",
-    ],
-    durata: "Ședințe de 50 de minute, la două săptămâni",
-    public: ["parinti"],
-  },
-  {
-    slug: "psihologie-clinica-adulti",
-    titlu: "Evaluare și intervenție pentru adulți",
-    scurt:
-      "Evaluare psihologică clinică și intervenție pentru adulți, inclusiv pentru dosarele care cer aviz psihologic.",
-    pentruCine:
-      "Adulți care traversează o perioadă de anxietate, epuizare sau schimbare majoră, precum și cei care au nevoie de o evaluare psihologică pentru un dosar.",
-    cumDecurge: [
-      "Prima întâlnire clarifică ce vă aduce aici și ce așteptări aveți.",
-      "Stabilim împreună obiective și un ritm realist al ședințelor.",
-      "Pentru evaluări, primiți raportul în maximum trei zile lucrătoare.",
-    ],
-    durata: "Ședințe de 50 de minute",
-    public: ["adulti"],
   },
 ];
 

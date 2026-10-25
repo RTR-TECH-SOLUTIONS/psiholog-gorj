@@ -1,0 +1,120 @@
+---
+import PaginaLegala from "../layouts/PaginaLegala.astro";
+import { site, u } from "../data/site";
+---
+
+<PaginaLegala
+  title={`Termeni și condiții · ${site.nume}, ${site.oras}`}
+  description={`Termenii de folosire a site-ului cabinetului de psihologie ${site.nume} din ${site.oras}.`}
+  titlu="Termeni și condiții de folosire a site-ului"
+  actualizat="25 octombrie 2026"
+>
+  <p>
+    Acest site este prezentarea cabinetului individual de psihologie al doamnei {site.nume},
+    din {site.oras}. Folosirea site-ului înseamnă acceptarea termenilor de mai jos. Dacă nu
+    sunteți de acord cu ei, vă rog să nu folosiți site-ul.
+  </p>
+
+  <h2>Cine administrează site-ul</h2>
+  <dl>
+    <div>
+      <dt>Denumirea</dt>
+      <dd>{site.denumireLegala}</dd>
+    </div>
+    <div>
+      <dt>Sediul</dt>
+      <dd>{site.sediuSocial}</dd>
+    </div>
+    <div>
+      <dt>Cabinetul unde se țin ședințele</dt>
+      <dd>{site.adresa}</dd>
+    </div>
+    <div>
+      <dt>Cod de identificare fiscală</dt>
+      <dd>{site.cif}</dd>
+    </div>
+    <div>
+      <dt>Registrul Unic al Psihologilor cu drept de liberă practică</dt>
+      <dd>nr. {site.codRegistru}</dd>
+    </div>
+    <div>
+      <dt>Telefon</dt>
+      <dd>{site.telefonAfisat}</dd>
+    </div>
+  </dl>
+
+  <h2>Ce este și ce nu este acest site</h2>
+  <p>
+    Site-ul are rol de informare. Textele despre evaluare, terapie de limbaj, terapie VML sau
+    intervenție comportamentală descriu modul de lucru al cabinetului, în termeni generali.
+  </p>
+  <p>
+    <strong
+      >Nimic din ce citiți aici nu este o consultație, un diagnostic sau o recomandare de tratament
+      pentru copilul dumneavoastră.</strong
+    > Un copil nu poate fi evaluat dintr-un text de pe internet. Orice concluzie se formulează numai
+    după o întâlnire la cabinet sau online, cu copilul și cu părinții.
+  </p>
+  <p>
+    Dacă vă aflați într-o situație de urgență, în care siguranța unei persoane este în pericol,
+    sunați la 112. Site-ul nu este un canal de urgență și nu este supravegheat permanent.
+  </p>
+
+  <h2>Programările</h2>
+  <p>
+    Programările se fac exclusiv la telefon sau pe WhatsApp, la numărul {site.telefonAfisat}.
+    Site-ul nu are formular de contact, nu are sistem de programare online și nu procesează plăți.
+    O programare se consideră făcută numai după ce o confirm eu, în discuția directă cu
+    dumneavoastră.
+  </p>
+  <p>
+    Tariful ședințelor se comunică la telefon sau pe WhatsApp înainte de programare, iar plata se
+    face la sfârșitul fiecărei ședințe. Prețurile nu sunt afișate pe site.
+  </p>
+
+  <h2>Conținutul site-ului</h2>
+  <p>
+    Textele, structura paginilor și fotografiile proprii aparțin cabinetului. Le puteți citi,
+    tipări și trimite mai departe pentru uz personal. Nu le puteți republica, în tot sau în parte,
+    pe un alt site sau într-un material comercial, fără acordul scris al cabinetului.
+  </p>
+  <p>
+    Aprecierile din secțiunea „Ce spun părinții" sunt recenzii publicate de părinți pe platforma
+    La-Psiholog.ro și sunt preluate cuvânt cu cuvânt, cu prenumele afișat acolo. Ele aparțin
+    autorilor lor. Dacă sunteți autorul uneia dintre ele și nu doriți să apară aici, îmi spuneți și
+    o scot în aceeași zi.
+  </p>
+
+  <h2>Legături către alte site-uri</h2>
+  <p>
+    Site-ul conține legături către WhatsApp, Google Maps, Waze și o hartă de la OpenStreetMap.
+    Când folosiți una dintre ele, intrați pe un serviciu administrat de altcineva, cu regulile și
+    cu politica lui de confidențialitate. Cabinetul nu răspunde de conținutul și de practicile
+    acestor servicii.
+  </p>
+
+  <h2>Disponibilitatea site-ului</h2>
+  <p>
+    Site-ul poate fi indisponibil temporar, pentru actualizări sau din motive tehnice care țin de
+    furnizorul de găzduire. În astfel de perioade rămân disponibilă la telefon și pe WhatsApp.
+  </p>
+
+  <h2>Modificarea termenilor</h2>
+  <p>
+    Termenii pot fi actualizați atunci când se schimbă ceva în felul în care funcționează
+    cabinetul sau site-ul. Data ultimei actualizări este trecută la începutul paginii.
+  </p>
+
+  <h2>Reclamații și legea aplicabilă</h2>
+  <p>
+    Prezentul document este supus legii române. O nemulțumire legată de serviciile cabinetului se
+    poate spune direct, la telefon, și încerc să o rezolv împreună cu dumneavoastră. Reclamațiile
+    privind exercitarea profesiei de psiholog se pot adresa Colegiului Psihologilor din România,
+    iar cele privind drepturile consumatorilor, Autorității Naționale pentru Protecția
+    Consumatorilor.
+  </p>
+  <p>
+    Vedeți și <a href={u("/confidentialitate")}>politica de confidențialitate</a> și
+    <a href={u("/cookies")}>politica de cookies</a>.
+  </p>
+</PaginaLegala>

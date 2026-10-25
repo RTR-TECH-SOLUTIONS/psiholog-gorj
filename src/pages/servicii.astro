@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 import CtaBand from "../components/CtaBand.astro";
 import { site, waLink, u } from "../data/site";
 import { servicii, publicLabels } from "../data/servicii";
@@ -13,16 +14,16 @@ const filtre = [
 ---
 
 <Layout
-  title={`Servicii · ${site.nume}, psiholog copii ${site.oras}`}
-  description="Evaluare psihologică clinică, stimularea limbajului și terapia VML, intervenție comportamentală, abilități sociale și emoționale, consiliere parentală și evaluare pentru adulți."
+  title={`Logopedie, terapie VML și ABA pentru copii · ${site.oras}`}
+  description={`Evaluare și terapie logopedică, terapia VML a limbajului și intervenția comportamentală ABA pentru copii, la cabinetul din ${site.oras}, ${site.judet}.`}
 >
   <section class="border-b border-line bg-mint-50">
     <div class="wrap py-14 md:py-20">
-      <h1 class="h1 max-w-[16ch]">Servicii</h1>
+      <h1 class="h1 max-w-[18ch]">Servicii pentru copii, în {site.oras}</h1>
       <p class="lead mt-5 max-w-2xl">
         Fiecare serviciu de mai jos începe cu aceeași întrebare: ce anume vă îngrijorează, concret,
-        în ziua de azi. Mai jos găsiți pentru cine este potrivit fiecare, cum decurge și cât
-        durează.
+        în ziua de azi. Pentru fiecare găsiți cui se adresează, ce urmăresc în lucrul cu copilul și
+        de la ce vârstă se poate începe.
       </p>
     </div>
   </section>
@@ -52,10 +53,10 @@ const filtre = [
             <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
               <div class={s.imagine && i % 2 === 1 ? "lg:order-2" : ""}>
                 {s.imagine ? (
-                  <img
-                    src={u(s.imagine)}
-                    width="1800"
-                    height="1344"
+                  <Image
+                    src={s.imagine}
+                    widths={[480, 720, 1080, 1440]}
+                    sizes="(min-width: 1024px) 42vw, 100vw"
                     alt={s.imagineAlt}
                     loading="lazy"
                     class="aspect-[4/3] w-full rounded-card object-cover lg:sticky lg:top-28"
@@ -66,6 +67,7 @@ const filtre = [
                       {s.public.map((p) => publicLabels[p]).join(" · ")}
                     </p>
                     <h2 class="h2 mt-3">{s.titlu}</h2>
+                    {s.motto && <p class="mt-2 font-serif text-[1.05rem] text-clay">{s.motto}</p>}
                     <p class="lead mt-4">{s.scurt}</p>
                   </div>
                 )}
@@ -78,30 +80,58 @@ const filtre = [
                       {s.public.map((p) => publicLabels[p]).join(" · ")}
                     </p>
                     <h2 class="h2 mt-3">{s.titlu}</h2>
+                    {s.motto && <p class="mt-2 font-serif text-[1.05rem] text-clay">{s.motto}</p>}
                     <p class="lead mt-4">{s.scurt}</p>
                   </>
                 )}
 
-                <h3 class={`font-serif text-[1.1rem] ${s.imagine ? "mt-8" : ""}`}>
-                  Pentru cine este
-                </h3>
-                <p class="mt-2 max-w-2xl text-ink-soft">{s.pentruCine}</p>
+                {s.descriere?.map((paragraf) => (
+                  <p class="mt-4 max-w-2xl text-ink-soft">{paragraf}</p>
+                ))}
 
-                <h3 class="mt-6 font-serif text-[1.1rem]">Cum decurge</h3>
-                <ol class="mt-2 max-w-2xl">
-                  {s.cumDecurge.map((pas, idx) => (
-                    <li class="flex gap-4 border-b border-line py-3 last:border-0">
-                      <span class="font-serif text-mint-700">
-                        {String(idx + 1).padStart(2, "0")}
-                      </span>
-                      <span class="text-ink-soft">{pas}</span>
+                <h3 class={`font-serif text-[1.1rem] ${s.imagine || s.descriere ? "mt-8" : ""}`}>
+                  Cui se adresează
+                </h3>
+                <ul class="mt-2 max-w-2xl">
+                  {s.pentruCine.map((p) => (
+                    <li class="border-b border-line py-3 text-ink-soft last:border-0">
+                      {p.label && <span class="text-ink">{p.label}: </span>}
+                      {p.text}
                     </li>
                   ))}
-                </ol>
+                </ul>
 
-                <p class="mt-5 text-[0.95rem]">
-                  <span class="text-ink-soft">Durata:</span> {s.durata}
-                </p>
+                {s.ceUrmaresc.length > 0 && (
+                  <>
+                    <h3 class="mt-6 font-serif text-[1.1rem]">Ce urmăresc</h3>
+                    <ul class="mt-2 max-w-2xl">
+                      {s.ceUrmaresc.map((p) => (
+                        <li class="border-b border-line py-3 text-ink-soft last:border-0">
+                          {p.label && <span class="text-ink">{p.label}: </span>}
+                          {p.text}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+
+                {s.scopFinal && (
+                  <>
+                    <h3 class="mt-6 font-serif text-[1.1rem]">Care este scopul final</h3>
+                    {s.scopFinal.map((paragraf) => (
+                      <p class="mt-2 max-w-2xl text-ink-soft">{paragraf}</p>
+                    ))}
+                  </>
+                )}
+
+                {s.delaVarsta && (
+                  <>
+                    <h3 class="mt-6 font-serif text-[1.1rem]">De la ce vârstă</h3>
+                    {s.delaVarsta.map((paragraf) => (
+                      <p class="mt-2 max-w-2xl text-ink-soft">{paragraf}</p>
+                    ))}
+                  </>
+                )}
               </div>
             </div>
           </article>
@@ -114,16 +144,19 @@ const filtre = [
     </p>
   </div>
 
-  <!-- Durate și tarife -->
-  <!-- TODO(real): de înlocuit paragraful cu lista reală de tarife, după ce le comunică clienta. -->
+  <!-- Tarife -->
+  <!-- Clienta a confirmat pe 21 octombrie că nu vrea prețuri pe site, iar pe 23 octombrie
+       modalitățile de plată. Promisiunea că prima discuție nu se taxează rămâne scoasă,
+       pe aceea nu a confirmat-o. -->
   <section class="border-t border-line bg-mint-50 py-16 md:py-20">
-    <div class="wrap grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-      <div>
-        <h2 class="h2 max-w-[14ch]">Cât durează și cât costă</h2>
-        <p class="mt-5 max-w-md text-ink-soft">
-          Tariful vi-l spun la telefon sau pe WhatsApp înainte de programare, ca să știți dinainte
-          la ce să vă așteptați. Discuția în care îmi povestiți ce se întâmplă nu se taxează. Plata
-          se face la fiecare ședință, în numerar sau prin transfer.
+    <div class="wrap">
+      <div class="max-w-2xl">
+        <h2 class="h2 max-w-[16ch]">Cât costă o ședință</h2>
+        <p class="mt-5 text-ink-soft">
+          Ședințele se desfășoară contra cost, inclusiv prima întâlnire. Tariful vi-l spun la
+          telefon sau pe WhatsApp înainte de programare, ca să știți dinainte la ce să vă
+          așteptați, iar plata se face la sfârșitul fiecărei ședințe, în numerar, prin transfer sau
+          cu cardul.
         </p>
         <a
           class="btn btn-ghost mt-7"
@@ -132,16 +165,6 @@ const filtre = [
           rel="noopener">Întrebați de tarif pe WhatsApp</a
         >
       </div>
-      <dl class="border-t border-line">
-        {
-          servicii.map((s) => (
-            <div class="grid gap-1 border-b border-line py-4 sm:grid-cols-[1fr_1fr] sm:items-baseline sm:gap-8">
-              <dt class="font-serif text-[1.08rem] leading-snug">{s.titlu}</dt>
-              <dd class="text-[0.95rem] text-ink-soft">{s.durata}</dd>
-            </div>
-          ))
-        }
-      </dl>
     </div>
   </section>
 

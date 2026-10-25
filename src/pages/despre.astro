@@ -1,55 +1,55 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import despreCabinet from "../assets/despre-cabinet.webp";
+import primaSedinta from "../assets/prima-sedinta.webp";
+import contactIntrare from "../assets/contact-intrare.webp";
 import CtaBand from "../components/CtaBand.astro";
 import { site, u } from "../data/site";
 
-// TODO(real): anii și formările sunt placeholder, de confirmat cu clienta.
+// Textele de mai jos sunt ale clientei, primite pe WhatsApp în 20 octombrie 2026
+// (secțiunile „Despre mine” și „Pregătire profesională”, vezi materiale-primite.md
+// din dosarul contractului). Corectate doar la diacritice și la câteva greșeli
+// evidente de tastare, fără schimbări de conținut.
 const formare = [
   {
-    an: "2014",
-    text: "Facultatea de Psihologie, urmată de masterul în psihologie clinică și evaluare.",
+    titlu: "Terapia VML, limbaj motor-verbal",
+    text: "Utilizez această metodă inovatoare, bazată pe tehnici manuale și stimulare tactilă, pentru a ajuta copiii cu apraxie verbală, autism sau alte dificultăți severe să își coordoneze vorbirea și să pronunțe primele cuvinte.",
   },
   {
-    an: "2015",
-    text: "Atestat de liber practician în psihologie clinică, Colegiul Psihologilor din România.",
+    titlu: "Intervenții bazate pe terapia ABA, Analiza Comportamentală Aplicată",
+    text: "Cursuri dedicate principiilor ABA și utilizării strategiilor comportamentale pentru dezvoltarea abilităților funcționale, a comunicării, atenției, imitației și autonomiei, în special în lucrul cu copiii cu TSA.",
   },
   {
-    an: "2017",
-    text: "Formare în evaluarea dezvoltării copilului mic și în probele standardizate de limbaj.",
-  },
-  {
-    an: "2019",
-    text: "Formare în terapia VML, limbaj verbal-motor, pentru copiii care vorbesc târziu sau neclar.",
-  },
-  {
-    an: "2021",
-    text: "Formare în analiza comportamentală aplicată și în lucrul cu părinții.",
+    titlu: "Evaluare și terapie logopedică în tulburările de limbaj",
+    text: "Cursuri care vizează evaluarea și intervenția în dificultățile de pronunție, precum și în aspecte ale limbajului scris-citit.",
   },
 ];
 
+// Fiecare punct de mai jos este o formulare a clientei, din textele trimise de ea.
 const principii = [
   {
-    titlu: "Vă spun ce văd, nu ce ați vrea să auziți",
-    text: "Dacă lucrurile sunt în regulă, vă spun asta și nu vă țin în cabinet. Dacă e nevoie de intervenție, vă spun clar cât durează și ce presupune.",
+    titlu: "Nu privesc un diagnostic, ci un copil",
+    text: "În cabinetul meu descopăr un copil unic, cu un potențial extraordinar, și o familie care are nevoie de susținere și de îndrumare.",
   },
   {
-    titlu: "Părintele face parte din terapie",
-    text: "Cele 50 de minute din cabinet nu schimbă singure nimic. Ce contează este ce se întâmplă în restul săptămânii, iar acolo lucrăm împreună.",
+    titlu: "Obiective stabilite pentru fiecare copil",
+    text: "Obiectivele se aleg individual, în funcție de vârsta, nivelul de dezvoltare și nevoile copilului, iar progresul îl urmărim pas cu pas.",
   },
   {
-    titlu: "Obiective concrete, verificabile",
-    text: "Nu lucrăm la „dezvoltare generală”. Lucrăm la zece cuvinte noi, la culcarea fără criză, la un joc dus până la capăt alături de alt copil.",
+    titlu: "Ședințe unu-la-unu",
+    text: "Lucrez exclusiv în regim 1:1, ca fiecare copil să beneficieze de întreaga mea atenție, într-un mediu calm și familiar lui.",
   },
   {
-    titlu: "Copilul nu află că e adus la un specialist",
-    text: "Pentru el, cabinetul este un loc unde se joacă cu cineva care îl ascultă. Discuțiile despre dificultăți le purtăm între adulți.",
+    titlu: "Suntem o echipă",
+    text: "Terapia dă roade atunci când lucrăm împreună. Vă sprijin prin consiliere, training și tehnici practice, pentru ca mediul de acasă să devină cel mai bun spațiu de creștere.",
   },
 ];
 ---
 
 <Layout
-  title={`Despre mine · ${site.nume}, psiholog clinician ${site.oras}`}
-  description={`${site.nume}, psiholog clinician în ${site.oras}. Formare în psihologie clinică, terapia VML a limbajului și intervenție comportamentală pentru copii.`}
+  title={`Psiholog clinician în ${site.oras} · ${site.nume}`}
+  description={`Peste ${site.aniExperienta} de ani de lucru cu copiii în ${site.oras}. Formare în psihologie clinică, terapia VML a limbajului și intervenție comportamentală ABA.`}
 >
   <section class="bg-mint-100">
     <div class="mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)]">
@@ -59,24 +59,24 @@ const principii = [
         >
           <h1 class="h1 max-w-[13ch]">{site.nume}</h1>
           <p class="mt-3 text-[0.98rem] text-ink-soft">
-            {site.titulatura} · {site.oras}, {site.judet}
+            Psiholog clinician și pedagog de recuperare · {site.oras}, {site.judet}
           </p>
           <p class="lead mt-6 max-w-xl text-ink">
-            Am ales să lucrez cu copii mici pentru un motiv simplu: la vârsta asta, câteva luni de
-            intervenție potrivită schimbă traiectoria următorilor ani. Iar părinții care ajung la
-            mine au nevoie, înainte de orice, de un răspuns clar la întrebarea „este ceva în
-            neregulă sau nu?”.
+            Sunt psiholog clinician și pedagog de recuperare, cu o experiență de peste 20 de ani în
+            lucrul cu copiii cu dizabilități și cu nevoi specifice de dezvoltare.
           </p>
         </div>
       </div>
       <div class="order-1 lg:order-2">
-        <!-- TODO(real): de înlocuit cu fotografia reală a clientei -->
-        <img
-          src={u("/images/portret-ana.webp")}
-          width="1120"
-          height="1500"
-          alt="Ana, psiholog clinician, în cabinetul ei"
-          class="h-[46vh] w-full object-cover object-top sm:h-[54vh] lg:h-full lg:min-h-[32rem]"
+        <!-- Fotografie de ilustrație, potrivit Anexei 1 lit. G.3. Se înlocuiește cu
+             portretul clientei imediat ce îl trimite. -->
+        <Image
+          src={despreCabinet}
+          widths={[480, 720, 960, 1344]}
+          sizes="(min-width: 1024px) 44vw, 100vw"
+          alt="Colțul de așteptare din cabinet: fotoliu crem cu pled, lampă și raft cu cărți"
+          class="h-[46vh] w-full object-cover sm:h-[54vh] lg:h-full lg:min-h-[32rem]"
+          loading="eager"
           fetchpriority="high"
         />
       </div>
@@ -86,42 +86,40 @@ const principii = [
   <section class="wrap py-16 md:py-24">
     <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
       <div class="prose-ro">
-        <h2 class="h2">Cum am ajuns aici</h2>
+        <h2 class="h2">Cum privesc lucrul cu un copil</h2>
         <p class="mt-5 text-ink-soft">
-          Am terminat psihologia cu gândul că voi lucra cu adulți. În primul an de practică am
-          primit, una după alta, familii care veneau pentru un copil de trei ani care încă nu
-          vorbea. Am văzut atunci două lucruri: că părinții sunt trimiși de la un specialist la
-          altul fără un răspuns și că, atunci când intervenția începe devreme, rezultatele se văd
-          repede.
+          În activitatea mea profesională pun accent pe înțelegerea particularităților fiecărui
+          copil, pe identificarea nevoilor sale și pe dezvoltarea abilităților care îl ajută să
+          comunice, să învețe și să se adapteze mai bine în viața de zi cu zi.
         </p>
         <p class="mt-4 text-ink-soft">
-          De atunci mi-am construit formarea în jurul acestei zone: evaluarea dezvoltării,
-          limbajul și comportamentul. Lucrez în {site.oras} și primesc familii din tot județul
-          Gorj, iar pentru părinții care nu pot ajunge săptămânal în cabinet ținem o parte din
-          întâlniri online.
+          Cred cu tărie că un diagnostic nu definește limitele unui copil, ci doar stabilește
+          punctul de plecare în terapie. În cabinetul meu, fiecare mic progres este o victorie
+          uriașă, obținută prin răbdare, consecvență și tehnici moderne.
         </p>
         <p class="mt-4 text-ink-soft">
-          Pe lângă copii, lucrez și cu adulți, în special cu evaluări psihologice clinice și cu
-          perioadele de anxietate sau epuizare. Sunt aceleași instrumente, folosite altfel.
+          Lucrez în {site.oras} și primesc familii din tot județul {site.judet}. Ședințele se
+          desfășoară atât la cabinet, cât și online, în funcție de nevoile fiecărei persoane și de
+          specificul intervenției, iar la terapia logopedică și la terapia VML lucrez și cu adulți.
         </p>
-
       </div>
 
       <aside class="lg:pt-2">
-        <h2 class="font-serif text-[1.45rem]">Formare și acreditări</h2>
+        <h2 class="font-serif text-[1.45rem]">Pregătire profesională</h2>
         <ul class="mt-5">
           {
             formare.map((f) => (
-              <li class="flex gap-5 border-b border-line py-4">
-                <span class="w-12 shrink-0 font-serif text-mint-700">{f.an}</span>
-                <span class="text-[0.96rem] text-ink-soft">{f.text}</span>
+              <li class="border-b border-line py-4">
+                <p class="font-serif text-[1.05rem] leading-snug">{f.titlu}</p>
+                <p class="mt-1.5 text-[0.96rem] text-ink-soft">{f.text}</p>
               </li>
             ))
           }
         </ul>
         <p class="mt-5 text-[0.88rem] text-ink-soft">
-          <!-- TODO(real): de completat cu codul real din Registrul unic al psihologilor -->
-          Cod în Registrul unic al psihologilor: 000000. Verificabil pe copsi.ro.
+          Înregistrată în Registrul unic al psihologilor cu drept de liberă practică sub nr. {
+            site.codRegistru
+          }. Verificabil pe copsi.ro.
         </p>
       </aside>
     </div>
@@ -143,20 +141,21 @@ const principii = [
 
   <section class="bg-cream py-16 md:py-24">
     <div class="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <!-- Fotografii de ilustrație, potrivit Anexei 1 lit. G.3, până la pozele din cabinetul ei. -->
       <div class="grid gap-4 sm:grid-cols-2">
-        <img
-          src={u("/images/prima-sedinta.webp")}
-          width="1800"
-          height="1344"
+        <Image
+          src={primaSedinta}
+          widths={[320, 480, 720]}
+          sizes="(min-width: 1024px) 22vw, 45vw"
           alt="Măsuță rotundă joasă cu două scaune mici, hârtie de desen și creioane colorate"
           loading="lazy"
           class="aspect-[3/4] w-full rounded-card object-cover"
         />
-        <img
-          src={u("/images/despre-cabinet.webp")}
-          width="1344"
-          height="1800"
-          alt="Colț de așteptare: fotoliu crem cu pled, lampă și raft cu cărți"
+        <Image
+          src={contactIntrare}
+          widths={[320, 480, 720]}
+          sizes="(min-width: 1024px) 22vw, 45vw"
+          alt="Intrarea în cabinet: ușă de lemn deschisă, o banchetă și o plantă mare"
           loading="lazy"
           class="aspect-[3/4] w-full rounded-card object-cover sm:mt-10"
         />
@@ -164,13 +163,14 @@ const principii = [
       <div>
         <h2 class="h2">Cabinetul</h2>
         <p class="mt-5 text-ink-soft">
-          Este o cameră cu lumină naturală, un covor, o masă joasă și rafturi la înălțimea
-          copilului. Nu are aparatură și nu seamănă cu un cabinet medical, pentru că nimic din ce
-          facem nu doare și nu trebuie să sperie.
+          Cabinetul individual de psihologie este în {site.oras}, pe {site.adresaStrada}.
+          Programul obișnuit este de luni până vineri, între 16:00 și 20:00, ideal pentru orele
+          de după școală sau grădiniță, iar sâmbăta și duminica lucrez pe bază de programare
+          stabilită din timp.
         </p>
         <p class="mt-4 text-ink-soft">
-          Părinții rămân în cameră ori de câte ori copilul are nevoie de asta, mai ales la
-          început. Pentru frați sau pentru așteptare există o zonă separată, la intrare.
+          {site.programNota} Ședințele se desfășoară atât la cabinet, cât și online, în funcție de
+          nevoile fiecărei persoane și de specificul intervenției.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a class="btn btn-primary" href={u("/contact")}>Cum ajungeți la cabinet</a>

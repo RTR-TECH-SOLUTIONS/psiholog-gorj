@@ -1,61 +1,56 @@
-# Demo — cabinet de psihologie pentru copii, Gorj
+# Site cabinet de psihologie pentru copii, Târgu Jiu
 
-Site de prezentare (5 pagini) construit ca material de pitch pentru clientă.
-Stack: **Astro 7 + Tailwind 4**, output static, zero JS de framework.
-
-**Link demo:** https://rtr-tech-solutions.github.io/psiholog-gorj/
-
-Se publică singur: orice push pe `main` declanșează workflow-ul din
-`.github/workflows/deploy.yml` și site-ul se actualizează în circa un minut.
+Site de prezentare construit pentru Dijmarescu Ana-Maria, Cabinet Individual de Psihologie,
+potrivit contractului nr. 36 din 13.10.2026. A pornit ca demo de pitch și a fost dus la
+varianta reală. Stack: **Astro 7 + Tailwind 4**, output static, zero JS de framework în afara
+a două scripturi mici (filtrul de servicii și bannerul de cookies).
 
 ```
-npm run dev      # server local
-npm run build    # build static în dist/
-npm run preview  # verificare build
+npm run dev         # server local
+npm run build       # build pentru psihologgorj.ro (implicit)
+npm run build:demo  # build pentru GitHub Pages, în subdirectorul /psiholog-gorj
+npm run preview     # verificarea build-ului
 ```
 
-## Structura
+`astro.config.mjs` alege singur varianta după variabila `DEMO`. Workflow-ul din
+`.github/workflows/deploy.yml` o pune pe `1`, deci orice push pe `main` actualizează demo-ul
+de pe GitHub Pages, nu site-ul clientei.
+
+## Paginile
 
 | Pagină | Rol |
 |---|---|
-| `/` | hero, bandă de încredere, „când merită să cereți o părere”, servicii, despre, cum decurge, „ce nu fac și când vă îndrum mai departe”, ședințe online, testimoniale, FAQ |
-| `/servicii` | cele 6 servicii cu „pentru cine este”, „cum decurge”, durată, filtrabile, plus blocul „cât durează și cât costă” |
-| `/despre` | poveste, formare și acreditări pe ani, principii de lucru, cabinet |
-| `/pentru-parinti` | repere de limbaj pe vârste, semne de alarmă, pregătirea primei ședințe, 8 întrebări frecvente |
-| `/contact` | formular, NAP, program, hartă OpenStreetMap |
-| `/404` | pagină de eroare cu harta site-ului și CTA |
+| `/` | hero, bandă de încredere, când merită cerută o părere, servicii, despre, cum decurge, ce nu fac, ședințe online, recenzii, întrebări frecvente |
+| `/servicii` | cele trei servicii, cu filtrare după public, și secțiunea despre tarif |
+| `/despre` | formarea profesională, principiile de lucru, cabinetul |
+| `/pentru-parinti` | repere de limbaj pe vârste, semne care cer evaluare, pregătirea primei ședințe, întrebări frecvente |
+| `/contact` | cum se ia legătura, datele cabinetului, programul, accesul, parcarea, harta |
+| `/blog` și `/blog/[slug]` | listarea articolelor și șablonul de articol, construite dar **nepublicate** (vezi `site.blogActiv`) |
+| `/termeni`, `/confidentialitate`, `/cookies` | paginile legale |
+| `/404` | pagina de eroare |
 
-## Funcționalități care merg în demo
+## Ce conține, pe scurt
 
-- meniu mobil (hamburger) cu buton WhatsApp separat pe ecran mic;
-- bară fixă jos pe mobil, cu WhatsApp și telefon, prezentă pe toate paginile;
-- filtrare servicii pe public țintă (copii / părinți / adulți), cu anunț pentru cititoarele de ecran;
-- formular de contact cu validare client-side și mesaj de confirmare;
-- FAQ pe `<details>`, funcțional fără JS;
-- hartă OpenStreetMap, fără cookie-uri terțe;
-- pagină 404 proprie;
-- previzualizare de link (Open Graph + `og.jpg` 1200x630) pentru când site-ul e trimis pe WhatsApp sau Facebook.
+- **Fără formular de contact** și fără colectare de date de la vizitatori (art. 1.7, Anexa 1 lit. A.5 și B.4). Contactul se face la telefon și pe WhatsApp, cu buton de sunat în hero, în antet și în bara fixă de pe mobil.
+- **Pagini legale și banner de cookies** (Anexa 1 lit. A.7). Bannerul ține alegerea în `localStorage`, nu într-un cookie, și încarcă analytics numai după acceptare.
+- **SEO on-page** (Anexa 1 lit. D): un cuvânt cheie principal pe pagină, title și meta description unice, canonical, Open Graph, `sitemap-index.xml`, `robots.txt` generat, date structurate `Psychologist` + `Person` + `FAQPage`, iar pe articole `BlogPosting`.
+- **Optimizare pentru asistenții AI** (Anexa 1 lit. E): `llms.txt` generat, roboții ChatGPT, Claude și Perplexity lăsați explicit să intre, conținut randat în HTML.
+- **Imagini** prin `astro:assets`, cu `srcset`, dimensiuni explicite și încărcare progresivă. Fonturile sunt găzduite pe site, nu la Google.
+- **Credit RTR** în subsol, cu link către rtrsolutions.ro (art. 11.6).
 
-## Ce este placeholder — `TODO(real)` în cod
+## Ce mai lipsește înainte de lansare
 
-- **`src/data/site.ts`**: numele afișat este doar prenumele real, **Ana**. Adresa, e-mailul și programul sunt inventate. Telefonul și WhatsApp-ul sunt cele reale: +40 785 977 639.
-- **`src/pages/despre.astro`**: anii de formare și codul din Registrul unic al psihologilor sunt fictivi.
-- **`src/pages/index.astro`**: cele trei testimoniale sunt scrise de noi, ca exemplu de ton. Se înlocuiesc cu recenzii reale sau se scot. Blocul „ce nu fac și când vă îndrum mai departe” descrie practici uzuale pentru un psiholog clinician, dar trebuie confirmat de ea înainte de publicare, pentru că sunt afirmații despre felul în care lucrează.
-- **cifre de experiență**: `aniExperienta` și `copiiEvaluati` există în `src/data/site.ts`, dar **nu sunt afișate nicăieri**. Erau inventate, iar pe un site personal cifrele astea sunt afirmații despre ea. Banda de sub hero folosește acum date verificabile. Se reactivează după ce le confirmă.
-- **`src/pages/servicii.astro`**: blocul de tarife spune că prețul se comunică la telefon. De înlocuit cu lista reală de tarife, dacă vrea să o afișeze.
-- **`astro.config.mjs`**: `site` și `base` sunt setate pentru GitHub Pages, unde demo-ul stă într-un subdirector. La mutarea pe domeniul clientei se pune domeniul în `site` și se șterge `base`. Nu e nevoie de alte modificări: toate linkurile și imaginile interne trec prin helperul `u()` din `src/data/site.ts`.
-- **`src/pages/contact.astro`**: formularul nu trimite nimic; coordonatele hărții sunt centrul orașului Târgu Jiu.
-- **`public/images/portret-ana.webp`**: portret generat, **nu este clienta**. Este un placeholder care ține locul și tonul fotografiei reale, pe pagina Despre și în secțiunea Despre de pe homepage. Se înlocuiește obligatoriu înainte de publicare: o fotografie AI prezentată ca fiind ea ar fi o reprezentare falsă a unei persoane reale.
-- **restul din `public/images/`**: fotografii generate (Higgsfield, Nano Banana Pro), interior de cabinet și scene de terapie fără fețe identificabile. Se înlocuiesc cu pozele reale din cabinet.
+1. **Fotografiile clientei.** Portretul generat a fost șters din proiect. Până trimite pozele ei, paginile Acasă și Despre folosesc fotografii de ilustrație fără oameni, potrivit Anexei 1 lit. G.3. Nicio imagine nu pretinde că este ea.
+2. **Domeniul psihologgorj.ro**, de înregistrat, plus urcarea pe găzduire și certificatul SSL.
+3. **Panoul de administrare** (Anexa 1 lit. C.1). Keystatic merge pe conținut din fișiere, dar panoul are nevoie de un loc unde să ruleze, pentru că găzduirea statică nu poate rula cod. De ales între o instanță separată pentru panou și mutarea site-ului pe VPS.
+4. **Google Analytics și Search Console** (Anexa 1 lit. D.11), pe conturi deschise pe numele clientei. ID-ul de Analytics se pune în `src/data/site.ts`, câmpul `analyticsGa4`, iar bannerul îl încarcă numai cu acordul vizitatorului.
+5. **Decizia pe blog.** Paginile există, nu apar în meniu, nu intră în sitemap și sunt marcate `noindex`. Se activează dintr-un singur câmp, `site.blogActiv`.
+6. **Punctul exact al clădirii pe hartă**, de luat din profilul Google al cabinetului.
 
-## Ce urmează dacă clienta acceptă
+## Unde stau datele
 
-1. **Conținut real**: nume complet, acreditări, tarife (dacă vrea să le afișeze), poze din cabinet, testimoniale reale.
-   Pentru portret, cerut clientei: cadru vertical, ea singură, lumină de la fereastră, fundal simplu din cabinet, ținută în care lucrează, privire spre aparat, fără filtre. Un telefon recent ajunge.
-2. **SEO local**, pe rezultate: research de keyworduri RO pe „psiholog copii Târgu Jiu”, „logoped Gorj”, „evaluare psihologică copii Gorj”; un keyword principal per pagină; `LocalBusiness` + `FAQPage` JSON-LD; sitemap, robots; Google Business Profile.
-3. **Formular funcțional**: Resend pentru e-mail de notificare, sau Supabase dacă vrea un istoric al cererilor. Alternativ, doar WhatsApp.
-4. **Pachet legal**: banner cookie, Termeni, Politica de confidențialitate, Politica de cookies. Necesar și pentru că formularul colectează date personale ale unor minori.
-5. **Performanță**: imaginile trec prin `astro:assets` (AVIF + srcset), fonturile se pot self-hosta pentru a scăpa de Google Fonts.
-6. **Deploy**: static, merge pe Hostinger (sau rămâne pe GitHub Pages, dacă vrea un domeniu propriu se leagă acolo). Dacă vrea să își editeze singură textele, Keystatic + build prin GitHub Actions.
-
-Estimare grosieră după acceptare: 2 zile pentru conținut real și SEO on-page, o zi pentru formular, legal și deploy.
+- `src/data/site.ts` — nume, adresă, telefon, program, date legale, comutatoarele `blogActiv` și `analyticsGa4`.
+- `src/data/servicii.ts` — cele trei servicii, cu textele trimise de clientă.
+- `src/data/schema.ts` — datele structurate.
+- `src/content/blog/` — articolele de blog.
+- `refs/` și dosarul contractului (în afara repoului) — materialele primite de la clientă.

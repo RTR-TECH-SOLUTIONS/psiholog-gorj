@@ -1,0 +1,91 @@
+---
+import PaginaLegala from "../layouts/PaginaLegala.astro";
+import { site, u } from "../data/site";
+const analiticaActiva = site.analyticsGa4 !== "";
+---
+
+<PaginaLegala
+  title={`Politica de cookies · ${site.nume}, ${site.oras}`}
+  description={`Ce cookie-uri folosește site-ul cabinetului de psihologie ${site.nume} și cum vă schimbați alegerea.`}
+  titlu="Politica de cookies"
+  actualizat="25 octombrie 2026"
+>
+  <p>
+    Cookie-urile sunt fișiere mici pe care un site le lasă în browserul dumneavoastră, ca să țină
+    minte ceva de la o pagină la alta. Site-ul acesta folosește cât mai puține cu putință.
+  </p>
+
+  <h2>Ce ține minte site-ul</h2>
+  <p>
+    Un singur lucru: alegerea pe care o faceți în bannerul de la prima vizită. Ea se salvează în
+    memoria locală a browserului, nu într-un cookie, rămâne pe dispozitivul dumneavoastră și nu
+    ajunge la mine.
+  </p>
+  <dl>
+    <div>
+      <dt>psihologgorj-cookies</dt>
+      <dd>
+        Reține dacă ați acceptat sau ați refuzat măsurarea anonimă a traficului, ca să nu vă mai
+        întreb la fiecare pagină. Rămâne până când ștergeți datele browserului sau o schimbați
+        dumneavoastră.
+      </dd>
+    </div>
+  </dl>
+
+  <h2>Măsurarea traficului</h2>
+  {
+    analiticaActiva ? (
+      <p>
+        Dacă apăsați „Sunt de acord", site-ul încarcă Google Analytics, care numără vizitele și
+        paginile citite, cu adresa IP anonimizată. Acesta lasă cookie-uri proprii, de tipul
+        <strong>_ga</strong> și <strong>_ga_*</strong>, cu o durată de până la doi ani. Dacă
+        alegeți „Doar strictul necesar", scriptul nu se încarcă deloc.
+      </p>
+    ) : (
+      <p>
+        În acest moment pe site <strong>nu este activată nicio unealtă de măsurare</strong>, deci
+        nu se încarcă niciun cookie de analiză, indiferent ce alegeți în banner. Când cabinetul va
+        avea un cont propriu de Google Analytics, acesta se va încărca numai după un „Sunt de
+        acord", iar pagina de față va fi actualizată cu numele și durata cookie-urilor respective.
+      </p>
+    )
+  }
+
+  <h2>Conținut încărcat de la alții</h2>
+  <p>
+    Pe pagina de contact este o hartă de la OpenStreetMap. Ca să o afișeze, browserul
+    dumneavoastră cere imaginile direct de la serverele lor, care văd astfel adresa IP. Butoanele
+    de WhatsApp nu trimit nimic până nu le apăsați.
+  </p>
+
+  <h2>Cum vă schimbați alegerea</h2>
+  <p>
+    Deschideți din nou bannerul și alegeți altceva. Tot ce ați ales înainte se șterge.
+  </p>
+  <p>
+    <button
+      type="button"
+      id="buton-preferinte"
+      class="rounded-btn border border-clay px-4 py-2 text-[0.92rem] font-medium text-clay transition-colors duration-200 hover:bg-clay hover:text-white"
+      >Schimbați alegerea</button
+    >
+  </p>
+  <p>
+    Puteți șterge oricând cookie-urile și memoria locală din setările browserului, la capitolul
+    despre date și confidențialitate. Site-ul funcționează normal și fără ele.
+  </p>
+
+  <h2>Mai multe</h2>
+  <p>
+    Ce se întâmplă cu datele dumneavoastră în rest este descris în
+    <a href={u("/confidentialitate")}>politica de confidențialitate</a>. Regulile de folosire a
+    site-ului sunt în <a href={u("/termeni")}>termeni și condiții</a>.
+  </p>
+</PaginaLegala>
+
+<script>
+  document.getElementById("buton-preferinte")?.addEventListener("click", () => {
+    const deschide = (window as any).deschidePreferinteCookies;
+    if (typeof deschide === "function") deschide();
+  });
+</script>

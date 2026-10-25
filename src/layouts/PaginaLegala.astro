@@ -1,0 +1,33 @@
+---
+import Layout from "./Layout.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  titlu: string;
+  actualizat: string;
+}
+
+const { title, description, titlu, actualizat } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <section class="border-b border-line bg-mint-50">
+    <div class="wrap py-12 md:py-16">
+      <h1 class="h2 max-w-[20ch]">{titlu}</h1>
+      <p class="mt-4 text-[0.95rem] text-ink-soft">Ultima actualizare: {actualizat}</p>
+    </div>
+  </section>
+
+  <section class="wrap py-12 md:py-16">
+    <div class="legal max-w-3xl">
+      <slot />
+    </div>
+
+    <p class="mt-14 max-w-3xl border-t border-line pt-6 text-[0.92rem] text-ink-soft">
+      Pentru orice întrebare legată de această pagină, sunați la {site.telefonAfisat} sau
+      scrieți-mi pe WhatsApp.
+    </p>
+  </section>
+</Layout>

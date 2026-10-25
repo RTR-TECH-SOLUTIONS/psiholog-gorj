@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import parintiLectura from "../assets/parinti-lectura.webp";
 import CtaBand from "../components/CtaBand.astro";
 import Faq from "../components/Faq.astro";
 import { site, u } from "../data/site";
@@ -82,7 +84,15 @@ const intrebari = [
   },
   {
     q: "Lucrați și online?",
-    a: "Da, pentru consiliere parentală și pentru o parte din ședințele cu copiii mai mari. Evaluarea inițială a unui copil mic se face însă întotdeauna în cabinet.",
+    a: "Da. Ședințele se desfășoară atât la cabinet, cât și online, în funcție de nevoile fiecărei persoane și de specificul intervenției. Online lucrăm exerciții pentru dezvoltarea atenției și a memoriei, gestionarea emoțiilor, dezvoltarea abilităților sociale și activități pentru stimularea comunicării și a limbajului. Modalitatea de lucru o stabilim individual, în funcție de vârstă, de obiectivele intervenției și de cât de potrivit este serviciul pentru formatul online. Ca și la cabinet, ședințele se fac pe bază de programare.",
+  },
+  {
+    q: "Care este programul cabinetului?",
+    a: "De luni până vineri lucrez între 16:00 și 20:00, interval gândit pentru orele de după școală sau grădiniță. Sâmbăta și duminica primesc pe bază de programare stabilită din timp. Toate vizitele se fac exclusiv cu programare prealabilă.",
+  },
+  {
+    q: "Prima întâlnire se taxează?",
+    a: "Da. Ședințele se desfășoară contra cost, inclusiv prima întâlnire. Tariful vi-l spun la telefon sau pe WhatsApp înainte de programare, iar plata se face la sfârșitul fiecărei ședințe, în numerar, prin transfer sau cu cardul.",
   },
   {
     q: "Cât de repede se văd rezultate?",
@@ -96,8 +106,9 @@ const intrebari = [
 ---
 
 <Layout
-  title={`Pentru părinți · ghid și întrebări frecvente · ${site.nume}`}
-  description="Repere de dezvoltare a limbajului pe vârste, semne care cer o evaluare, cum pregătiți copilul pentru prima ședință și răspunsuri la întrebările frecvente ale părinților."
+  title={`Când duceți copilul la psiholog · ghid pentru părinți`}
+  description={`Repere de limbaj pe vârste, semnele care cer o evaluare și cum pregătiți copilul pentru prima ședință, explicate de un psiholog de copii din ${site.oras}.`}
+  intrebari={intrebari}
 >
   <section class="border-b border-line bg-mint-50">
     <div class="wrap py-14 md:py-20">
@@ -153,10 +164,10 @@ const intrebari = [
 
   <section class="wrap py-16 md:py-24">
     <div class="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-      <img
-        src={u("/images/parinti-lectura.webp")}
-        width="1800"
-        height="1344"
+      <Image
+        src={parintiLectura}
+        widths={[480, 720, 1080]}
+        sizes="(min-width: 1024px) 46vw, 100vw"
         alt="Fotoliu crem cu o carte deschisă, un pled verde împăturit și o cană de ceai pe un taburet de lemn"
         loading="lazy"
         class="aspect-[4/3] w-full rounded-card object-cover lg:sticky lg:top-28"

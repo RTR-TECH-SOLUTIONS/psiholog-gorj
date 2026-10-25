@@ -1,5 +1,5 @@
 ---
-import { site, nav } from "../data/site";
+import { site, nav, waLink, u } from "../data/site";
 const an = new Date().getFullYear();
 ---
 
@@ -21,13 +21,18 @@ const an = new Date().getFullYear();
         Cabinet
       </h2>
       <address class="not-italic leading-relaxed">
-        {site.adresa}<br />
-        {site.judet}
+        {site.adresaStrada}<br />
+        {site.oras}, {site.judet}
       </address>
       <p class="mt-3 leading-relaxed">
         <a class="link-u" href={`tel:${site.telefon.replace(/\s/g, "")}`}>{site.telefonAfisat}</a
         ><br />
-        <a class="link-u" href={`mailto:${site.email}`}>{site.email}</a>
+        <a
+          class="link-u"
+          href={waLink("Bună ziua, aș dori o programare la cabinet.")}
+          target="_blank"
+          rel="noopener">Scrieți pe WhatsApp</a
+        >
       </p>
     </div>
 
@@ -56,6 +61,24 @@ const an = new Date().getFullYear();
         {nav.map((item) => <a class="hover:text-ink" href={item.href}>{item.label}</a>)}
       </nav>
       <p>&copy; {an} Cabinet individual de psihologie {site.nume}, {site.oras}.</p>
+    </div>
+
+    <div
+      class="wrap flex flex-col gap-3 border-t border-line/70 py-5 text-[0.84rem] text-ink-soft sm:flex-row sm:items-center sm:justify-between"
+    >
+      <nav aria-label="Pagini legale" class="flex flex-wrap gap-x-6 gap-y-2">
+        <a class="hover:text-ink" href={u("/termeni")}>Termeni și condiții</a>
+        <a class="hover:text-ink" href={u("/confidentialitate")}>Politica de confidențialitate</a>
+        <a class="hover:text-ink" href={u("/cookies")}>Politica de cookies</a>
+      </nav>
+      <p>
+        Dezvoltat de <a
+          class="link-u hover:text-ink"
+          href="https://rtrsolutions.ro"
+          target="_blank"
+          rel="noopener">RTR Tech Solutions</a
+        >
+      </p>
     </div>
   </div>
 </footer>

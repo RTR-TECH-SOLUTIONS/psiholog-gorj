@@ -1,0 +1,132 @@
+---
+import PaginaLegala from "../layouts/PaginaLegala.astro";
+import { site, u } from "../data/site";
+---
+
+<PaginaLegala
+  title={`Politica de confidențialitate · ${site.nume}, ${site.oras}`}
+  description={`Ce date prelucrează cabinetul de psihologie ${site.nume} din ${site.oras} și care sunt drepturile dumneavoastră.`}
+  titlu="Politica de confidențialitate"
+  actualizat="25 octombrie 2026"
+>
+  <p>
+    Lucrez cu copii, deci cu cele mai sensibile date pe care le poate avea o familie. Pagina asta
+    spune, pe scurt și fără limbaj de avocat, ce se întâmplă cu datele dumneavoastră.
+  </p>
+
+  <h2>Pe scurt</h2>
+  <ul>
+    <li>Site-ul nu are formular de contact și nu vă cere nicio informație ca să îl citiți.</li>
+    <li>Nu există cont, coș, plată online sau secțiune de comentarii.</li>
+    <li>
+      Datele ajung la mine abia când mă sunați sau îmi scrieți pe WhatsApp, pentru că vreți o
+      programare.
+    </li>
+    <li>Nu vând și nu dau mai departe datele nimănui, în niciun scop de reclamă.</li>
+  </ul>
+
+  <h2>Cine răspunde de datele dumneavoastră</h2>
+  <p>
+    Operatorul este {site.denumireLegala}, cu sediul în {site.sediuSocial}, cod de identificare
+    fiscală {site.cif}, înregistrată în Registrul Unic al Psihologilor cu drept de liberă practică
+    sub nr. {site.codRegistru}, reprezentată de {site.nume}, telefon {site.telefonAfisat}.
+  </p>
+
+  <h2>Ce date se prelucrează și de ce</h2>
+
+  <h3>1. Când doar citiți site-ul</h3>
+  <p>
+    Serverul pe care este găzduit site-ul înregistrează automat, ca orice server web, adresa IP,
+    data și ora cererii, pagina cerută și tipul de browser. Sunt date tehnice, folosite pentru
+    funcționarea și securitatea site-ului, pe temeiul interesului legitim prevăzut la art. 6 alin.
+    (1) lit. f din Regulamentul general privind protecția datelor. Nu sunt folosite ca să fiți
+    identificat și nu sunt corelate cu dosarul niciunui client.
+  </p>
+
+  <h3>2. Când sunați sau scrieți pe WhatsApp</h3>
+  <p>
+    Atunci îmi spuneți numele, numărul de telefon, vârsta copilului și ce ați observat la el.
+    Folosesc informațiile ca să vă pot răspunde și ca să stabilim o programare, adică pentru
+    demersuri făcute la cererea dumneavoastră înainte de începerea serviciului, potrivit art. 6
+    alin. (1) lit. b din regulament.
+  </p>
+  <p>
+    Conversațiile de pe WhatsApp trec prin serviciul administrat de Meta Platforms Ireland Ltd.,
+    sunt criptate între telefoane, iar regulile lor de prelucrare le găsiți în politica WhatsApp.
+    Dacă preferați să nu folosiți WhatsApp, sunați-mă.
+  </p>
+
+  <h3>3. Când deveniți clientul cabinetului</h3>
+  <p>
+    Dosarul de lucru al copilului, rezultatele evaluărilor și notele de ședință se țin la cabinet,
+    în afara site-ului, și nu ajung niciodată pe internet. Sunt date privind sănătatea, prelucrate
+    în scopul furnizării de servicii de sănătate, potrivit art. 9 alin. (2) lit. h din regulament,
+    cu respectarea Legii nr. 213/2004 privind exercitarea profesiei de psiholog și a secretului
+    profesional prevăzut de Codul deontologic al profesiei.
+  </p>
+  <p>
+    Pentru copil, acordul îl dă părintele sau reprezentantul legal. Nu divulg nimic din ce se
+    discută în cabinet fără acest acord, în afara situațiilor în care legea mă obligă, de exemplu
+    când există un pericol pentru viața sau integritatea cuiva.
+  </p>
+
+  <h2>Cât timp păstrez datele</h2>
+  <ul>
+    <li>Jurnalele serverului: perioada scurtă stabilită de furnizorul de găzduire, pentru securitate.</li>
+    <li>
+      Mesajele și apelurile care nu duc la o programare: le șterg când nu mai au rost, de regulă în
+      câteva luni.
+    </li>
+    <li>
+      Dosarele clienților: pe durata relației profesionale și apoi atât cât cer regulile profesiei
+      de psiholog.
+    </li>
+  </ul>
+
+  <h2>Cine mai are acces la ele</h2>
+  <p>
+    Site-ul este realizat și găzduit de RTR TECH SOLUTIONS S.R.L., din Iași, care acționează ca
+    persoană împuternicită, are acces strict tehnic, pentru mentenanță, și prelucrează datele pe
+    servere situate în Uniunea Europeană. Prin contract, nu le folosește în scopuri proprii și nu
+    le folosește pentru antrenarea vreunui sistem de inteligență artificială. Harta de pe pagina de
+    contact este încărcată de la OpenStreetMap, iar butoanele de WhatsApp duc către serviciul Meta.
+    În rest, nimeni. Datele nu se vând, nu se închiriază și nu se folosesc pentru reclamă.
+  </p>
+  <p>
+    Dacă vreunul dintre acești furnizori prelucrează date în afara Uniunii Europene, o face pe baza
+    clauzelor contractuale standard aprobate de Comisia Europeană.
+  </p>
+
+  <h2>Cookie-uri</h2>
+  <p>
+    Site-ul nu folosește cookie-uri de urmărire. Detaliile sunt în
+    <a href={u("/cookies")}>politica de cookies</a>.
+  </p>
+
+  <h2>Drepturile dumneavoastră</h2>
+  <p>
+    Aveți dreptul să cereți accesul la datele pe care le am despre dumneavoastră, rectificarea lor
+    dacă sunt greșite, ștergerea, restricționarea prelucrării, portabilitatea și să vă opuneți
+    prelucrării întemeiate pe interesul legitim. Pentru datele din dosarul profesional, ștergerea
+    poate fi limitată de obligațiile legale ale profesiei de psiholog.
+  </p>
+  <p>
+    Cereți-mi oricare dintre ele la telefon, pe WhatsApp sau printr-o scrisoare la sediul de mai
+    sus. Vă răspund în cel mult o lună. Dacă răspunsul meu nu vă mulțumește, vă puteți adresa
+    Autorității Naționale de Supraveghere a Prelucrării Datelor cu Caracter Personal, B-dul
+    General Gheorghe Magheru nr. 28-30, sector 1, București, sau pe
+    <a href="https://www.dataprotection.ro" target="_blank" rel="noopener">dataprotection.ro</a>.
+  </p>
+
+  <h2>Securitate</h2>
+  <p>
+    Site-ul funcționează pe HTTPS, cu certificat de securitate. Dosarele de la cabinet se țin
+    încuiate, iar telefonul prin care comunicăm este protejat prin cod.
+  </p>
+
+  <h2>Modificări</h2>
+  <p>
+    Dacă se schimbă ceva în felul în care prelucrez datele, actualizez pagina și schimb data de la
+    început. Vedeți și <a href={u("/termeni")}>termenii și condițiile</a>.
+  </p>
+</PaginaLegala>
