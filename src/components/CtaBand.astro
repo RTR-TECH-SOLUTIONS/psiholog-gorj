@@ -6,13 +6,13 @@ interface Props {
   text?: string;
 }
 
-// Titlul, fraza de deschidere și textul sunt ale clientei: „În loc de programări:
-// Contact. Primul pas e un mesaj" (25 octombrie, 22:03) și frazele despre contact
-// și programare din 20 și 23 octombrie. Banda stă pe verde închis, tot la cererea
-// ei, ca să iasă în evidență.
+// Tot ce scrie pe bandă e de la clientă: „În loc de programări: Contact. Primul
+// pas e un mesaj" (25 octombrie, 22:03) și textul de pe fondul verde, cu butonul
+// de WhatsApp și telefonul sub el (25 octombrie, 22:06). Fondul verde închis e
+// tot cererea ei, ca banda să iasă în evidență.
 const {
   titlu = "Contact",
-  text = "Mă pot contacta direct prin telefon sau WhatsApp. Toate vizitele în cadrul cabinetului se fac exclusiv cu programare prealabilă, pentru a asigura un mediu liniștit și atenție deplină fiecărui copil.",
+  text = "Spuneți-mi pe scurt vârsta copilului și ce v-a îngrijorat. Revin cu un răspuns și stabilim împreună prima întâlnire.",
 } = Astro.props;
 ---
 
@@ -23,12 +23,13 @@ const {
       <p class="lead mt-3 font-serif text-white">Primul pas e un mesaj.</p>
       <p class="mt-4 max-w-xl text-[1rem] text-mint-200">{text}</p>
     </div>
-    <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap md:flex-col md:items-end">
+    <!-- butonul de WhatsApp, iar telefonul sub el, cum a cerut clienta -->
+    <div class="flex flex-col items-start gap-3 md:items-end">
       <a
         class="btn btn-light"
         href={waLink("Bună ziua, aș dori să discutăm despre o programare.")}
         target="_blank"
-        rel="noopener">Scrieți pe WhatsApp</a
+        rel="noopener">Scrieți-mi pe WhatsApp</a
       >
       <a class="btn btn-outline-light" href={`tel:${site.telefon.replace(/\s/g, "")}`}
         >Sunați la {site.telefonAfisat}</a
