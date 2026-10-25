@@ -108,6 +108,19 @@
   }
   .btn-ghost:hover { background-color: var(--color-clay); color: #fff; }
 
+  /* variantele pentru banda de contact, care stă pe verde închis */
+  .btn-light {
+    background-color: #fff;
+    color: var(--color-mint-900);
+  }
+  .btn-light:hover { background-color: var(--color-mint-100); }
+
+  .btn-outline-light {
+    border: 1px solid rgb(255 255 255 / 0.6);
+    color: #fff;
+  }
+  .btn-outline-light:hover { background-color: rgb(255 255 255 / 0.12); }
+
   .prose-ro p { max-width: 62ch; }
 
   .lead {
