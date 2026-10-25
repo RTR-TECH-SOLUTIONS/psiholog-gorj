@@ -1,10 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import heroCopil from "../assets/hero-copil.webp";
-import heroCabinet from "../assets/hero-cabinet.webp";
+import portretAna from "../assets/portret-ana.webp";
+import cabinetAnsamblu from "../assets/cabinet-ansamblu.webp";
+import cabinetMateriale from "../assets/cabinet-materiale.webp";
 import sedinteOnline from "../assets/sedinte-online.webp";
-import primaSedinta from "../assets/prima-sedinta.webp";
 import CtaBand from "../components/CtaBand.astro";
 import Faq from "../components/Faq.astro";
 import { site, waLink, u } from "../data/site";
@@ -142,11 +142,11 @@ const intrebari = [
 
       <div class="order-1 lg:order-2">
         <Image
-          src={heroCopil}
-          widths={[640, 960, 1280, 1800]}
+          src={portretAna}
+          widths={[480, 720, 900]}
           sizes="(min-width: 1024px) 52vw, 100vw"
-          alt="Copil de patru ani așezat pe covor în cabinet, jucându-se cu un cub de sortat forme, alături de terapeut"
-          class="h-[38vh] w-full object-cover object-[60%_center] sm:h-[46vh] lg:h-full lg:min-h-[34rem]"
+          alt={`${site.nume}, psiholog clinician, la biroul din cabinetul din ${site.oras}`}
+          class="h-[38vh] w-full object-cover object-[center_12%] sm:h-[46vh] lg:h-full lg:min-h-[34rem]"
           loading="eager"
           fetchpriority="high"
         />
@@ -258,13 +258,11 @@ const intrebari = [
   <!-- Despre -->
   <section class="wrap py-16 md:py-24">
     <div class="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-      <!-- Fotografie de ilustrație, potrivit Anexei 1 lit. G.3, până când clienta trimite
-           pozele ei. Nu punem un portret care nu este al ei. -->
       <Image
-        src={primaSedinta}
-        widths={[480, 720, 960]}
+        src={cabinetMateriale}
+        widths={[480, 720, 900]}
         sizes="(min-width: 1024px) 42vw, 100vw"
-        alt="Masa rotundă joasă din cabinet, cu două scaune mici, o foaie de desen și creioane colorate"
+        alt="Raftul din cabinet, cu jocuri de limbaj, cărți, fișe și instrumente de lucru pentru copii"
         loading="lazy"
         class="aspect-[4/5] w-full rounded-card object-cover"
       />
@@ -298,10 +296,10 @@ const intrebari = [
       <div class="grid items-end gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         <h2 class="h2 max-w-[18ch]">Cum decurge, de la primul telefon</h2>
         <Image
-          src={heroCabinet}
+          src={cabinetAnsamblu}
           widths={[480, 720, 1080, 1440]}
           sizes="(min-width: 1024px) 44vw, 100vw"
-          alt="Cabinetul: masă rotundă joasă, două scaune mici și rafturi cu jucării de lemn"
+          alt="Colțul de lucru din cabinet: rafturile cu materiale, măsuța verde pentru copii și scăunelele"
           loading="lazy"
           class="aspect-[16/10] w-full rounded-card object-cover"
         />

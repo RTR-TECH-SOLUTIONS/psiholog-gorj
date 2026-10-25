@@ -1,9 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import despreCabinet from "../assets/despre-cabinet.webp";
-import primaSedinta from "../assets/prima-sedinta.webp";
-import contactIntrare from "../assets/contact-intrare.webp";
+import portretAnaBirou from "../assets/portret-ana-birou.webp";
+import cabinetRafturi from "../assets/cabinet-rafturi.webp";
+import cabinetMasuta from "../assets/cabinet-masuta.webp";
 import CtaBand from "../components/CtaBand.astro";
 import { site, u } from "../data/site";
 
@@ -68,14 +68,12 @@ const principii = [
         </div>
       </div>
       <div class="order-1 lg:order-2">
-        <!-- Fotografie de ilustrație, potrivit Anexei 1 lit. G.3. Se înlocuiește cu
-             portretul clientei imediat ce îl trimite. -->
         <Image
-          src={despreCabinet}
-          widths={[480, 720, 960, 1344]}
+          src={portretAnaBirou}
+          widths={[480, 720, 900]}
           sizes="(min-width: 1024px) 44vw, 100vw"
-          alt="Colțul de așteptare din cabinet: fotoliu crem cu pled, lampă și raft cu cărți"
-          class="h-[46vh] w-full object-cover sm:h-[54vh] lg:h-full lg:min-h-[32rem]"
+          alt={`${site.nume}, psiholog clinician și pedagog de recuperare, în cabinetul din ${site.oras}`}
+          class="h-[46vh] w-full object-cover object-[center_18%] sm:h-[54vh] lg:h-full lg:min-h-[32rem]"
           loading="eager"
           fetchpriority="high"
         />
@@ -141,21 +139,20 @@ const principii = [
 
   <section class="bg-cream py-16 md:py-24">
     <div class="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-      <!-- Fotografii de ilustrație, potrivit Anexei 1 lit. G.3, până la pozele din cabinetul ei. -->
       <div class="grid gap-4 sm:grid-cols-2">
         <Image
-          src={primaSedinta}
-          widths={[320, 480, 720]}
+          src={cabinetRafturi}
+          widths={[320, 480, 720, 900]}
           sizes="(min-width: 1024px) 22vw, 45vw"
-          alt="Măsuță rotundă joasă cu două scaune mici, hârtie de desen și creioane colorate"
+          alt="Raftul înalt din cabinet, plin cu jocuri educative, cărți și mape de lucru"
           loading="lazy"
           class="aspect-[3/4] w-full rounded-card object-cover"
         />
         <Image
-          src={contactIntrare}
-          widths={[320, 480, 720]}
+          src={cabinetMasuta}
+          widths={[320, 480, 720, 900]}
           sizes="(min-width: 1024px) 22vw, 45vw"
-          alt="Intrarea în cabinet: ușă de lemn deschisă, o banchetă și o plantă mare"
+          alt="Măsuța verde pentru copii, cu scăunel și o banchetă joasă cu fișe de lucru"
           loading="lazy"
           class="aspect-[3/4] w-full rounded-card object-cover sm:mt-10"
         />

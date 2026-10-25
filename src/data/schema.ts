@@ -66,6 +66,9 @@ export const grafCabinet = (baza: URL) => {
       "@id": idPersoana,
       name: site.nume,
       jobTitle: `${site.titulatura} și pedagog de recuperare`,
+      // Fotografia ei, trimisă pe WhatsApp în 25 octombrie 2026. Stă în /public
+      // ca să aibă o adresă stabilă, pe care Google o poate folosi în rezultate.
+      image: absolut(baza, "/images/ana-maria-dijmarescu.jpg"),
       worksFor: { "@id": idCabinet },
       telephone: site.telefon.replace(/\s/g, ""),
       knowsAbout: [

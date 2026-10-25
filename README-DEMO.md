@@ -32,7 +32,7 @@ de pe GitHub Pages, nu site-ul clientei.
 ## Ce conține, pe scurt
 
 - **Fără formular de contact** și fără colectare de date de la vizitatori (art. 1.7, Anexa 1 lit. A.5 și B.4). Contactul se face la telefon și pe WhatsApp, cu buton de sunat în hero, în antet și în bara fixă de pe mobil.
-- **Pagini legale și banner de cookies** (Anexa 1 lit. A.7). Bannerul ține alegerea în `localStorage`, nu într-un cookie, și încarcă analytics numai după acceptare.
+- **Pagini legale și panou de consimțământ pentru cookies** (Anexa 1 lit. A.7). Bara are Setări, Doar necesare și Accept toate, iar panoul separă strict necesare, statistici și marketing. Alegerea se ține într-un cookie propriu, `psihologgorj_consimtamant`, șase luni, și se poate schimba oricând din subsol.
 - **SEO on-page** (Anexa 1 lit. D): un cuvânt cheie principal pe pagină, title și meta description unice, canonical, Open Graph, `sitemap-index.xml`, `robots.txt` generat, date structurate `Psychologist` + `Person` + `FAQPage`, iar pe articole `BlogPosting`.
 - **Optimizare pentru asistenții AI** (Anexa 1 lit. E): `llms.txt` generat, roboții ChatGPT, Claude și Perplexity lăsați explicit să intre, conținut randat în HTML.
 - **Imagini** prin `astro:assets`, cu `srcset`, dimensiuni explicite și încărcare progresivă. Fonturile sunt găzduite pe site, nu la Google.
@@ -40,7 +40,7 @@ de pe GitHub Pages, nu site-ul clientei.
 
 ## Ce mai lipsește înainte de lansare
 
-1. **Fotografiile clientei.** Portretul generat a fost șters din proiect. Până trimite pozele ei, paginile Acasă și Despre folosesc fotografii de ilustrație fără oameni, potrivit Anexei 1 lit. G.3. Nicio imagine nu pretinde că este ea.
+1. **Restul fotografiilor clientei.** În 25 octombrie 2026 a trimis patru poze: două cu ea, la birou, și două cu colțul de lucru și rafturile. Din ele au ieșit portretele de pe Acasă și Despre, pozele cabinetului și imaginea de previzualizare la distribuire. Mai sunt de cerut: intrarea în clădire și în cabinet, masa de lucru pregătită pentru o ședință și un plan apropiat cu materialele de logopedie. Până atunci, cardurile de servicii, secțiunea de ședințe online și pagina Pentru părinți folosesc fotografii de ilustrație fără oameni identificabili, potrivit Anexei 1 lit. G.3.
 2. **Domeniul psihologgorj.ro**, de înregistrat, plus urcarea pe găzduire și certificatul SSL.
 3. **Panoul de administrare** (Anexa 1 lit. C.1). Keystatic merge pe conținut din fișiere, dar panoul are nevoie de un loc unde să ruleze, pentru că găzduirea statică nu poate rula cod. De ales între o instanță separată pentru panou și mutarea site-ului pe VPS.
 4. **Google Analytics și Search Console** (Anexa 1 lit. D.11), pe conturi deschise pe numele clientei. ID-ul de Analytics se pune în `src/data/site.ts`, câmpul `analyticsGa4`, iar bannerul îl încarcă numai cu acordul vizitatorului.
