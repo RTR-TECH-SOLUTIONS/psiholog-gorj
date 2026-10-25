@@ -85,8 +85,10 @@ const intrebari = [
           <!-- Titlul și subtitlul sunt ale clientei, trimise pe WhatsApp în 25 octombrie,
                la 21:05 și 21:07. Singura intervenție este diacriticul din „și" și virgula
                după „familii". -->
-          <!-- experiența, scoasă în evidență la cererea ei din 25 octombrie, 21:13 -->
-          <p class="font-serif text-[1.08rem] text-mint-900">
+          <!-- Experiența, scoasă în evidență la cererea ei din 25 octombrie, 21:13, apoi
+               „mai colorat, să iese în evidență" (22:03), confirmat că se referă la cei
+               peste 20 de ani. De aici și banda verde de mai jos. -->
+          <p class="font-serif text-[1.3rem] leading-snug text-mint-900 md:text-[1.45rem]">
             Peste 20 de ani de experiență în lucrul cu copiii
           </p>
           <h1 class="h1 mt-3 max-w-[17ch]">O altfel de cale către comunicare și dezvoltare</h1>
@@ -139,30 +141,35 @@ const intrebari = [
     </div>
   </section>
 
-  <!-- Bandă de încredere -->
-  <section class="border-b border-line">
-    <div class="wrap grid gap-y-6 py-8 sm:grid-cols-2 md:grid-cols-4 md:gap-x-8 md:py-9">
-      <div class="md:border-r md:border-line md:pr-8">
-        <p class="font-serif text-[2.1rem] leading-none text-mint-900">Peste 20 de ani</p>
-        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
+  <!-- Bandă de încredere. Verdele închis și coloana mai lată pentru experiență vin din
+       cererea ei de pe 25 octombrie, 22:03: cei peste 20 de ani să iasă în evidență. -->
+  <section class="bg-mint-900 text-white">
+    <div
+      class="wrap grid gap-y-8 py-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-x-10 md:py-12"
+    >
+      <div class="md:border-r md:border-mint-700 md:pr-10">
+        <p class="font-serif text-[2.7rem] leading-[1.05] text-balance md:text-[3rem]">
+          Peste 20 de ani
+        </p>
+        <p class="mt-2.5 text-[0.95rem] text-mint-200">
           de lucru cu copiii cu dizabilități și cu nevoi specifice de dezvoltare
         </p>
       </div>
-      <div class="md:border-r md:border-line md:pr-8">
-        <p class="font-serif text-[1.6rem] leading-none">Unu-la-unu</p>
-        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
+      <div class="md:border-r md:border-mint-700 md:pr-10">
+        <p class="font-serif text-[1.6rem] leading-none text-mint-100">Unu-la-unu</p>
+        <p class="mt-2 text-[0.92rem] text-mint-200">
           ședințe desfășurate exclusiv în regim unu-la-unu (1:1)
         </p>
       </div>
-      <div class="md:border-r md:border-line md:pr-8">
-        <p class="font-serif text-[1.6rem] leading-none">{site.oras}</p>
-        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
+      <div class="md:border-r md:border-mint-700 md:pr-10">
+        <p class="font-serif text-[1.6rem] leading-none text-mint-100">{site.oras}</p>
+        <p class="mt-2 text-[0.92rem] text-mint-200">
           {site.adresaStrada}
         </p>
       </div>
       <div>
-        <p class="font-serif text-[1.6rem] leading-none">Online</p>
-        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
+        <p class="font-serif text-[1.6rem] leading-none text-mint-100">Online</p>
+        <p class="mt-2 text-[0.92rem] text-mint-200">
           ședințele se desfășoară atât la cabinet, cât și online
         </p>
       </div>
