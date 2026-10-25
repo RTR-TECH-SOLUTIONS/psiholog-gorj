@@ -17,7 +17,7 @@ import { site, waLink, u } from "../data/site";
         se fac exclusiv cu programare prealabilă, pentru a asigura un mediu liniștit și atenție
         deplină fiecărui copil.
       </p>
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <a class="btn btn-primary" href={`tel:${site.telefon.replace(/\s/g, "")}`}
           >Sunați la {site.telefonAfisat}</a
         >
@@ -39,7 +39,7 @@ import { site, waLink, u } from "../data/site";
           Site-ul nu are formular de contact și nu strânge date despre copilul dumneavoastră.
         </p>
 
-        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a class="btn btn-primary" href={`tel:${site.telefon.replace(/\s/g, "")}`}
             >Sunați la {site.telefonAfisat}</a
           >
@@ -159,7 +159,7 @@ import { site, waLink, u } from "../data/site";
           </li>
         </ul>
 
-        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a
             class="btn btn-primary"
             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.adresa)}`}

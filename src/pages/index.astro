@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import portretAna from "../assets/portret-ana.webp";
+import portretAnaLat from "../assets/portret-ana-lat.webp";
 import cabinetAnsamblu from "../assets/cabinet-ansamblu.webp";
 import cabinetMateriale from "../assets/cabinet-materiale.webp";
 import sedinteOnline from "../assets/sedinte-online.webp";
@@ -21,6 +22,15 @@ const secundare = servicii.filter((s) => !s.imagine);
 // ABA & TSA, ca textul ei să existe într-un singur loc în proiect.
 const abaTsa = servicii.find((s) => s.slug === "aba-tsa");
 const cuiMaAdresez = abaTsa?.pentruCine ?? [];
+
+// Hero-ul are două decupaje din aceeași fotografie. Pe ecrane late cadrul e mai
+// mult lat decât înalt, așa că acolo intră varianta cu toată încăperea; sub
+// 1280px rămâne decupajul apropiat, altfel pe telefon s-ar vedea doar camera.
+const portretLat = await getImage({
+  src: portretAnaLat,
+  widths: [900, 1120],
+  format: "webp",
+});
 
 // Recenzii lăsate de părinți pe La-Psiholog.ro, trimise de clientă pe 23 octombrie.
 // Textele sunt preluate cuvânt cu cuvânt, cu prenumele afișat acolo și luna recenziei.
@@ -70,7 +80,7 @@ const intrebari = [
     <div class="mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
       <div class="order-2 flex items-center lg:order-1">
         <div
-          class="w-full px-5 py-12 md:px-10 lg:py-24 xl:pl-[max(2.5rem,calc((100vw-72rem)/2))] xl:pr-16"
+          class="w-full px-5 py-12 md:px-10 lg:py-24 xl:pl-[clamp(2.5rem,calc((100vw-72rem)/2),11rem)] xl:pr-16"
         >
           <h1 class="h1 max-w-[15ch]">Evaluare și terapie pentru copii, în {site.oras}</h1>
           <p class="lead mt-6 max-w-lg text-ink">
@@ -79,7 +89,7 @@ const intrebari = [
             nu privesc doar un diagnostic, ci descopăr un copil unic, cu un potențial extraordinar,
             și o familie care are nevoie de susținere și îndrumare.
           </p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
               class="btn btn-primary"
               href={waLink("Bună ziua, aș dori o programare pentru copilul meu.")}
@@ -95,15 +105,24 @@ const intrebari = [
       </div>
 
       <div class="order-1 lg:order-2">
-        <Image
-          src={portretAna}
-          widths={[480, 720, 900]}
-          sizes="(min-width: 1024px) 52vw, 100vw"
-          alt={`${site.nume}, psiholog clinician, la biroul din cabinetul din ${site.oras}`}
-          class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[34rem]"
-          loading="eager"
-          fetchpriority="high"
-        />
+        <picture>
+          <source
+            media="(min-width: 1280px)"
+            srcset={portretLat.srcSet.attribute}
+            sizes="52vw"
+            width={portretAnaLat.width}
+            height={portretAnaLat.height}
+          />
+          <Image
+            src={portretAna}
+            widths={[480, 720, 900]}
+            sizes="(min-width: 1024px) 52vw, 100vw"
+            alt={`${site.nume}, psiholog clinician, la biroul din cabinetul din ${site.oras}`}
+            class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[34rem]"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </picture>
       </div>
     </div>
   </section>

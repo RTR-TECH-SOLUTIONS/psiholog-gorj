@@ -90,6 +90,8 @@
     border-radius: var(--radius-btn);
     font-weight: 500;
     font-size: 0.975rem;
+    /* eticheta nu se rupe în două rânduri pe coloane înguste */
+    white-space: nowrap;
     line-height: 1.2;
     transition: background-color 180ms ease-out, color 180ms ease-out, border-color 180ms ease-out;
   }
