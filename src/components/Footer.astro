@@ -70,6 +70,9 @@ const an = new Date().getFullYear();
         <a class="hover:text-ink" href={u("/termeni")}>Termeni și condiții</a>
         <a class="hover:text-ink" href={u("/confidentialitate")}>Politica de confidențialitate</a>
         <a class="hover:text-ink" href={u("/cookies")}>Politica de cookies</a>
+        <button type="button" id="preferinte-cookies-subsol" class="text-left hover:text-ink"
+          >Preferințe cookies</button
+        >
       </nav>
       <p>
         Dezvoltat de <a
@@ -82,3 +85,10 @@ const an = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+<script>
+  document.getElementById("preferinte-cookies-subsol")?.addEventListener("click", () => {
+    const deschide = (window as any).deschidePreferinteCookies;
+    if (typeof deschide === "function") deschide();
+  });
+</script>

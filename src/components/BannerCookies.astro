@@ -1,48 +1,180 @@
 ---
 import { site, u } from "../data/site";
-// Bannerul apare o singură dată, până când vizitatorul alege. Alegerea se ține în
-// localStorage, nu într-un cookie, ca site-ul să nu scrie nimic în cookie-uri de la sine.
-// Analytics se încarcă numai după un „Accept", și numai dacă există un ID configurat.
+
+// Gestionarea consimțământului. Trei categorii, fiecare legată de ceva real:
+// cele strict necesare (cookie-ul de consimțământ în sine), statisticile (Google
+// Analytics, art. D.11 din Anexa 1) și marketingul (un eventual pixel de campanie).
+// Nimic nu se încarcă înainte de acord, iar dacă ID-ul nu e configurat în
+// src/data/site.ts nu se încarcă nimic nici după acord.
+const categorii = [
+  {
+    cheie: "necesare",
+    titlu: "Strict necesare",
+    text: "Fac site-ul să funcționeze și rețin alegerea dumneavoastră de aici, ca să nu vă mai întreb la fiecare pagină. Fără ele nu vă pot ține minte răspunsul.",
+    detaliu: "psihologgorj_consimtamant, păstrat 6 luni",
+    mereu: true,
+  },
+  {
+    cheie: "statistici",
+    titlu: "Statistici",
+    text: "Îmi arată, în mod anonim, câți părinți ajung pe site și ce pagini citesc. Mă ajută să scriu mai bine paginile. Nu știu cine sunteți și nu vă pot contacta de aici.",
+    detaliu: "Google Analytics, cookie-urile _ga și _ga_*, până la 2 ani",
+    mereu: false,
+  },
+  {
+    cheie: "marketing",
+    titlu: "Marketing",
+    text: "Ar fi folosite dacă ar exista vreodată o campanie plătită, ca să se vadă dacă a avut rost. În acest moment site-ul nu încarcă nimic de acest fel.",
+    detaliu: "neconfigurat în acest moment",
+    mereu: false,
+  },
+];
 ---
 
 <div
-  id="banner-cookies"
+  id="bara-cookies"
   hidden
   role="region"
   aria-label="Preferințe privind cookie-urile"
   class="fixed inset-x-0 bottom-[4.6rem] z-40 border-t border-line bg-cream md:bottom-0"
   data-ga={site.analyticsGa4}
+  data-pixel={site.pixelMarketing}
 >
-  <div class="wrap flex flex-col gap-4 py-4 md:flex-row md:items-center md:justify-between md:gap-8">
-    <p class="max-w-2xl text-[0.92rem] text-ink-soft">
-      Site-ul nu folosește cookie-uri de reclamă. Aș vrea doar să văd, în mod anonim, câți părinți
-      ajung aici și ce citesc. Alegerea o schimbați oricând în{" "}
-      <a class="link-u" href={u("/cookies")}>politica de cookies</a>.
+  <div class="wrap flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+    <p class="max-w-3xl text-[0.92rem] text-ink-soft">
+      Folosesc cookie-uri ca site-ul să funcționeze și, dacă sunteți de acord, ca să văd în mod
+      anonim câți părinți ajung aici.<span class="hidden sm:inline">
+        {" "}Detaliile sunt în <a class="link-u" href={u("/cookies")}>politica de cookies</a>.</span
+      >
     </p>
-    <div class="flex shrink-0 gap-3">
+    <div class="flex shrink-0 items-center gap-3 sm:gap-4">
       <button
         type="button"
-        data-cookies="necesare"
-        class="rounded-btn border border-clay px-4 py-2 text-[0.92rem] font-medium text-clay transition-colors duration-200 hover:bg-clay hover:text-white"
+        data-actiune="setari"
+        class="link-u shrink-0 text-[0.92rem] whitespace-nowrap hover:text-ink">Setări</button
+      >
+      <button
+        type="button"
+        data-actiune="necesare"
+        class="rounded-btn border border-clay px-3 py-2 text-[0.92rem] font-medium whitespace-nowrap text-clay transition-colors duration-200 hover:bg-clay hover:text-white sm:px-4"
         >Doar necesare</button
       >
       <button
         type="button"
-        data-cookies="toate"
-        class="rounded-btn bg-clay px-4 py-2 text-[0.92rem] font-medium text-white transition-colors duration-200 hover:bg-clay-dark"
-        >Sunt de acord</button
+        data-actiune="toate"
+        class="rounded-btn bg-clay px-3 py-2 text-[0.92rem] font-medium whitespace-nowrap text-white transition-colors duration-200 hover:bg-clay-dark sm:px-4"
+        >Accept toate</button
       >
     </div>
   </div>
 </div>
 
-<script>
-  const CHEIE = "psihologgorj-cookies";
-  const banner = document.getElementById("banner-cookies");
-  if (banner) {
-    const idGa = banner.dataset.ga ?? "";
+<dialog
+  id="setari-cookies"
+  aria-labelledby="titlu-setari-cookies"
+  class="m-auto w-[min(34rem,calc(100vw-2rem))] rounded-card border border-line bg-paper p-0 text-ink backdrop:bg-ink/45"
+>
+  <form method="dialog" class="max-h-[85vh] overflow-y-auto">
+    <div class="border-b border-line px-5 py-5 sm:px-6">
+      <h2 id="titlu-setari-cookies" class="font-serif text-[1.35rem]">
+        Preferințe privind cookie-urile
+      </h2>
+      <p class="mt-2 text-[0.92rem] text-ink-soft">
+        Alegeți ce se încarcă atunci când citiți site-ul. Puteți reveni oricând, din subsolul
+        paginii.
+      </p>
+    </div>
 
-    const porneste = () => {
+    <div class="divide-y divide-line px-5 sm:px-6">
+      {
+        categorii.map((c) => (
+          <div class="py-5">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="font-serif text-[1.08rem]">{c.titlu}</h3>
+              {c.mereu ? (
+                <span class="mt-1 shrink-0 text-[0.82rem] whitespace-nowrap text-ink-soft">
+                  Mereu active
+                </span>
+              ) : (
+                <label class="mt-0.5 inline-flex shrink-0 cursor-pointer items-center gap-2">
+                  <span class="sr-only">Activează categoria {c.titlu}</span>
+                  <input type="checkbox" data-categorie={c.cheie} class="peer sr-only" />
+                  <span class="relative h-6 w-11 rounded-full bg-line transition-colors duration-200 peer-checked:bg-clay peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-mint-900 after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-paper after:transition-transform after:duration-200 after:content-[''] peer-checked:after:translate-x-5" />
+                </label>
+              )}
+            </div>
+            <p class="mt-1.5 text-[0.92rem] text-ink-soft">{c.text}</p>
+            <p class="mt-2 text-[0.82rem] break-words text-mint-700">{c.detaliu}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="flex flex-col gap-3 border-t border-line px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+    >
+      <a class="link-u text-[0.9rem] text-ink-soft hover:text-ink" href={u("/cookies")}
+        >Politica de cookies</a
+      >
+      <div class="flex flex-wrap gap-3">
+        <button
+          type="button"
+          data-actiune="salveaza"
+          class="rounded-btn border border-clay px-4 py-2 text-[0.92rem] font-medium text-clay transition-colors duration-200 hover:bg-clay hover:text-white"
+          >Salvează alegerea</button
+        >
+        <button
+          type="button"
+          data-actiune="toate"
+          class="rounded-btn bg-clay px-4 py-2 text-[0.92rem] font-medium text-white transition-colors duration-200 hover:bg-clay-dark"
+          >Accept toate</button
+        >
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<script>
+  type Consimtamant = { v: number; statistici: boolean; marketing: boolean; data: string };
+
+  const CHEIE = "psihologgorj_consimtamant";
+  const VERSIUNE = 1;
+  const DURATA = 60 * 60 * 24 * 182; // șase luni
+
+  const bara = document.getElementById("bara-cookies");
+  const setari = document.getElementById("setari-cookies") as HTMLDialogElement | null;
+
+  if (bara && setari) {
+    const idGa = bara.dataset.ga ?? "";
+    const idPixel = bara.dataset.pixel ?? "";
+    const comutatoare = setari.querySelectorAll<HTMLInputElement>("[data-categorie]");
+
+    const citeste = (): Consimtamant | null => {
+      const brut = document.cookie
+        .split("; ")
+        .find((c) => c.startsWith(`${CHEIE}=`))
+        ?.slice(CHEIE.length + 1);
+      if (!brut) return null;
+      try {
+        const valoare = JSON.parse(decodeURIComponent(brut)) as Consimtamant;
+        return valoare.v === VERSIUNE ? valoare : null;
+      } catch {
+        return null;
+      }
+    };
+
+    const scrie = (statistici: boolean, marketing: boolean) => {
+      const valoare: Consimtamant = {
+        v: VERSIUNE,
+        statistici,
+        marketing,
+        data: new Date().toISOString(),
+      };
+      document.cookie = `${CHEIE}=${encodeURIComponent(JSON.stringify(valoare))}; path=/; max-age=${DURATA}; SameSite=Lax`;
+      aplica(valoare);
+    };
+
+    const porneșteStatistici = () => {
       if (!idGa || document.getElementById("ga-script")) return;
       const s = document.createElement("script");
       s.id = "ga-script";
@@ -58,44 +190,70 @@ import { site, u } from "../data/site";
       w.gtag("config", idGa, { anonymize_ip: true });
     };
 
-    const citeste = () => {
-      try {
-        return localStorage.getItem(CHEIE);
-      } catch {
-        return null;
-      }
+    const porneșteMarketing = () => {
+      if (!idPixel || document.getElementById("pixel-script")) return;
+      const s = document.createElement("script");
+      s.id = "pixel-script";
+      s.async = true;
+      s.src = idPixel;
+      document.head.appendChild(s);
     };
 
-    const scrie = (valoare: string) => {
-      try {
-        localStorage.setItem(CHEIE, valoare);
-      } catch {
-        /* browser cu stocarea blocată: alegerea ține doar cât pagina */
-      }
+    const aplica = (valoare: Consimtamant) => {
+      if (valoare.statistici) porneșteStatistici();
+      if (valoare.marketing) porneșteMarketing();
     };
 
-    const alegere = citeste();
-    if (alegere === "toate") porneste();
-    if (!alegere) banner.hidden = false;
+    const inchide = () => {
+      bara.hidden = true;
+      if (setari.open) setari.close();
+    };
 
-    banner.querySelectorAll<HTMLButtonElement>("[data-cookies]").forEach((buton) => {
+    const salvatDinainte = citeste();
+    if (salvatDinainte) {
+      aplica(salvatDinainte);
+    } else {
+      bara.hidden = false;
+    }
+
+    const sincronizeaza = () => {
+      const valoare = citeste();
+      comutatoare.forEach((c) => {
+        const cheie = c.dataset.categorie as "statistici" | "marketing";
+        c.checked = valoare ? valoare[cheie] : false;
+      });
+    };
+
+    const deschideSetari = () => {
+      sincronizeaza();
+      setari.showModal();
+    };
+
+    document.querySelectorAll<HTMLButtonElement>("[data-actiune]").forEach((buton) => {
       buton.addEventListener("click", () => {
-        const valoare = buton.dataset.cookies === "toate" ? "toate" : "necesare";
-        scrie(valoare);
-        banner.hidden = true;
-        if (valoare === "toate") porneste();
+        const actiune = buton.dataset.actiune;
+        if (actiune === "setari") {
+          deschideSetari();
+          return;
+        }
+        if (actiune === "toate") {
+          comutatoare.forEach((c) => (c.checked = true));
+          scrie(true, true);
+        } else if (actiune === "necesare") {
+          scrie(false, false);
+        } else if (actiune === "salveaza") {
+          const stat = setari.querySelector<HTMLInputElement>('[data-categorie="statistici"]');
+          const mark = setari.querySelector<HTMLInputElement>('[data-categorie="marketing"]');
+          scrie(Boolean(stat?.checked), Boolean(mark?.checked));
+        }
+        inchide();
       });
     });
 
-    // folosit de butonul din politica de cookies
+    // folosit de linkul din subsol și de butonul din politica de cookies
     (window as any).deschidePreferinteCookies = () => {
-      try {
-        localStorage.removeItem(CHEIE);
-      } catch {
-        /* nimic de făcut */
-      }
-      banner.hidden = false;
-      banner.scrollIntoView({ block: "nearest" });
+      bara.hidden = false;
+      deschideSetari();
     };
   }
 </script>

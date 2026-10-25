@@ -12,44 +12,60 @@ const analiticaActiva = site.analyticsGa4 !== "";
 >
   <p>
     Cookie-urile sunt fișiere mici pe care un site le lasă în browserul dumneavoastră, ca să țină
-    minte ceva de la o pagină la alta. Site-ul acesta folosește cât mai puține cu putință.
+    minte ceva de la o pagină la alta. Site-ul acesta folosește cât mai puține cu putință, iar pe
+    cele care nu sunt strict necesare le încarcă numai dacă sunteți de acord.
   </p>
 
-  <h2>Ce ține minte site-ul</h2>
+  <h2>Categoriile și ce fac</h2>
+
+  <h3>Strict necesare</h3>
   <p>
-    Un singur lucru: alegerea pe care o faceți în bannerul de la prima vizită. Ea se salvează în
-    memoria locală a browserului, nu într-un cookie, rămâne pe dispozitivul dumneavoastră și nu
-    ajunge la mine.
+    Fac site-ul să funcționeze și rețin răspunsul dumneavoastră din bannerul de la prima vizită,
+    ca să nu vă mai întreb la fiecare pagină. Acestea nu se pot opri, pentru că fără ele nu am
+    cum să vă țin minte alegerea.
   </p>
   <dl>
     <div>
-      <dt>psihologgorj-cookies</dt>
+      <dt>psihologgorj_consimtamant</dt>
       <dd>
-        Reține dacă ați acceptat sau ați refuzat măsurarea anonimă a traficului, ca să nu vă mai
-        întreb la fiecare pagină. Rămâne până când ștergeți datele browserului sau o schimbați
-        dumneavoastră.
+        Păstrează ce ați ales pentru fiecare categorie și data alegerii. Este pus de site-ul
+        acesta, nu de altcineva, și se șterge singur după șase luni, când vă voi întreba din nou.
       </dd>
     </div>
   </dl>
 
-  <h2>Măsurarea traficului</h2>
+  <h3>Statistici</h3>
   {
     analiticaActiva ? (
-      <p>
-        Dacă apăsați „Sunt de acord", site-ul încarcă Google Analytics, care numără vizitele și
-        paginile citite, cu adresa IP anonimizată. Acesta lasă cookie-uri proprii, de tipul
-        <strong>_ga</strong> și <strong>_ga_*</strong>, cu o durată de până la doi ani. Dacă
-        alegeți „Doar strictul necesar", scriptul nu se încarcă deloc.
-      </p>
+      <>
+        <p>
+          Dacă bifați categoria, site-ul încarcă Google Analytics, care numără vizitele și paginile
+          citite, cu adresa IP anonimizată. Nu știu cine sunteți și nu vă pot contacta pornind de
+          la aceste date.
+        </p>
+        <dl>
+          <div>
+            <dt>_ga, _ga_*</dt>
+            <dd>Puse de Google Analytics, pentru a deosebi vizitatorii. Durată de până la doi ani.</dd>
+          </div>
+        </dl>
+      </>
     ) : (
       <p>
-        În acest moment pe site <strong>nu este activată nicio unealtă de măsurare</strong>, deci
-        nu se încarcă niciun cookie de analiză, indiferent ce alegeți în banner. Când cabinetul va
-        avea un cont propriu de Google Analytics, acesta se va încărca numai după un „Sunt de
-        acord", iar pagina de față va fi actualizată cu numele și durata cookie-urilor respective.
+        Aici ar intra Google Analytics, care numără în mod anonim vizitele și paginile citite.
+        <strong>În acest moment nu este activat</strong>, deci chiar dacă bifați categoria nu se
+        încarcă nimic. Când cabinetul va avea un cont propriu, pagina de față va fi completată cu
+        numele și durata cookie-urilor respective.
       </p>
     )
   }
+
+  <h3>Marketing</h3>
+  <p>
+    Ar fi folosite dacă ar exista vreodată o campanie plătită, ca să se poată vedea dacă a avut
+    rost. <strong>În acest moment site-ul nu încarcă nimic de acest fel</strong>, iar categoria
+    rămâne oprită până când veți fi anunțat aici.
+  </p>
 
   <h2>Conținut încărcat de la alții</h2>
   <p>
@@ -60,7 +76,8 @@ const analiticaActiva = site.analyticsGa4 !== "";
 
   <h2>Cum vă schimbați alegerea</h2>
   <p>
-    Deschideți din nou bannerul și alegeți altceva. Tot ce ați ales înainte se șterge.
+    Deschideți panoul de preferințe și bifați altfel. Găsiți același buton și în subsolul fiecărei
+    pagini, sub denumirea „Preferințe cookies".
   </p>
   <p>
     <button
@@ -71,8 +88,8 @@ const analiticaActiva = site.analyticsGa4 !== "";
     >
   </p>
   <p>
-    Puteți șterge oricând cookie-urile și memoria locală din setările browserului, la capitolul
-    despre date și confidențialitate. Site-ul funcționează normal și fără ele.
+    Puteți șterge oricând cookie-urile din setările browserului, la capitolul despre date și
+    confidențialitate. Site-ul funcționează normal și fără ele, doar că vă va întreba din nou.
   </p>
 
   <h2>Mai multe</h2>

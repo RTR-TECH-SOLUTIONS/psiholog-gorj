@@ -36,8 +36,11 @@ export const site = {
   domeniu: "psihologgorj.ro",
   // Google Analytics 4 (Anexa 1 lit. D.11): se completează cu ID-ul contului deschis
   // pe numele clientei, de forma G-XXXXXXXXXX. Gol înseamnă că nu se încarcă nimic,
-  // iar bannerul de cookies rămâne doar pe stricta necesitate.
+  // oricâte acorduri ar da vizitatorul.
   analyticsGa4: "",
+  // Pixel de marketing (Meta sau Google Ads), dacă se va face vreodată promovare plătită.
+  // Gol înseamnă că nu se încarcă nimic, chiar dacă vizitatorul bifează categoria.
+  pixelMarketing: "",
   // Blogul există în contract (art. 1.2, Anexa 1 lit. A.6), dar clienta a cerut pe
   // 15 octombrie să renunțăm la el. Până la decizia finală paginile sunt construite,
   // dar nu apar în meniu, nu intră în sitemap și sunt marcate noindex.
