@@ -13,8 +13,9 @@ import { site, waLink, u } from "../data/site";
     <div class="wrap py-14 md:py-20">
       <h1 class="h1 max-w-[14ch]">Programări</h1>
       <p class="lead mt-5 max-w-2xl">
-        Cel mai simplu este să sunați. Dacă vă e mai ușor să scrieți, îmi lăsați un mesaj pe
-        WhatsApp și vă răspund în aceeași zi lucrătoare.
+        Mă puteți contacta direct prin telefon sau WhatsApp. Toate vizitele în cadrul cabinetului
+        se fac exclusiv cu programare prealabilă, pentru a asigura un mediu liniștit și atenție
+        deplină fiecărui copil.
       </p>
       <div class="mt-8 flex flex-col gap-3 sm:flex-row">
         <a class="btn btn-primary" href={`tel:${site.telefon.replace(/\s/g, "")}`}
@@ -35,43 +36,42 @@ import { site, waLink, u } from "../data/site";
       <div>
         <h2 class="h2">Cum luăm legătura</h2>
         <p class="mt-4 max-w-xl text-ink-soft">
-          Site-ul nu are formular și nu strânge date despre copilul dumneavoastră. Programările le
-          fac eu, direct, la telefon sau pe WhatsApp.
+          Site-ul nu are formular de contact și nu strânge date despre copilul dumneavoastră.
         </p>
 
-        <ol class="mt-8 max-w-xl">
-          <li class="border-t border-line py-5">
-            <p class="font-serif text-[1.1rem]">Sunați-mă</p>
-            <p class="mt-1.5 text-[0.95rem] text-ink-soft">
-              În timpul ședințelor nu răspund la telefon. Lăsați un mesaj sau un apel nepreluat și
-              vă sun eu, în aceeași zi lucrătoare.
-            </p>
-            <a class="btn btn-primary mt-4" href={`tel:${site.telefon.replace(/\s/g, "")}`}
-              >Sunați la {site.telefonAfisat}</a
-            >
-          </li>
-          <li class="border-t border-line py-5">
-            <p class="font-serif text-[1.1rem]">Sau scrieți-mi pe WhatsApp</p>
-            <p class="mt-1.5 text-[0.95rem] text-ink-soft">
-              Dacă vă este mai ușor în scris sau sunteți la serviciu, îmi scrieți și vă răspund
-              când termin ședința.
-            </p>
-            <a
-              class="btn btn-ghost mt-4"
-              href={waLink("Bună ziua, aș dori o programare la cabinet.")}
-              target="_blank"
-              rel="noopener">Scrieți pe WhatsApp</a
-            >
-          </li>
-          <li class="border-t border-b border-line py-5">
-            <p class="font-serif text-[1.1rem]">Ce îmi spuneți de la început</p>
-            <p class="mt-1.5 text-[0.95rem] text-ink-soft">
-              Vârsta copilului și ce ați observat, în două rânduri. Atât îmi trebuie ca să vă spun
-              dacă este cazul unei evaluări și cât durează. Nu am nevoie de detalii medicale în
-              scris, restul discutăm la telefon.
-            </p>
-          </li>
-        </ol>
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+          <a class="btn btn-primary" href={`tel:${site.telefon.replace(/\s/g, "")}`}
+            >Sunați la {site.telefonAfisat}</a
+          >
+          <a
+            class="btn btn-ghost"
+            href={waLink("Bună ziua, aș dori o programare la cabinet.")}
+            target="_blank"
+            rel="noopener">Scrieți pe WhatsApp</a
+          >
+        </div>
+
+        <dl class="mt-10 max-w-xl border-t border-line">
+          <div class="border-b border-line py-4">
+            <dt class="font-serif text-[1.08rem]">Programările</dt>
+            <dd class="mt-1.5 text-[0.95rem] text-ink-soft">{site.programNota}</dd>
+          </div>
+          <div class="border-b border-line py-4">
+            <dt class="font-serif text-[1.08rem]">Ședințele</dt>
+            <dd class="mt-1.5 text-[0.95rem] text-ink-soft">
+              Ședințele se desfășoară atât la cabinet, cât și online, în funcție de nevoile
+              fiecărei persoane și de specificul intervenției. Toate ședințele se realizează pe
+              bază de programare.
+            </dd>
+          </div>
+          <div class="border-b border-line py-4">
+            <dt class="font-serif text-[1.08rem]">Plata</dt>
+            <dd class="mt-1.5 text-[0.95rem] text-ink-soft">
+              Ședințele se desfășoară contra cost, inclusiv prima întâlnire. Plata se face în
+              numerar, prin transfer sau cu cardul. Plata se face la sfârșitul fiecărei ședințe.
+            </dd>
+          </div>
+        </dl>
       </div>
 
       <aside>
@@ -98,11 +98,6 @@ import { site, waLink, u } from "../data/site";
               ))
             }
           </ul>
-          <p class="mt-4 text-[0.9rem] text-ink-soft">{site.programNota}</p>
-          <p class="mt-3 text-[0.9rem] text-ink-soft">
-            În timpul ședințelor nu răspund la telefon. Dacă nu vă răspund, lăsați un mesaj și vă
-            sun eu.
-          </p>
         </div>
 
         <Image

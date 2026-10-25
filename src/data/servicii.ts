@@ -64,10 +64,8 @@ export const servicii: Serviciu[] = [
   {
     slug: "terapia-vml",
     titlu: "Terapia VML, învățare verbală motorie",
-    // „scurt" e singura frază pe care am compus-o eu, din propriile ei formulări,
-    // ca să existe un rezumat pe prima pagină. Restul e textul ei.
     scurt:
-      "Pentru copiii și adulții care știu ce vor să spună, dar întâmpină dificultăți în planificarea și coordonarea mișcărilor necesare vorbirii.",
+      "Pentru copiii care știu ce vor să spună, dar întâmpină dificultăți în planificarea și coordonarea mișcărilor necesare pentru a produce sunetele și cuvintele.",
     pentruCine: [
       {
         label: "Copiilor cu apraxie verbală",

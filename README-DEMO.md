@@ -41,11 +41,12 @@ de pe GitHub Pages, nu site-ul clientei.
 ## Ce mai lipsește înainte de lansare
 
 1. **Restul fotografiilor clientei.** În 25 octombrie 2026 a trimis patru poze: două cu ea, la birou, și două cu colțul de lucru și rafturile. Din ele au ieșit portretele de pe Acasă și Despre, pozele cabinetului și imaginea de previzualizare la distribuire. Mai sunt de cerut: intrarea în clădire și în cabinet, masa de lucru pregătită pentru o ședință și un plan apropiat cu materialele de logopedie. Până atunci, cardurile de servicii, secțiunea de ședințe online și pagina Pentru părinți folosesc fotografii de ilustrație fără oameni identificabili, potrivit Anexei 1 lit. G.3.
-2. **Domeniul psihologgorj.ro**, de înregistrat, plus urcarea pe găzduire și certificatul SSL.
-3. **Panoul de administrare** (Anexa 1 lit. C.1). Keystatic merge pe conținut din fișiere, dar panoul are nevoie de un loc unde să ruleze, pentru că găzduirea statică nu poate rula cod. De ales între o instanță separată pentru panou și mutarea site-ului pe VPS.
-4. **Google Analytics și Search Console** (Anexa 1 lit. D.11), pe conturi deschise pe numele clientei. ID-ul de Analytics se pune în `src/data/site.ts`, câmpul `analyticsGa4`, iar bannerul îl încarcă numai cu acordul vizitatorului.
-5. **Decizia pe blog.** Paginile există, nu apar în meniu, nu intră în sitemap și sunt marcate `noindex`. Se activează dintr-un singur câmp, `site.blogActiv`.
-6. **Punctul exact al clădirii pe hartă**, de luat din profilul Google al cabinetului.
+2. **Textele pentru secțiunile rămase goale.** Pe 25 octombrie clienta a cerut ca site-ul să folosească numai textele ei, identic. Tot copy-ul scris de noi pentru demo și pus la persoana întâi a fost scos. Au rămas fără conținut „cum decurge o primă întâlnire" de pe Acasă (Anexa 1 lit. A.1) și, de pe Pentru părinți, semnele care cer o evaluare, pregătirea copilului pentru prima ședință și ce se întâmplă la evaluare (lit. A.4). Se cer de la ea, altfel anexa se reduce la ce a trimis, ca la serviciile scoase pe 19 octombrie. Detalii în `materiale-primite.md`, punctul 11, și în `DE-COMPLETAT.md`, secțiunea K.
+3. **Domeniul psihologgorj.ro**, de înregistrat, plus urcarea pe găzduire și certificatul SSL.
+4. **Panoul de administrare** (Anexa 1 lit. C.1). Keystatic merge pe conținut din fișiere, dar panoul are nevoie de un loc unde să ruleze, pentru că găzduirea statică nu poate rula cod. De ales între o instanță separată pentru panou și mutarea site-ului pe VPS.
+5. **Google Analytics și Search Console** (Anexa 1 lit. D.11), pe conturi deschise pe numele clientei. ID-ul de Analytics se pune în `src/data/site.ts`, câmpul `analyticsGa4`, iar bannerul îl încarcă numai cu acordul vizitatorului.
+6. **Decizia pe blog.** Paginile există, nu apar în meniu, nu intră în sitemap și sunt marcate `noindex`. Se activează dintr-un singur câmp, `site.blogActiv`.
+7. **Punctul exact al clădirii pe hartă**, de luat din profilul Google al cabinetului.
 
 ## Unde stau datele
 

@@ -24,8 +24,9 @@ export const site = {
     { zi: "Luni – Vineri", ore: "16:00 – 20:00" },
     { zi: "Sâmbătă – Duminică", ore: "pe bază de programare" },
   ],
+  // fraza ei, din mesajul din 20 octombrie
   programNota:
-    "Toate vizitele în cabinet se fac exclusiv cu programare prealabilă, pentru un mediu liniștit și atenție deplină fiecărui copil.",
+    "Toate vizitele în cadrul cabinetului se fac exclusiv cu programare prealabilă, pentru a asigura un mediu liniștit și atenție deplină fiecărui copil.",
   // Codul din Registrul unic al psihologilor, din contract.
   codRegistru: "1GJ18917",
   aniExperienta: 20,
