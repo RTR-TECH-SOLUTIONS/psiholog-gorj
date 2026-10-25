@@ -60,8 +60,8 @@ const intrebari = [
     a: "Ședințele se desfășoară atât la cabinet, cât și online, în funcție de nevoile fiecărei persoane și de specificul intervenției. Toate ședințele se realizează pe bază de programare.",
   },
   {
-    q: "Cum vă pot contacta?",
-    a: "Mă puteți contacta direct prin telefon sau WhatsApp.",
+    q: "Cum vă contactează părinții?",
+    a: "Mă pot contacta direct prin telefon sau WhatsApp.",
   },
   {
     q: "Prima întâlnire se taxează?",
@@ -82,8 +82,15 @@ const intrebari = [
         <div
           class="w-full px-5 py-12 md:px-10 lg:py-24 xl:pl-[clamp(2.5rem,calc((100vw-72rem)/2),11rem)] xl:pr-16"
         >
-          <h1 class="h1 max-w-[15ch]">Evaluare și terapie pentru copii, în {site.oras}</h1>
+          <!-- Titlul și subtitlul sunt ale clientei, trimise pe WhatsApp în 25 octombrie,
+               la 21:05 și 21:07. Singura intervenție este diacriticul din „și" și virgula
+               după „familii". -->
+          <h1 class="h1 max-w-[17ch]">O altfel de cale către comunicare și dezvoltare</h1>
           <p class="lead mt-6 max-w-lg text-ink">
+            Sprijin individualizat pentru copii, adolescenți și familii, adaptat nevoilor și
+            ritmului fiecăruia.
+          </p>
+          <p class="mt-5 max-w-lg text-ink-soft">
             Sunt psiholog clinician și pedagog de recuperare, cu o experiență de peste 20 de ani în
             lucrul cu copiii cu dizabilități și cu nevoi specifice de dezvoltare. În cabinetul meu,
             nu privesc doar un diagnostic, ci descopăr un copil unic, cu un potențial extraordinar,
@@ -267,7 +274,8 @@ const intrebari = [
             Intervenții bazate pe terapia ABA (Analiza Comportamentală Aplicată)
           </li>
           <li class="border-b border-line py-2">
-            Evaluare și terapia logopedică în tulburările de limbaj
+            Evaluare și terapia logopedică în tulburările de limbaj: de pronunție și în plan
+            lexico-grafic
           </li>
           <li class="border-b border-line py-2">
             Psiholog clinician, drept de liberă practică
