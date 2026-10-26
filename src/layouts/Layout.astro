@@ -50,7 +50,7 @@ const dateStructurate = {
     {!estePreviz && noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#e4f1eb" />
 
-    <!-- previzualizarea linkului pe WhatsApp și Facebook -->
+    {/* previzualizarea linkului pe WhatsApp și Facebook */}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ro_RO" />
     <meta property="og:site_name" content={`Cabinet de psihologie ${site.nume}`} />
@@ -79,7 +79,7 @@ const dateStructurate = {
       <slot />
     </main>
     <Footer />
-    <!-- spațiu cât bara fixă de pe mobil, ca să nu acopere footerul -->
+    {/* spațiu cât bara fixă de pe mobil, ca să nu acopere footerul */}
     <div class="h-[4.6rem] md:hidden" aria-hidden="true"></div>
     <BaraMobila />
     <BannerCookies />
