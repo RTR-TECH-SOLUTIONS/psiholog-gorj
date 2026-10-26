@@ -5,11 +5,14 @@ import portretAna from "../assets/portret-ana.webp";
 import portretAnaLat from "../assets/portret-ana-lat.webp";
 import AntetText from "../components/AntetText.astro";
 import AntetValuri from "../components/AntetValuri.astro";
-import { site } from "../data/site";
+import { site, waLink } from "../data/site";
+import { servicii } from "../data/servicii";
 
-// Pagină de lucru, nu face parte din site. Clienta a cerut pe 26 octombrie, la 10:06, mai
-// multe modele. Așezarea paginii rămâne aceeași la toate; se schimbă numai despărțitorul
-// cu inimioară și felul titlului, adică exact ce a desenat ea în machetă.
+// Pagină de lucru, nu face parte din site. Clienta a cerut pe 26 octombrie, la 10:47,
+// „câteva propuneri vizuale pentru stilul general al site-ului", ca să stabilească
+// aspectul, culorile și modul de prezentare a informațiilor înainte de finalizare.
+// Aici sunt trei propuneri, cu aceleași texte, pe aceleași trei bucăți de pagină:
+// partea de sus, serviciile și contactul.
 const portretLat = await getImage({
   src: portretAnaLat,
   widths: [900, 1120],
@@ -17,122 +20,322 @@ const portretLat = await getImage({
 });
 
 const alt = `${site.nume}, psiholog clinician, la biroul din cabinetul din ${site.oras}`;
-
-const modele = [
-  {
-    nr: 1,
-    titlu: "Varianta 1, cea de pe site acum",
-    nota: "Inimioara desenată cu linia, între două linii care se sting la capete. Titlul scris de mână.",
-    ornament: "linii-inima" as const,
-    fontTitlu: "mana" as const,
-  },
-  {
-    nr: 2,
-    titlu: "Varianta 2, inimioara plină",
-    nota: "Aceleași linii, dar inimioara este colorată în întregime, nu doar conturată.",
-    ornament: "inima-plina" as const,
-    fontTitlu: "mana" as const,
-  },
-  {
-    nr: 3,
-    titlu: "Varianta 3, numai inimioara",
-    nota: "Fără linii. Rămâne doar inimioara, puțin mai mare, între cele două rânduri.",
-    ornament: "doar-inima" as const,
-    fontTitlu: "mana" as const,
-  },
-  {
-    nr: 4,
-    titlu: "Varianta 4, linii drepte",
-    nota: "Două linii drepte, subțiri, cu o inimioară mică plină la mijloc. Varianta cea mai sobră.",
-    ornament: "linii-drepte" as const,
-    fontTitlu: "mana" as const,
-  },
-  {
-    nr: 5,
-    titlu: "Varianta 5, titlul cu literă de carte",
-    nota: "Ornamentul ca în varianta 1, dar titlul nu mai este scris de mână, ci cu litera cursivă de pe celelalte pagini.",
-    ornament: "linii-inima" as const,
-    fontTitlu: "serif" as const,
-  },
-];
+const principale = servicii.filter((s) => s.imagine);
+const textContact =
+  "Spuneți-mi pe scurt vârsta copilului și ce v-a îngrijorat. Revin cu un răspuns și stabilim împreună prima întâlnire.";
 ---
 
 <Layout
-  title="Modele pentru partea de sus a primei pagini"
-  description="Pagină de lucru cu variantele de ornament și de titlu pentru prima pagină."
+  title="Propuneri de stil pentru site"
+  description="Pagină de lucru cu trei propuneri vizuale pentru stilul general al site-ului."
   noindex={true}
 >
-  <section class="border-b border-line bg-mint-50">
+  <section class="border-b border-line bg-paper">
     <div class="wrap py-12 md:py-16">
-      <h1 class="h1 max-w-[20ch]">Modele pentru prima pagină</h1>
+      <h1 class="h1 max-w-[22ch]">Trei propuneri de stil</h1>
       <p class="lead mt-5 max-w-2xl">
-        Mai jos este partea de sus a primei pagini, în cinci feluri. Textele, culorile,
-        fotografia și așezarea sunt aceleași peste tot. Se schimbă numai ornamentul dintre
-        rânduri și, la ultima, felul titlului.
+        Fiecare propunere arată același lucru: partea de sus a paginii, felul în care sunt
+        prezentate serviciile și zona de contact. Textele sunt identice peste tot. Se schimbă
+        culorile, literele și modul în care sunt aranjate informațiile.
       </p>
       <p class="mt-4 max-w-2xl text-ink-soft">
-        Prima este cea de pe site acum. Dacă vă place alta, este de ajuns să ne scrieți numărul ei.
+        Prima propunere este cea de pe site acum. Dacă vă place alta, este de ajuns să ne
+        scrieți numărul ei. Putem și să combinăm, de exemplu culorile de la una cu felul în
+        care sunt așezate serviciile de la alta.
       </p>
-      <nav class="mt-7 flex flex-wrap gap-2" aria-label="Sari la o variantă">
-        {
-          modele.map((m) => (
-            <a
-              class="rounded-btn border border-line px-4 py-2 text-[0.93rem] transition-colors hover:border-mint-500"
-              href={`#varianta-${m.nr}`}
-            >
-              Varianta {m.nr}
-            </a>
-          ))
-        }
+      <nav class="mt-7 flex flex-wrap gap-2" aria-label="Sari la o propunere">
+        <a class="rounded-btn border border-line px-4 py-2 text-[0.93rem] hover:border-mint-500" href="#propunerea-1">Propunerea 1</a>
+        <a class="rounded-btn border border-line px-4 py-2 text-[0.93rem] hover:border-mint-500" href="#propunerea-2">Propunerea 2</a>
+        <a class="rounded-btn border border-line px-4 py-2 text-[0.93rem] hover:border-mint-500" href="#propunerea-3">Propunerea 3</a>
       </nav>
     </div>
   </section>
 
-  {
-    modele.map((m) => (
-      <section id={`varianta-${m.nr}`} class="scroll-mt-24 border-b border-line">
-        <div class="wrap py-8">
-          <p class="font-serif text-[1.5rem]">{m.titlu}</p>
-          <p class="mt-1.5 max-w-2xl text-[0.95rem] text-ink-soft">{m.nota}</p>
-        </div>
+  {/* ------------------------------ Propunerea 1 ------------------------------ */}
+  <section id="propunerea-1" class="scroll-mt-24">
+    <div class="wrap py-9">
+      <p class="font-serif text-[1.6rem]">Propunerea 1, cea de pe site acum</p>
+      <p class="mt-2 max-w-2xl text-[0.97rem] text-ink-soft">
+        Crem cald și maro, cu titlul scris de mână și ornamentul cu inimioară. Serviciile stau
+        în trei cartonașe alăturate, fiecare cu fotografia lui deasupra.
+      </p>
+    </div>
 
-        <div class="relative overflow-hidden border-t border-line bg-cream">
-          <AntetValuri />
-          <div class="relative mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
-            <div class="order-2 flex items-center lg:order-1">
-              <div class="w-full px-5 py-12 md:px-10 lg:py-20">
-                <AntetText id={`m${m.nr}`} ornament={m.ornament} titlu={m.fontTitlu} />
-              </div>
-            </div>
-            <div class="order-1 lg:order-2">
-              <picture>
-                <source
-                  media="(min-width: 1280px)"
-                  srcset={portretLat.srcSet.attribute}
-                  sizes="52vw"
-                  width={portretAnaLat.width}
-                  height={portretAnaLat.height}
-                />
+    <div class="relative overflow-hidden border-y border-line bg-cream">
+      <AntetValuri />
+      <div class="relative mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
+        <div class="order-2 flex items-center lg:order-1">
+          <div class="w-full px-5 py-12 md:px-10 lg:py-20">
+            <AntetText id="p1" />
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <picture>
+            <source
+              media="(min-width: 1280px)"
+              srcset={portretLat.srcSet.attribute}
+              sizes="52vw"
+              width={portretAnaLat.width}
+              height={portretAnaLat.height}
+            />
+            <Image
+              src={portretAna}
+              widths={[480, 720, 900]}
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              alt={alt}
+              class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[30rem]"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-cream py-14 md:py-16">
+      <div class="wrap">
+        <h2 class="h2">Cu ce vă pot ajuta</h2>
+        <div class="mt-9 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+          {
+            principale.map((s) => (
+              <article class="flex h-full flex-col">
                 <Image
-                  src={portretAna}
-                  widths={[480, 720, 900]}
-                  sizes="(min-width: 1024px) 52vw, 100vw"
-                  alt={alt}
-                  class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[32rem]"
+                  src={s.imagine}
+                  widths={[320, 480, 640]}
+                  sizes="(min-width: 1024px) 30vw, 100vw"
+                  alt={s.imagineAlt}
                   loading="lazy"
+                  class="aspect-[4/5] w-full rounded-card object-cover"
                 />
-              </picture>
+                <h3 class="mt-5 font-serif text-[1.22rem] leading-snug">{s.titlu}</h3>
+                <p class="mt-2.5 text-[0.95rem] text-ink-soft">{s.scurt}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-line bg-mint-50">
+      <div class="wrap grid gap-8 py-12 md:grid-cols-[1.3fr_1fr] md:items-center md:py-16">
+        <div>
+          <p class="text-[0.78rem] uppercase tracking-[0.18em] text-clay">Contact</p>
+          <p class="h2 mt-3 font-serif">Primul pas e <em class="text-clay">un mesaj</em>.</p>
+          <p class="mt-5 max-w-xl text-[1rem] text-ink-soft">{textContact}</p>
+        </div>
+        <div class="flex flex-col items-start gap-3 md:items-end">
+          <a class="btn btn-whatsapp" href={waLink("Bună ziua.")} target="_blank" rel="noopener"
+            >Scrieți-mi pe WhatsApp</a
+          >
+          <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}
+            >Sunați la {site.telefonAfisat}</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------ Propunerea 2 ------------------------------ */}
+  <section id="propunerea-2" class="scroll-mt-24">
+    <div class="wrap py-9">
+      <p class="font-serif text-[1.6rem]">Propunerea 2, verde liniștit</p>
+      <p class="mt-2 max-w-2xl text-[0.97rem] text-ink-soft">
+        Verde pal de cabinet, cu titluri de carte, fără scris de mână. Serviciile sunt scrise
+        unul sub altul, numerotate, cu o linie între ele, fără fotografii. Informația se citește
+        ca o listă limpede, nu ca niște cartonașe.
+      </p>
+    </div>
+
+    <div class="border-y border-line bg-mint-100">
+      <div class="mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
+        <div class="order-2 flex items-center lg:order-1">
+          <div class="w-full px-5 py-12 md:px-10 lg:py-20 xl:pl-16">
+            <p class="font-serif text-[1.15rem] text-mint-900">
+              Peste 20 de ani de experiență dedicați copiilor cu nevoi speciale
+            </p>
+            <p class="mt-4 font-serif text-[2.4rem] leading-[1.12] text-ink md:text-[3.1rem]">
+              O altfel de cale către comunicare și dezvoltare
+            </p>
+            <div class="mt-6 h-px w-20 bg-mint-500"></div>
+            <p class="mt-6 max-w-lg text-ink-soft">
+              Sunt psiholog clinician și pedagog de recuperare, cu o experiență de peste 20 de
+              ani în lucrul cu copiii cu dizabilități și cu nevoi specifice de dezvoltare. În
+              cabinetul meu, nu privesc doar un diagnostic, ci descopăr un copil unic, cu un
+              potențial extraordinar, și o familie care are nevoie de susținere și îndrumare.
+            </p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a class="btn btn-whatsapp" href={waLink("Bună ziua.")} target="_blank" rel="noopener"
+                >Scrieți-mi pe WhatsApp</a
+              >
+              <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}
+                >Sunați la {site.telefonAfisat}</a
+              >
             </div>
           </div>
         </div>
-      </section>
-    ))
-  }
+        <div class="order-1 lg:order-2">
+          <picture>
+            <source
+              media="(min-width: 1280px)"
+              srcset={portretLat.srcSet.attribute}
+              sizes="52vw"
+              width={portretAnaLat.width}
+              height={portretAnaLat.height}
+            />
+            <Image
+              src={portretAna}
+              widths={[480, 720, 900]}
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              alt={alt}
+              class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[30rem]"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-paper py-14 md:py-16">
+      <div class="wrap max-w-4xl">
+        <h2 class="h2">Cu ce vă pot ajuta</h2>
+        <ol class="mt-9 border-t border-line">
+          {
+            principale.map((s, i) => (
+              <li class="grid gap-x-6 gap-y-2 border-b border-line py-7 sm:grid-cols-[3rem_1fr]">
+                <span class="font-serif text-[1.6rem] leading-none text-mint-500">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 class="font-serif text-[1.3rem] leading-snug">{s.titlu}</h3>
+                  <p class="mt-2 max-w-2xl text-[0.97rem] text-ink-soft">{s.scurt}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+
+    <div class="bg-mint-900 text-white">
+      <div class="wrap grid gap-8 py-12 md:grid-cols-[1.3fr_1fr] md:items-center md:py-16">
+        <div>
+          <h2 class="h2">Contact</h2>
+          <p class="mt-3 font-serif text-[1.3rem] text-mint-200">Primul pas e un mesaj.</p>
+          <p class="mt-5 max-w-xl text-[1rem] text-mint-200">{textContact}</p>
+        </div>
+        <div class="flex flex-col items-start gap-3 md:items-end">
+          <a
+            class="btn bg-white text-mint-900"
+            href={waLink("Bună ziua.")}
+            target="_blank"
+            rel="noopener">Scrieți-mi pe WhatsApp</a
+          >
+          <a
+            class="btn border border-white/60 text-white"
+            href={`tel:${site.telefon.replace(/\s/g, "")}`}>Sunați la {site.telefonAfisat}</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------ Propunerea 3 ------------------------------ */}
+  <section id="propunerea-3" class="scroll-mt-24">
+    <div class="wrap py-9">
+      <p class="font-serif text-[1.6rem]">Propunerea 3, crem cu literă mare de carte</p>
+      <p class="mt-2 max-w-2xl text-[0.97rem] text-ink-soft">
+        Aceleași culori calde ca la prima, dar fără scris de mână. Titlul este mare, cu literă
+        de carte, iar serviciile sunt rânduri late, cu o fotografie mică în stânga și textul în
+        dreapta, ca într-un pliant de cabinet.
+      </p>
+    </div>
+
+    <div class="border-y border-line bg-cream">
+      <div class="mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+        <div class="order-2 flex items-center lg:order-1">
+          <div class="w-full px-5 py-14 md:px-10 lg:py-24 xl:pl-16">
+            <p class="font-serif text-[1.1rem] italic text-cocoa">
+              Peste 20 de ani de experiență dedicați copiilor cu nevoi speciale
+            </p>
+            <p class="mt-5 max-w-[14ch] font-serif text-[2.9rem] leading-[1.06] text-cocoa md:text-[4rem]">
+              O altfel de cale către comunicare și dezvoltare
+            </p>
+            <p class="mt-7 max-w-lg text-ink">
+              Sunt psiholog clinician și pedagog de recuperare, cu o experiență de peste 20 de
+              ani în lucrul cu copiii cu dizabilități și cu nevoi specifice de dezvoltare. În
+              cabinetul meu, nu privesc doar un diagnostic, ci descopăr un copil unic, cu un
+              potențial extraordinar, și o familie care are nevoie de susținere și îndrumare.
+            </p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a class="btn btn-whatsapp" href={waLink("Bună ziua.")} target="_blank" rel="noopener"
+                >Scrieți-mi pe WhatsApp</a
+              >
+              <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}
+                >Sunați la {site.telefonAfisat}</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <Image
+            src={portretAna}
+            widths={[480, 720, 900]}
+            sizes="(min-width: 1024px) 46vw, 100vw"
+            alt={alt}
+            class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[30rem]"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-paper py-14 md:py-16">
+      <div class="wrap max-w-4xl">
+        <h2 class="h2">Cu ce vă pot ajuta</h2>
+        <div class="mt-9 flex flex-col gap-9">
+          {
+            principale.map((s) => (
+              <article class="grid gap-5 border-b border-line pb-9 last:border-0 sm:grid-cols-[11rem_1fr] sm:gap-7">
+                <Image
+                  src={s.imagine}
+                  widths={[240, 360, 480]}
+                  sizes="11rem"
+                  alt={s.imagineAlt}
+                  loading="lazy"
+                  class="aspect-square w-full rounded-card object-cover"
+                />
+                <div>
+                  <h3 class="font-serif text-[1.35rem] leading-snug text-cocoa">{s.titlu}</h3>
+                  <p class="mt-2.5 text-[0.97rem] text-ink-soft">{s.scurt}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-line bg-blush/50">
+      <div class="wrap py-12 text-center md:py-16">
+        <p class="font-serif text-[2.1rem] italic leading-tight text-cocoa md:text-[2.6rem]">
+          Primul pas e un mesaj
+        </p>
+        <p class="mx-auto mt-5 max-w-2xl text-[1rem] text-ink-soft">{textContact}</p>
+        <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <a class="btn btn-whatsapp" href={waLink("Bună ziua.")} target="_blank" rel="noopener"
+            >Scrieți-mi pe WhatsApp</a
+          >
+          <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}
+            >Sunați la {site.telefonAfisat}</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="wrap py-14">
-    <p class="text-ink-soft">
-      Textele rămân cele trimise de dumneavoastră, iar culorile sunt cele din macheta
-      dumneavoastră. Se schimbă doar ornamentul.
+    <p class="max-w-2xl text-ink-soft">
+      Textele sunt cele trimise de dumneavoastră, aceleași în toate trei. După ce alegeți,
+      ducem stilul ales pe toate paginile.
     </p>
   </section>
 </Layout>
