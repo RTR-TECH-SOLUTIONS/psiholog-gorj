@@ -69,48 +69,92 @@ const intrebari = [
   description={`Cabinet de psihologie pentru copii în ${site.oras}, ${site.judet}: evaluare și terapie logopedică, terapia VML și terapie ABA. Programări la telefon sau pe WhatsApp.`}
   intrebari={intrebari}
 >
-  {/* Hero */}
-  <section class="bg-mint-100">
-    <div class="mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
+  {/* Hero. Întreg blocul de text reia macheta trimisă de clientă pe 26 octombrie, la 09:11:
+      fond crem cu valuri bej, text centrat și maro, „Peste 20 de ani" cursiv, despărțitor
+      cu inimioară și titlul scris de mână. Textele sunt tot ale ei. */}
+  <section class="relative overflow-hidden bg-cream">
+    {/* valurile bej din colțurile machetei; marginile lor ies din cadru, ca să nu se vadă
+        nicio tăietură dreaptă */}
+    <svg
+      class="pointer-events-none absolute -left-16 -top-10 h-[22rem] w-[26rem] text-blush"
+      viewBox="0 0 400 300"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M-20 210C60 140 110 250 190 180 250 128 300 60 330-10H-20Z"
+        fill="currentColor"
+        opacity="0.9"></path>
+      <path
+        d="M-20 262C62 192 112 300 192 230c62-54 115-128 150-208"
+        stroke="var(--color-blush-deep)"
+        stroke-width="9"
+        stroke-linecap="round"
+        opacity="0.6"></path>
+    </svg>
+    <svg
+      class="pointer-events-none absolute -bottom-10 -left-20 hidden h-[18rem] w-[24rem] text-blush lg:block"
+      viewBox="0 0 400 300"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M-20 118C60 188 112 80 192 150c62 54 115 128 150 208H-20Z"
+        fill="currentColor"
+        opacity="0.75"></path>
+    </svg>
+
+    <div class="relative mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
       <div class="order-2 flex items-center lg:order-1">
         <div
-          class="w-full px-5 py-12 md:px-10 lg:py-24 xl:pl-[clamp(2.5rem,calc((100vw-72rem)/2),11rem)] xl:pr-16"
+          class="w-full px-5 py-12 text-center md:px-10 lg:py-24 xl:pl-[clamp(2.5rem,calc((100vw-72rem)/2),11rem)] xl:pr-16"
         >
-          {/* Titlul și subtitlul sunt ale clientei, trimise pe WhatsApp în 25 octombrie,
-               la 21:05 și 21:07. Singura intervenție este diacriticul din „și" și virgula
-               după „familii". */}
-          {/* Experiența, pusă la început și cu scris maro, cum a cerut pe 26 octombrie la
-               08:48, cu macheta ei de la 09:11. Formularea e a ei, din același mesaj. */}
-          <p class="max-w-[22ch] font-serif text-[1.6rem] leading-[1.25] text-clay md:text-[1.9rem]">
-            Peste 20 de ani de experiență dedicați copiilor cu nevoi speciale
+          {/* Textele sunt ale clientei: titlul din 25 octombrie, 21:05, iar rândul de
+              experiență din 26 octombrie, 08:48. Corectate doar diacriticele. */}
+          <p class="font-serif text-[2.1rem] italic leading-[1.05] text-clay md:text-[2.6rem]">
+            Peste 20 de ani
           </p>
-          {/* Inimioara dintre cele două rânduri e din macheta ei de pe 26 octombrie, 09:11. */}
+          <p
+            class="mx-auto mt-2 max-w-[20ch] font-serif text-[1.3rem] leading-[1.3] text-clay md:text-[1.55rem]"
+          >
+            de experiență dedicați copiilor cu nevoi speciale
+          </p>
+
+          {/* despărțitorul cu inimioară, din aceeași machetă */}
           <svg
-            class="mt-5 h-6 w-6 text-clay"
-            viewBox="0 0 24 24"
+            class="mx-auto my-6 h-6 w-[min(22rem,80%)] text-clay/60"
+            viewBox="0 0 320 24"
             fill="none"
-            stroke="currentColor"
-            stroke-width="1.3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
             aria-hidden="true"
             focusable="false"
           >
-            <path
-              d="M12 20.5C12 20.5 3.5 15.4 3.5 9.4a4.6 4.6 0 0 1 8.5-2.5 4.6 4.6 0 0 1 8.5 2.5c0 6-8.5 11.1-8.5 11.1Z"
+            <path d="M8 16c44 8 80 8 122-1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
             ></path>
+            <path d="M312 16c-44 8-80 8-122-1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+            ></path>
+            <path
+              d="M160 21s-9.5-5.7-9.5-11.6a5.1 5.1 0 0 1 9.5-2.7 5.1 5.1 0 0 1 9.5 2.7c0 5.9-9.5 11.6-9.5 11.6Z"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linejoin="round"></path>
           </svg>
-          <h1 class="h1 mt-4 max-w-[17ch]">O altfel de cale către comunicare și dezvoltare</h1>
+
+          <h1
+            class="mx-auto max-w-[16ch] font-script text-[2.5rem] font-medium leading-[1.25] text-clay-dark md:text-[3.2rem]"
+          >
+            O altfel de cale către comunicare și dezvoltare
+          </h1>
+
           {/* Propoziția „Sprijin individualizat..." a fost scoasă la cererea ei din
                26 octombrie, 09:08, deși tot ea o trimisese pe 25 octombrie. */}
-          <p class="mt-6 max-w-lg text-ink">
+          <p class="mx-auto mt-7 max-w-lg text-ink">
             Sunt psiholog clinician și pedagog de recuperare, cu <strong
               class="font-medium text-clay">o experiență de peste 20 de ani</strong
             > în lucrul cu copiii cu dizabilități și cu nevoi specifice de dezvoltare. În cabinetul
             meu, nu privesc doar un diagnostic, ci descopăr un copil unic, cu un potențial
             extraordinar, și o familie care are nevoie de susținere și îndrumare.
           </p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
             <a
               class="btn btn-primary"
               href={waLink("Bună ziua, aș dori o programare pentru copilul meu.")}
@@ -119,7 +163,7 @@ const intrebari = [
             >
             <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}>Sunați la {site.telefonAfisat}</a>
           </div>
-          <p class="mt-8 text-[0.9rem] text-ink-soft">
+          <p class="mx-auto mt-8 max-w-md text-[0.9rem] text-ink-soft">
             {site.denumireLegala}. {site.adresaStrada}, {site.oras}, județul {site.judet}.
           </p>
         </div>

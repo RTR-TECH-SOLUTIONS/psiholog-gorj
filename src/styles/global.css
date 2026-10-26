@@ -5,6 +5,8 @@
    de confidențialitate). Variantele variabile au aceleași axe ca înainte. */
 @import "@fontsource-variable/fraunces/opsz.css";
 @import "@fontsource-variable/instrument-sans/wght.css";
+/* Scrisul de mână din antet, cerut de clientă pe 26 octombrie prin macheta ei. */
+@import "@fontsource-variable/dancing-script/wght.css";
 
 @theme {
   /* Paletă: mint pastel + alb + maro închis (accent unic pe butoane) */
@@ -22,11 +24,15 @@
   --color-line: #e8e1d7;
   --color-clay: #3c2a21;
   --color-clay-dark: #24150e;
+  /* Bejul cald din macheta clientei, pentru valurile din antet. */
+  --color-blush: #f6e7da;
+  --color-blush-deep: #efd8c6;
   --color-whatsapp: #15784b;
   --color-whatsapp-dark: #10603c;
 
   --font-serif: "Fraunces Variable", "Iowan Old Style", Georgia, "Times New Roman", serif;
   --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-script: "Dancing Script Variable", "Snell Roundhand", "Apple Chancery", cursive;
 
   --radius-card: 14px;
   --radius-btn: 10px;
