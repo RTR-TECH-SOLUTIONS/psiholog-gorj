@@ -24,7 +24,10 @@
   --color-line: #e8e1d7;
   --color-clay: #3c2a21;
   --color-clay-dark: #24150e;
-  /* Bejul cald din macheta clientei, pentru valurile din antet. */
+  /* Culorile luate din macheta clientei: maroul cald al scrisului, maroul deschis al
+     ornamentului și bejul valurilor din antet. */
+  --color-cocoa: #643c28;
+  --color-cocoa-light: #ac8c74;
   --color-blush: #f6e7da;
   --color-blush-deep: #efd8c6;
   --color-whatsapp: #15784b;
