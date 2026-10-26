@@ -17,19 +17,17 @@ const {
 } = Astro.props;
 ---
 
+{/* Totul e centrat, pe o coloană, ca în macheta trimisă de clientă pe 26 octombrie:
+    eticheta mică, fraza mare cu „un mesaj" cursiv și maro, textul ei, apoi butonul verde
+    de WhatsApp și telefonul dedesubt. La 19:03 a cerut să fie identică cu macheta. */}
 <section class="border-t border-line bg-mint-50">
-  <div class="wrap grid gap-8 py-14 md:grid-cols-[1.3fr_1fr] md:items-center md:py-20">
-    <div>
-      {/* Ordinea, mărimile și cursivul maro din „un mesaj" sunt după macheta trimisă de
-          clientă pe 26 octombrie, la 08:31: întâi eticheta mică, apoi fraza mare. */}
-      <p class="text-[0.78rem] uppercase tracking-[0.18em] text-clay">{titlu}</p>
-      <h2 class="h2 mt-3">
-        Primul pas e <em class="text-clay">un mesaj</em>.
-      </h2>
-      <p class="mt-5 max-w-xl text-[1rem] text-ink-soft">{text}</p>
-    </div>
-    {/* butonul de WhatsApp pe verde, iar telefonul sub el, cum a cerut clienta */}
-    <div class="flex flex-col items-start gap-3 md:items-end">
+  <div class="wrap max-w-3xl py-14 text-center md:py-20">
+    <p class="text-[0.78rem] uppercase tracking-[0.18em] text-cocoa-light">{titlu}</p>
+    <h2 class="h2 mt-4">
+      Primul pas e <em class="text-cocoa">un mesaj</em>.
+    </h2>
+    <p class="mx-auto mt-5 max-w-xl text-[1rem] text-ink-soft">{text}</p>
+    <div class="mt-8 flex flex-col items-center gap-3">
       <a
         class="btn btn-whatsapp"
         href={waLink("Bună ziua, aș dori să discutăm despre o programare.")}

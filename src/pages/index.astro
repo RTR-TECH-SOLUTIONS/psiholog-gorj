@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { Image, getImage } from "astro:assets";
 import portretAna from "../assets/portret-ana.webp";
 import portretAnaLat from "../assets/portret-ana-lat.webp";
+import cabinetAnsamblu from "../assets/cabinet-ansamblu.webp";
 import cabinetMateriale from "../assets/cabinet-materiale.webp";
 import sedinteOnline from "../assets/sedinte-online.webp";
 import AntetText from "../components/AntetText.astro";
@@ -192,6 +193,34 @@ const intrebari = [
           ))
         }
       </div>
+    </div>
+  </section>
+
+  {/* Spațiul. Secțiune cerută de clientă pe 26 octombrie, la 19:07, după un model pe
+      care l-a trimis. La 19:12 a cerut o singură fotografie, nu două. */}
+  <section class="border-y border-line bg-cream py-16 md:py-20">
+    <div class="wrap text-center">
+      <p class="text-[0.78rem] uppercase tracking-[0.18em] text-cocoa-light">Spațiul</p>
+      <h2 class="mx-auto mt-4 max-w-[20ch] font-serif text-[2rem] leading-[1.15] text-ink md:text-[2.6rem]">
+        O cameră în care <em class="text-cocoa">copilului îi vine să rămână</em>.
+      </h2>
+
+      <figure class="relative mx-auto mt-10 max-w-3xl">
+        <Image
+          src={cabinetAnsamblu}
+          widths={[480, 720, 1080, 1440]}
+          sizes="(min-width: 1024px) 48rem, 100vw"
+          alt="Colțul de lucru din cabinet: rafturile cu materiale, măsuța verde pentru copii și scăunelele"
+          loading="lazy"
+          class="aspect-[16/10] w-full rounded-card object-cover"
+        />
+        <figcaption
+          class="absolute bottom-4 left-4 rounded-btn bg-paper/90 px-4 py-2.5 text-left shadow-sm"
+        >
+          <span class="block font-serif text-[1.02rem] text-ink">Camera de terapie</span>
+          <span class="block text-[0.82rem] text-ink-soft">fotografie reală din cabinet</span>
+        </figcaption>
+      </figure>
     </div>
   </section>
 

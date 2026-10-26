@@ -17,13 +17,12 @@ const filtre = [
   title={`Logopedie, terapie VML și ABA pentru copii · ${site.oras}`}
   description={`Evaluare și terapie logopedică, terapia VML a limbajului și intervenția comportamentală ABA pentru copii, la cabinetul din ${site.oras}, ${site.judet}.`}
 >
-  <section class="border-b border-line bg-mint-50">
+  {/* Titlul e cel trimis de clientă pe 26 octombrie, la 18:53. Fraza de dedesubt, scrisă
+      de noi, a fost scoasă: pe site rămân numai textele ei. */}
+  <section class="border-b border-line bg-cream">
     <div class="wrap py-14 md:py-20">
-      <h1 class="h1 max-w-[18ch]">Servicii pentru copii, în {site.oras}</h1>
-      <p class="lead mt-5 max-w-2xl">
-        Pentru fiecare serviciu găsiți mai jos cui se adresează, ce urmăresc și de la ce vârstă se
-        poate începe.
-      </p>
+      <h1 class="h1 max-w-[20ch] text-cocoa">Comunicare și dezvoltare, sprijin la orice vârstă</h1>
+      <p class="mt-5 text-[0.95rem] text-ink-soft">{site.nume} · {site.oras}, {site.judet}</p>
     </div>
   </section>
 
@@ -48,7 +47,15 @@ const filtre = [
     <div class="mt-12 flex flex-col gap-16 md:gap-24">
       {
         servicii.map((s, i) => (
-          <article id={s.slug} class="serviciu scroll-mt-28" data-public={s.public.join(" ")}>
+          <article
+            id={s.slug}
+            class:list={[
+              "serviciu scroll-mt-28",
+              s.slug === "terapia-vml" &&
+                "rounded-card border border-blush-deep bg-cream px-5 py-10 md:px-10 md:py-12",
+            ]}
+            data-public={s.public.join(" ")}
+          >
             <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
               <div class={s.imagine && i % 2 === 1 ? "lg:order-2" : ""}>
                 {s.imagine ? (
@@ -66,8 +73,10 @@ const filtre = [
                       {s.public.map((p) => publicLabels[p]).join(" · ")}
                     </p>
                     <h2 class="h2 mt-3">{s.titlu}</h2>
-                    {s.motto && <p class="mt-2 font-serif text-[1.05rem] text-clay">{s.motto}</p>}
-                    <p class="lead mt-4">{s.scurt}</p>
+                    {s.motto && <p class="mt-2 font-serif text-[1.05rem] italic text-cocoa-light">{s.motto}</p>}
+                    <p class="mt-4 font-serif text-[1.2rem] italic leading-snug text-cocoa md:text-[1.35rem]">
+                      {s.scurt}
+                    </p>
                   </div>
                 )}
               </div>
@@ -79,8 +88,10 @@ const filtre = [
                       {s.public.map((p) => publicLabels[p]).join(" · ")}
                     </p>
                     <h2 class="h2 mt-3">{s.titlu}</h2>
-                    {s.motto && <p class="mt-2 font-serif text-[1.05rem] text-clay">{s.motto}</p>}
-                    <p class="lead mt-4">{s.scurt}</p>
+                    {s.motto && <p class="mt-2 font-serif text-[1.05rem] italic text-cocoa-light">{s.motto}</p>}
+                    <p class="mt-4 font-serif text-[1.2rem] italic leading-snug text-cocoa md:text-[1.35rem]">
+                      {s.scurt}
+                    </p>
                   </>
                 )}
 
@@ -88,7 +99,7 @@ const filtre = [
                   <p class="mt-4 max-w-2xl text-ink-soft">{paragraf}</p>
                 ))}
 
-                <h3 class={`font-serif text-[1.1rem] ${s.imagine || s.descriere ? "mt-8" : ""}`}>
+                <h3 class={`font-serif text-[1.45rem] text-cocoa ${s.imagine || s.descriere ? "mt-9" : ""}`}>
                   Cui se adresează
                 </h3>
                 <ul class="mt-2 max-w-2xl">
@@ -102,7 +113,7 @@ const filtre = [
 
                 {s.ceUrmaresc.length > 0 && (
                   <>
-                    <h3 class="mt-6 font-serif text-[1.1rem]">Ce urmăresc</h3>
+                    <h3 class="mt-8 font-serif text-[1.45rem] text-cocoa">Ce urmăresc</h3>
                     <ul class="mt-2 max-w-2xl">
                       {s.ceUrmaresc.map((p) => (
                         <li class="border-b border-line py-3 text-ink-soft last:border-0">
@@ -116,7 +127,7 @@ const filtre = [
 
                 {s.scopFinal && (
                   <>
-                    <h3 class="mt-6 font-serif text-[1.1rem]">Care este scopul final</h3>
+                    <h3 class="mt-8 font-serif text-[1.45rem] text-cocoa">Care este scopul final</h3>
                     {s.scopFinal.map((paragraf) => (
                       <p class="mt-2 max-w-2xl text-ink-soft">{paragraf}</p>
                     ))}
@@ -125,7 +136,7 @@ const filtre = [
 
                 {s.delaVarsta && (
                   <>
-                    <h3 class="mt-6 font-serif text-[1.1rem]">De la ce vârstă</h3>
+                    <h3 class="mt-8 font-serif text-[1.45rem] text-cocoa">De la ce vârstă</h3>
                     {s.delaVarsta.map((paragraf) => (
                       <p class="mt-2 max-w-2xl text-ink-soft">{paragraf}</p>
                     ))}

@@ -66,10 +66,11 @@ export const servicii: Serviciu[] = [
   {
     slug: "terapia-vml",
     titlu: "Terapia VML (Învățare Verbală Motorie)",
-    // rezumatul e primul punct din „Cui se adresează", ca apraxia verbală să apară
-    // și pe prima pagină, nu doar în pagina de servicii (cerut de clientă pe 25 octombrie)
+    // Clienta a semnalat pe 26 octombrie, la 18:04, că rezumatul repeta primul punct din
+    // „Cui se adresează". Textul de mai jos e cel trimis de ea la 18:14.
+    motto: "Terapia VML, o altfel de cale către comunicare și dezvoltare",
     scurt:
-      "Copiilor cu apraxie verbală: copiii care știu ce vor să spună, dar întâmpină dificultăți în planificarea și coordonarea mișcărilor necesare pentru a produce sunetele și cuvintele.",
+      "Copilul tău nu vorbește sau vorbește puțin? Nu amâna intervenția! Limbajul se dezvoltă pas cu pas, iar timpul contează.",
     pentruCine: [
       {
         label: "Copiilor cu apraxie verbală",
