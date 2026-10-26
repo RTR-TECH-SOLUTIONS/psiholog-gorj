@@ -8,30 +8,34 @@ interface Props {
 
 // Tot ce scrie pe bandă e de la clientă: „În loc de programări: Contact. Primul
 // pas e un mesaj" (25 octombrie, 22:03) și textul de pe fondul verde, cu butonul
-// de WhatsApp și telefonul sub el (25 octombrie, 22:06). Fondul verde închis e
-// tot cererea ei, ca banda să iasă în evidență.
+// de WhatsApp și telefonul sub el (25 octombrie, 22:06). Macheta trimisă pe
+// 26 octombrie, la 08:31, arată ce a vrut să spună prin „pe fond verde": nu
+// banda, ci butonul de WhatsApp. Banda revine deci pe fond deschis.
 const {
   titlu = "Contact",
   text = "Spuneți-mi pe scurt vârsta copilului și ce v-a îngrijorat. Revin cu un răspuns și stabilim împreună prima întâlnire.",
 } = Astro.props;
 ---
 
-<section class="bg-mint-900 text-white">
+<section class="border-t border-line bg-mint-50">
   <div class="wrap grid gap-8 py-14 md:grid-cols-[1.3fr_1fr] md:items-center md:py-20">
     <div>
       <h2 class="h2">{titlu}</h2>
-      <p class="lead mt-3 font-serif text-white">Primul pas e un mesaj.</p>
-      <p class="mt-4 max-w-xl text-[1rem] text-mint-200">{text}</p>
+      <!-- „un mesaj" cursiv și în maro, ca în macheta ei din 26 octombrie -->
+      <p class="lead mt-3 font-serif text-ink">
+        Primul pas e <em class="text-clay">un mesaj</em>.
+      </p>
+      <p class="mt-4 max-w-xl text-[1rem] text-ink-soft">{text}</p>
     </div>
-    <!-- butonul de WhatsApp, iar telefonul sub el, cum a cerut clienta -->
+    <!-- butonul de WhatsApp pe verde, iar telefonul sub el, cum a cerut clienta -->
     <div class="flex flex-col items-start gap-3 md:items-end">
       <a
-        class="btn btn-light"
+        class="btn btn-whatsapp"
         href={waLink("Bună ziua, aș dori să discutăm despre o programare.")}
         target="_blank"
         rel="noopener">Scrieți-mi pe WhatsApp</a
       >
-      <a class="btn btn-outline-light" href={`tel:${site.telefon.replace(/\s/g, "")}`}
+      <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}
         >Sunați la {site.telefonAfisat}</a
       >
     </div>

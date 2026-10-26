@@ -22,6 +22,8 @@
   --color-line: #e8e1d7;
   --color-clay: #3c2a21;
   --color-clay-dark: #24150e;
+  --color-whatsapp: #15784b;
+  --color-whatsapp-dark: #10603c;
 
   --font-serif: "Fraunces Variable", "Iowan Old Style", Georgia, "Times New Roman", serif;
   --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -108,18 +110,15 @@
   }
   .btn-ghost:hover { background-color: var(--color-clay); color: #fff; }
 
-  /* variantele pentru banda de contact, care stă pe verde închis */
-  .btn-light {
-    background-color: #fff;
-    color: var(--color-mint-900);
-  }
-  .btn-light:hover { background-color: var(--color-mint-100); }
-
-  .btn-outline-light {
-    border: 1px solid rgb(255 255 255 / 0.6);
+  /* Butonul de WhatsApp de pe banda de contact. Clienta a cerut, pe 25 octombrie la 22:06,
+     ca eticheta „Scrieți-mi pe WhatsApp" să stea pe fond verde, iar macheta trimisă pe
+     26 octombrie arată verdele de WhatsApp. Nuanța e coborâtă față de verdele oficial,
+     ca textul alb să treacă pragul de contrast AA. */
+  .btn-whatsapp {
+    background-color: var(--color-whatsapp);
     color: #fff;
   }
-  .btn-outline-light:hover { background-color: rgb(255 255 255 / 0.12); }
+  .btn-whatsapp:hover { background-color: var(--color-whatsapp-dark); }
 
   .prose-ro p { max-width: 62ch; }
 
