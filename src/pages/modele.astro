@@ -7,9 +7,9 @@ import AntetText from "../components/AntetText.astro";
 import AntetValuri from "../components/AntetValuri.astro";
 import { site } from "../data/site";
 
-// Pagină de lucru, nu face parte din site. Clienta a cerut pe 26 octombrie, la 10:06,
-// mai multe modele pentru fiecare pagină. Aici stau variantele de antet pentru Acasă,
-// prima fiind exact cea publicată, ca să le poată compara și să aleagă un număr.
+// Pagină de lucru, nu face parte din site. Clienta a cerut pe 26 octombrie, la 10:06, mai
+// multe modele. Așezarea paginii rămâne aceeași la toate; se schimbă numai despărțitorul
+// cu inimioară și felul titlului, adică exact ce a desenat ea în machetă.
 const portretLat = await getImage({
   src: portretAnaLat,
   widths: [900, 1120],
@@ -19,29 +19,59 @@ const portretLat = await getImage({
 const alt = `${site.nume}, psiholog clinician, la biroul din cabinetul din ${site.oras}`;
 
 const modele = [
-  { nr: 1, titlu: "Varianta 1, cea de pe site acum", nota: "Fotografia în dreapta, textul centrat pe fond crem, cu valurile bej." },
-  { nr: 2, titlu: "Varianta 2, fotografia dedesubt", nota: "Textul singur, pe toată lățimea. Fotografia vine imediat sub el, ca o bandă lată." },
-  { nr: 3, titlu: "Varianta 3, fotografia în stânga", nota: "Aceeași așezare ca varianta 1, dar oglindită." },
-  { nr: 4, titlu: "Varianta 4, textul peste fotografie", nota: "Fotografia ocupă tot fundalul, iar textul stă pe un card crem deasupra ei, ca în macheta trimisă." },
-  { nr: 5, titlu: "Varianta 5, fără valuri, scris mai mare", nota: "Crem simplu, fără valurile bej, cu scrisul mai mare și mai mult aer." },
+  {
+    nr: 1,
+    titlu: "Varianta 1, cea de pe site acum",
+    nota: "Inimioara desenată cu linia, între două linii care se sting la capete. Titlul scris de mână.",
+    ornament: "linii-inima" as const,
+    fontTitlu: "mana" as const,
+  },
+  {
+    nr: 2,
+    titlu: "Varianta 2, inimioara plină",
+    nota: "Aceleași linii, dar inimioara este colorată în întregime, nu doar conturată.",
+    ornament: "inima-plina" as const,
+    fontTitlu: "mana" as const,
+  },
+  {
+    nr: 3,
+    titlu: "Varianta 3, numai inimioara",
+    nota: "Fără linii. Rămâne doar inimioara, puțin mai mare, între cele două rânduri.",
+    ornament: "doar-inima" as const,
+    fontTitlu: "mana" as const,
+  },
+  {
+    nr: 4,
+    titlu: "Varianta 4, linii drepte",
+    nota: "Două linii drepte, subțiri, cu o inimioară mică plină la mijloc. Varianta cea mai sobră.",
+    ornament: "linii-drepte" as const,
+    fontTitlu: "mana" as const,
+  },
+  {
+    nr: 5,
+    titlu: "Varianta 5, titlul cu literă de carte",
+    nota: "Ornamentul ca în varianta 1, dar titlul nu mai este scris de mână, ci cu litera cursivă de pe celelalte pagini.",
+    ornament: "linii-inima" as const,
+    fontTitlu: "serif" as const,
+  },
 ];
 ---
 
 <Layout
-  title="Modele de antet pentru prima pagină"
-  description="Pagină de lucru cu variantele de antet pentru prima pagină."
+  title="Modele pentru partea de sus a primei pagini"
+  description="Pagină de lucru cu variantele de ornament și de titlu pentru prima pagină."
   noindex={true}
 >
   <section class="border-b border-line bg-mint-50">
     <div class="wrap py-12 md:py-16">
       <h1 class="h1 max-w-[20ch]">Modele pentru prima pagină</h1>
       <p class="lead mt-5 max-w-2xl">
-        Mai jos sunt cinci așezări pentru partea de sus a paginii. Textele, culorile și
-        ornamentul sunt aceleași peste tot, se schimbă numai felul în care stau fotografia și
-        textul unul față de celălalt. Prima este cea de pe site acum.
+        Mai jos este partea de sus a primei pagini, în cinci feluri. Textele, culorile,
+        fotografia și așezarea sunt aceleași peste tot. Se schimbă numai ornamentul dintre
+        rânduri și, la ultima, felul titlului.
       </p>
       <p class="mt-4 max-w-2xl text-ink-soft">
-        Dacă vă place una dintre ele, este de ajuns să ne scrieți numărul ei.
+        Prima este cea de pe site acum. Dacă vă place alta, este de ajuns să ne scrieți numărul ei.
       </p>
       <nav class="mt-7 flex flex-wrap gap-2" aria-label="Sari la o variantă">
         {
@@ -66,128 +96,34 @@ const modele = [
           <p class="mt-1.5 max-w-2xl text-[0.95rem] text-ink-soft">{m.nota}</p>
         </div>
 
-        <div class="border-t border-line">
-          {m.nr === 1 && (
-            <div class="relative overflow-hidden bg-cream">
-              <AntetValuri />
-              <div class="relative mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
-                <div class="order-2 flex items-center lg:order-1">
-                  <div class="w-full px-5 py-12 md:px-10 lg:py-20">
-                    <AntetText id="m1" />
-                  </div>
-                </div>
-                <div class="order-1 lg:order-2">
-                  <picture>
-                    <source
-                      media="(min-width: 1280px)"
-                      srcset={portretLat.srcSet.attribute}
-                      sizes="52vw"
-                      width={portretAnaLat.width}
-                      height={portretAnaLat.height}
-                    />
-                    <Image
-                      src={portretAna}
-                      widths={[480, 720, 900]}
-                      sizes="(min-width: 1024px) 52vw, 100vw"
-                      alt={alt}
-                      class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[32rem]"
-                      loading="lazy"
-                    />
-                  </picture>
-                </div>
+        <div class="relative overflow-hidden border-t border-line bg-cream">
+          <AntetValuri />
+          <div class="relative mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
+            <div class="order-2 flex items-center lg:order-1">
+              <div class="w-full px-5 py-12 md:px-10 lg:py-20">
+                <AntetText id={`m${m.nr}`} ornament={m.ornament} titlu={m.fontTitlu} />
               </div>
             </div>
-          )}
-
-          {m.nr === 2 && (
-            <div>
-              <div class="relative overflow-hidden bg-cream">
-                <AntetValuri unde="sus" />
-                <div class="relative mx-auto max-w-4xl px-5 py-14 md:py-20">
-                  <AntetText id="m2" />
-                </div>
-              </div>
-              <Image
-                src={portretAnaLat}
-                widths={[720, 1120, 1600]}
-                sizes="100vw"
-                alt={alt}
-                class="h-[42vh] w-full object-cover object-[center_26%] md:h-[56vh]"
-                loading="lazy"
-              />
+            <div class="order-1 lg:order-2">
+              <picture>
+                <source
+                  media="(min-width: 1280px)"
+                  srcset={portretLat.srcSet.attribute}
+                  sizes="52vw"
+                  width={portretAnaLat.width}
+                  height={portretAnaLat.height}
+                />
+                <Image
+                  src={portretAna}
+                  widths={[480, 720, 900]}
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                  alt={alt}
+                  class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[32rem]"
+                  loading="lazy"
+                />
+              </picture>
             </div>
-          )}
-
-          {m.nr === 3 && (
-            <div class="relative overflow-hidden bg-cream">
-              <AntetValuri unde="sus" />
-              <div class="relative mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]">
-                <div>
-                  <picture>
-                    <source
-                      media="(min-width: 1280px)"
-                      srcset={portretLat.srcSet.attribute}
-                      sizes="52vw"
-                      width={portretAnaLat.width}
-                      height={portretAnaLat.height}
-                    />
-                    <Image
-                      src={portretAna}
-                      widths={[480, 720, 900]}
-                      sizes="(min-width: 1024px) 52vw, 100vw"
-                      alt={alt}
-                      class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[32rem]"
-                      loading="lazy"
-                    />
-                  </picture>
-                </div>
-                <div class="flex items-center">
-                  <div class="w-full px-5 py-12 md:px-10 lg:py-20">
-                    <AntetText id="m3" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {m.nr === 4 && (
-            <div class="relative isolate overflow-hidden bg-cream">
-              <Image
-                src={portretAnaLat}
-                widths={[720, 1120, 1600]}
-                sizes="100vw"
-                alt={alt}
-                class="absolute inset-0 -z-10 h-full w-full object-cover object-[center_18%]"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 -z-10 bg-cream/45"></div>
-              <div class="relative mx-auto max-w-3xl px-5 py-14 md:py-20">
-                <AntetText id="m4" card={true} />
-              </div>
-            </div>
-          )}
-
-          {m.nr === 5 && (
-            <div class="bg-cream">
-              <div class="mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
-                <div class="order-2 flex items-center lg:order-1">
-                  <div class="w-full px-5 py-14 md:px-10 lg:py-24">
-                    <AntetText id="m5" marime="mare" />
-                  </div>
-                </div>
-                <div class="order-1 lg:order-2">
-                  <Image
-                    src={portretAna}
-                    widths={[480, 720, 900]}
-                    sizes="(min-width: 1024px) 46vw, 100vw"
-                    alt={alt}
-                    class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[34rem]"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       </section>
     ))
@@ -195,8 +131,8 @@ const modele = [
 
   <section class="wrap py-14">
     <p class="text-ink-soft">
-      Variantele de mai sus schimbă numai așezarea. Textele rămân cele trimise de
-      dumneavoastră, iar culorile și ornamentul sunt cele din macheta dumneavoastră.
+      Textele rămân cele trimise de dumneavoastră, iar culorile sunt cele din macheta
+      dumneavoastră. Se schimbă doar ornamentul.
     </p>
   </section>
 </Layout>
