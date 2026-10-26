@@ -16,8 +16,10 @@ export default defineConfig({
   base: esteDemo ? '/psiholog-gorj' : '/',
   integrations: [
     sitemap({
-      // blogul intră în sitemap abia când clienta se hotărăște să îl publice
-      filter: (pagina) => dateSite.blogActiv || !pagina.includes('/blog'),
+      // blogul intră în sitemap abia când clienta se hotărăște să îl publice,
+      // iar pagina cu modele de antet e doar de lucru, nu face parte din site
+      filter: (pagina) =>
+        !pagina.includes('/modele') && (dateSite.blogActiv || !pagina.includes('/blog')),
     }),
   ],
   vite: {

@@ -5,6 +5,8 @@ import portretAna from "../assets/portret-ana.webp";
 import portretAnaLat from "../assets/portret-ana-lat.webp";
 import cabinetMateriale from "../assets/cabinet-materiale.webp";
 import sedinteOnline from "../assets/sedinte-online.webp";
+import AntetText from "../components/AntetText.astro";
+import AntetValuri from "../components/AntetValuri.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Faq from "../components/Faq.astro";
 import { site, waLink, u } from "../data/site";
@@ -69,124 +71,24 @@ const intrebari = [
   description={`Cabinet de psihologie pentru copii în ${site.oras}, ${site.judet}: evaluare și terapie logopedică, terapia VML și terapie ABA. Programări la telefon sau pe WhatsApp.`}
   intrebari={intrebari}
 >
-  {/* Hero. Întreg blocul de text reia macheta trimisă de clientă pe 26 octombrie, la 09:11:
-      fond crem cu valuri bej, text centrat și maro, „Peste 20 de ani" cursiv, despărțitor
-      cu inimioară și titlul scris de mână. Textele sunt tot ale ei. */}
+  {/* Hero. Blocul de text stă în AntetText.astro, ca să fie exact același și pe pagina
+      cu modele. Fondul crem, valurile bej și textul maro vin din macheta clientei. */}
   <section class="relative overflow-hidden bg-cream">
-    {/* valurile bej din colțurile machetei; marginile lor ies din cadru, ca să nu se vadă
-        nicio tăietură dreaptă */}
-    <svg
-      class="pointer-events-none absolute -left-16 -top-10 h-[22rem] w-[26rem] text-blush"
-      viewBox="0 0 400 300"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M-20 210C60 140 110 250 190 180 250 128 300 60 330-10H-20Z"
-        fill="currentColor"
-        opacity="0.9"></path>
-      <path
-        d="M-20 262C62 192 112 300 192 230c62-54 115-128 150-208"
-        stroke="var(--color-blush-deep)"
-        stroke-width="9"
-        stroke-linecap="round"
-        opacity="0.6"></path>
-    </svg>
-    <svg
-      class="pointer-events-none absolute -bottom-10 -left-20 hidden h-[18rem] w-[24rem] text-blush lg:block"
-      viewBox="0 0 400 300"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M-20 118C60 188 112 80 192 150c62 54 115 128 150 208H-20Z"
-        fill="currentColor"
-        opacity="0.75"></path>
-    </svg>
+    <AntetValuri />
 
     <div class="relative mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
       <div class="order-2 flex items-center lg:order-1">
         <div
-          class="w-full px-5 py-12 text-center md:px-10 lg:py-24 xl:pl-[clamp(2.5rem,calc((100vw-72rem)/2),11rem)] xl:pr-16"
+          class="w-full px-5 py-12 md:px-10 lg:py-24 xl:pl-[clamp(2.5rem,calc((100vw-72rem)/2),11rem)] xl:pr-16"
         >
-          {/* Textele sunt ale clientei: titlul din 25 octombrie, 21:05, iar rândul de
-              experiență din 26 octombrie, 08:48. Corectate doar diacriticele. */}
-          <p class="font-serif text-[2.1rem] italic leading-[1.05] text-cocoa md:text-[2.6rem]">
-            Peste 20 de ani
-          </p>
-          <p
-            class="mx-auto mt-2 max-w-[20ch] font-serif text-[1.3rem] leading-[1.3] text-cocoa md:text-[1.55rem]"
-          >
-            de experiență dedicați copiilor cu nevoi speciale
-          </p>
-
-          {/* Despărțitorul cu inimioară, desenat după macheta ei: două linii în S, subțiate
-              și stinse la capete, iar inima trasată dintr-o singură tușă, cu vârfurile
-              lobilor ascuțite și coada scurtă sub vârf. */}
-          <svg
-            class="mx-auto my-7 h-[2.6rem] w-[min(23rem,86%)] text-cocoa-light"
-            viewBox="0 0 320 46"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <defs>
-              <linearGradient id="orn-stanga" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="142" y2="0">
-                <stop offset="0" stop-color="currentColor" stop-opacity="0.25"></stop>
-                <stop offset="0.18" stop-color="currentColor" stop-opacity="1"></stop>
-                <stop offset="0.72" stop-color="currentColor" stop-opacity="1"></stop>
-                <stop offset="1" stop-color="currentColor" stop-opacity="0.12"></stop>
-              </linearGradient>
-              <linearGradient id="orn-dreapta" gradientUnits="userSpaceOnUse" x1="316" y1="0" x2="178" y2="0">
-                <stop offset="0" stop-color="currentColor" stop-opacity="0.25"></stop>
-                <stop offset="0.18" stop-color="currentColor" stop-opacity="1"></stop>
-                <stop offset="0.72" stop-color="currentColor" stop-opacity="1"></stop>
-                <stop offset="1" stop-color="currentColor" stop-opacity="0.12"></stop>
-              </linearGradient>
-            </defs>
-            <path
-              d="M4 37C22 27 42 19.8 68 18.9c26-0.9 44 5 60 9.3 5.4 1.4 9.6 2 14 2.6l0 0.3c-4.4-0.3-8.6-0.6-14-1.4-16-4.1-34-9.8-60-8.9-26 0.9-46 7.6-64 16.2Z"
-              fill="url(#orn-stanga)"></path>
-            <path
-              d="M316 37c-18-10-38-17.2-64-18.1-26-0.9-44 5-60 9.3-5.4 1.4-9.6 2-14 2.6l0 0.3c4.4-0.3 8.6-0.6 14-1.4 16-4.1 34-9.8 60-8.9 26 0.9 46 7.6 64 16.2Z"
-              fill="url(#orn-dreapta)"></path>
-            <g transform="translate(145.1 10.2) scale(0.74)">
-              <path
-                d="M20.1 41C14 33 5 23 2.8 14 1.2 6 6 0.5 10.5 4 14 7 18.5 14.5 20.6 21 23 14 27 6.5 31 3c4.5-4 10-0.5 9.2 8C39.6 19.5 30 32 20.1 41l-2.2 0.5"
-                stroke="currentColor"
-                stroke-width="3.1"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </g>
-          </svg>
-
-          <h1
-            class="mx-auto max-w-[16ch] font-script text-[2.5rem] font-medium leading-[1.25] text-cocoa md:text-[3.2rem]"
-          >
-            O altfel de cale către comunicare și dezvoltare
-          </h1>
-
-          {/* Propoziția „Sprijin individualizat..." a fost scoasă la cererea ei din
-               26 octombrie, 09:08, deși tot ea o trimisese pe 25 octombrie. */}
-          <p class="mx-auto mt-7 max-w-lg text-ink">
-            Sunt psiholog clinician și pedagog de recuperare, cu <strong
-              class="font-medium text-clay">o experiență de peste 20 de ani</strong
-            > în lucrul cu copiii cu dizabilități și cu nevoi specifice de dezvoltare. În cabinetul
-            meu, nu privesc doar un diagnostic, ci descopăr un copil unic, cu un potențial
-            extraordinar, și o familie care are nevoie de susținere și îndrumare.
-          </p>
-          <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
-            <a
-              class="btn btn-primary"
-              href={waLink("Bună ziua, aș dori o programare pentru copilul meu.")}
-              target="_blank"
-              rel="noopener">Scrieți-mi pe WhatsApp</a
+          <AntetText id="acasa">
+            <h1
+              slot="titlu"
+              class="mx-auto max-w-[16ch] font-script text-[2.5rem] font-medium leading-[1.25] text-cocoa md:text-[3.2rem]"
             >
-            <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}>Sunați la {site.telefonAfisat}</a>
-          </div>
-          <p class="mx-auto mt-8 max-w-md text-[0.9rem] text-ink-soft">
-            {site.denumireLegala}. {site.adresaStrada}, {site.oras}, județul {site.judet}.
-          </p>
+              O altfel de cale către comunicare și dezvoltare
+            </h1>
+          </AntetText>
         </div>
       </div>
 

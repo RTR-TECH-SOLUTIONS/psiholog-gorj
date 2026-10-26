@@ -1,0 +1,49 @@
+---
+interface Props {
+  // „colturi" pune un val sus-stânga și unul jos-stânga, ca în macheta clientei;
+  // „sus" lasă numai valul de sus, pentru variantele pe toată lățimea
+  unde?: "colturi" | "sus";
+}
+
+const { unde = "colturi" } = Astro.props;
+---
+
+{/* Valurile bej din macheta clientei. Marginile lor ies din cadru, ca să nu se vadă
+    nicio tăietură dreaptă. */}
+<svg
+  class="pointer-events-none absolute -left-16 -top-10 h-[22rem] w-[26rem] text-blush"
+  viewBox="0 0 400 300"
+  fill="none"
+  aria-hidden="true"
+>
+  <path d="M-20 210C60 140 110 250 190 180 250 128 300 60 330-10H-20Z" fill="currentColor" opacity="0.9"
+  ></path>
+  <path
+    d="M-20 262C62 192 112 300 192 230c62-54 115-128 150-208"
+    stroke="var(--color-blush-deep)"
+    stroke-width="9"
+    stroke-linecap="round"
+    opacity="0.6"></path>
+</svg>
+
+{
+  unde === "colturi" ? (
+    <svg
+      class="pointer-events-none absolute -bottom-10 -left-20 hidden h-[18rem] w-[24rem] text-blush lg:block"
+      viewBox="0 0 400 300"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M-20 118C60 188 112 80 192 150c62 54 115 128 150 208H-20Z" fill="currentColor" opacity="0.75" />
+    </svg>
+  ) : (
+    <svg
+      class="pointer-events-none absolute -right-16 -top-10 hidden h-[22rem] w-[26rem] scale-x-[-1] text-blush lg:block"
+      viewBox="0 0 400 300"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M-20 210C60 140 110 250 190 180 250 128 300 60 330-10H-20Z" fill="currentColor" opacity="0.9" />
+    </svg>
+  )
+}

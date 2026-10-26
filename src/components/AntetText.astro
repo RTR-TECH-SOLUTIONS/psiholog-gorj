@@ -1,0 +1,110 @@
+---
+import { site, waLink } from "../data/site";
+
+interface Props {
+  // sufix pentru id-urile gradientului, ca să nu se repete când blocul apare
+  // de mai multe ori pe aceeași pagină (pagina cu modele)
+  id: string;
+  marime?: "normal" | "mare";
+  // pe variantele cu fotografia de fundal, textul stă pe un card crem
+  card?: boolean;
+}
+
+const { id, marime = "normal", card = false } = Astro.props;
+
+const mare = marime === "mare";
+---
+
+{/* Blocul de text al antetului, după macheta trimisă de clientă pe 26 octombrie, la 09:11:
+    „Peste 20 de ani" cu serif cursiv, rândul al doilea cu serif drept, despărțitorul cu
+    inimioară și titlul scris de mână. Culorile sunt luate cu pipeta din macheta ei. */}
+<div class={`text-center ${card ? "rounded-card bg-cream/95 px-6 py-10 shadow-sm md:px-12 md:py-14" : ""}`}>
+  <p
+    class:list={[
+      "font-serif italic leading-[1.05] text-cocoa",
+      mare ? "text-[2.4rem] md:text-[3.1rem]" : "text-[2.1rem] md:text-[2.6rem]",
+    ]}
+  >
+    Peste 20 de ani
+  </p>
+  <p
+    class:list={[
+      "mx-auto mt-2 max-w-[20ch] font-serif leading-[1.3] text-cocoa",
+      mare ? "text-[1.45rem] md:text-[1.8rem]" : "text-[1.3rem] md:text-[1.55rem]",
+    ]}
+  >
+    de experiență dedicați copiilor cu nevoi speciale
+  </p>
+
+  {/* despărțitorul cu inimioară: două linii în S, stinse la capete, și inima dintr-o tușă */}
+  <svg
+    class="mx-auto my-7 h-[2.6rem] w-[min(23rem,86%)] text-cocoa-light"
+    viewBox="0 0 320 46"
+    fill="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <linearGradient id={`orn-st-${id}`} gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="142" y2="0">
+        <stop offset="0" stop-color="currentColor" stop-opacity="0.25"></stop>
+        <stop offset="0.18" stop-color="currentColor" stop-opacity="1"></stop>
+        <stop offset="0.72" stop-color="currentColor" stop-opacity="1"></stop>
+        <stop offset="1" stop-color="currentColor" stop-opacity="0.12"></stop>
+      </linearGradient>
+      <linearGradient id={`orn-dr-${id}`} gradientUnits="userSpaceOnUse" x1="316" y1="0" x2="178" y2="0">
+        <stop offset="0" stop-color="currentColor" stop-opacity="0.25"></stop>
+        <stop offset="0.18" stop-color="currentColor" stop-opacity="1"></stop>
+        <stop offset="0.72" stop-color="currentColor" stop-opacity="1"></stop>
+        <stop offset="1" stop-color="currentColor" stop-opacity="0.12"></stop>
+      </linearGradient>
+    </defs>
+    <path
+      d="M4 37C22 27 42 19.8 68 18.9c26-0.9 44 5 60 9.3 5.4 1.4 9.6 2 14 2.6l0 0.3c-4.4-0.3-8.6-0.6-14-1.4-16-4.1-34-9.8-60-8.9-26 0.9-46 7.6-64 16.2Z"
+      fill={`url(#orn-st-${id})`}></path>
+    <path
+      d="M316 37c-18-10-38-17.2-64-18.1-26-0.9-44 5-60 9.3-5.4 1.4-9.6 2-14 2.6l0 0.3c4.4-0.3 8.6-0.6 14-1.4 16-4.1 34-9.8 60-8.9 26 0.9 46 7.6 64 16.2Z"
+      fill={`url(#orn-dr-${id})`}></path>
+    <g transform="translate(145.1 10.2) scale(0.74)">
+      <path
+        d="M20.1 41C14 33 5 23 2.8 14 1.2 6 6 0.5 10.5 4 14 7 18.5 14.5 20.6 21 23 14 27 6.5 31 3c4.5-4 10-0.5 9.2 8C39.6 19.5 30 32 20.1 41l-2.2 0.5"
+        stroke="currentColor"
+        stroke-width="3.1"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </g>
+  </svg>
+
+  <slot name="titlu">
+    <p
+      class:list={[
+        "mx-auto max-w-[16ch] font-script font-medium leading-[1.25] text-cocoa",
+        mare ? "text-[2.9rem] md:text-[3.9rem]" : "text-[2.5rem] md:text-[3.2rem]",
+      ]}
+    >
+      O altfel de cale către comunicare și dezvoltare
+    </p>
+  </slot>
+
+  {/* Propoziția „Sprijin individualizat..." a fost scoasă la cererea ei din 26 octombrie. */}
+  <p class="mx-auto mt-7 max-w-lg text-ink">
+    Sunt psiholog clinician și pedagog de recuperare, cu <strong class="font-medium text-clay"
+      >o experiență de peste 20 de ani</strong
+    > în lucrul cu copiii cu dizabilități și cu nevoi specifice de dezvoltare. În cabinetul meu, nu
+    privesc doar un diagnostic, ci descopăr un copil unic, cu un potențial extraordinar, și o
+    familie care are nevoie de susținere și îndrumare.
+  </p>
+  <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+    <a
+      class="btn btn-primary"
+      href={waLink("Bună ziua, aș dori o programare pentru copilul meu.")}
+      target="_blank"
+      rel="noopener">Scrieți-mi pe WhatsApp</a
+    >
+    <a class="btn btn-ghost" href={`tel:${site.telefon.replace(/\s/g, "")}`}
+      >Sunați la {site.telefonAfisat}</a
+    >
+  </div>
+  <p class="mx-auto mt-8 max-w-md text-[0.9rem] text-ink-soft">
+    {site.denumireLegala}. {site.adresaStrada}, {site.oras}, județul {site.judet}.
+  </p>
+</div>
