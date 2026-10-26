@@ -37,10 +37,12 @@ export type Serviciu = {
 export const servicii: Serviciu[] = [
   {
     slug: "logopedie",
-    titlu: "Evaluarea și terapia logopedică în tulburările de limbaj",
-    motto: "De pronunție și în plan lexico-grafic",
-    scurt:
-      "Îmi propun să îl ajut pe copil să comunice mai clar, să învețe cu mai multă încredere și să își valorifice potențialul.",
+    // Titlul întreg și fraza scurtă sunt cerute de clientă pe 26 octombrie, la 10:50 și
+    // 11:04. „De pronunție și în plan lexico-grafic" a intrat în titlu, cum a scris ea,
+    // deci nu mai stă separat ca motto.
+    titlu:
+      "Evaluarea și terapia logopedică în tulburările de limbaj: de pronunție și în plan lexico-grafic",
+    scurt: "Fiecare sunet are timpul lui. Îl descoperim împreună, cu răbdare.",
     pentruCine: [
       {
         text: "Copiilor preșcolari (3-6 ani) și școlari care întâmpină dificultăți de pronunție, citire sau scriere și care au nevoie de sprijin pentru dezvoltarea abilităților de comunicare și învățare.",
