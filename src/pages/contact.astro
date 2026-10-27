@@ -32,25 +32,10 @@ import { site, waLink, u } from "../data/site";
 
   <section class="wrap py-16 md:py-20">
     <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+      {/* Blocul „Cum luăm legătura" a fost scos pe 27 octombrie: repeta butonul de telefon
+          și pe cel de WhatsApp din capul paginii. */}
       <div>
-        <h2 class="h2">Cum luăm legătura</h2>
-        <p class="mt-4 max-w-xl text-ink-soft">
-          Site-ul nu are formular de contact și nu strânge date despre copilul dumneavoastră.
-        </p>
-
-        <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a class="btn btn-primary" href={`tel:${site.telefon.replace(/\s/g, "")}`}
-            >Sunați la {site.telefonAfisat}</a
-          >
-          <a
-            class="btn btn-whatsapp"
-            href={waLink("Bună ziua, aș dori o programare la cabinet.")}
-            target="_blank"
-            rel="noopener">Scrieți-mi pe WhatsApp</a
-          >
-        </div>
-
-        <dl class="mt-10 max-w-xl border-t border-line">
+        <dl class="max-w-xl border-t border-line">
           <div class="border-b border-line py-4">
             <dt class="font-serif text-[1.08rem]">Programările</dt>
             <dd class="mt-1.5 text-[0.95rem] text-ink-soft">{site.programNota}</dd>
