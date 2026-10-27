@@ -17,16 +17,20 @@ const {
 } = Astro.props;
 ---
 
+{/* Pe 27 octombrie, la 19:00, clienta a cerut „Contact mai vizibil, scris puțin mai mare".
+    Banda a trecut pe fondul bej al valurilor din antet, ca să se desprindă de restul paginii,
+    iar eticheta și textul sunt scrise mai mare. */}
+
 {/* Totul e centrat, pe o coloană, ca în macheta trimisă de clientă pe 26 octombrie:
     eticheta mică, fraza mare cu „un mesaj" cursiv și maro, textul ei, apoi butonul verde
     de WhatsApp și telefonul dedesubt. La 19:03 a cerut să fie identică cu macheta. */}
-<section class="border-t border-line bg-cream">
-  <div class="wrap max-w-3xl py-14 text-center md:py-20">
-    <p class="text-[0.78rem] uppercase tracking-[0.18em] text-cocoa-light">{titlu}</p>
+<section class="border-y border-line bg-blush">
+  <div class="wrap max-w-3xl py-16 text-center md:py-20">
+    <p class="text-[1rem] uppercase tracking-[0.14em] text-cocoa">{titlu}</p>
     <h2 class="h2 mt-4">
       Primul pas e <em class="text-cocoa">un mesaj</em>.
     </h2>
-    <p class="mx-auto mt-5 max-w-xl text-[1rem] text-ink-soft">{text}</p>
+    <p class="mx-auto mt-5 max-w-xl text-[1.12rem] text-ink-soft">{text}</p>
     <div class="mt-8 flex flex-col items-center gap-3">
       <a
         class="btn btn-whatsapp"

@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
 import CtaBand from "../components/CtaBand.astro";
 import { site, waLink, u } from "../data/site";
 import { servicii, publicLabels } from "../data/servicii";
@@ -46,7 +45,7 @@ const filtre = [
 
     <div class="mt-12 flex flex-col gap-16 md:gap-24">
       {
-        servicii.map((s, i) => (
+        servicii.map((s) => (
           <article
             id={s.slug}
             class:list={[
@@ -57,49 +56,25 @@ const filtre = [
             data-public={s.public.join(" ")}
           >
             <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
-              <div class={s.imagine && i % 2 === 1 ? "lg:order-2" : ""}>
-                {s.imagine ? (
-                  <Image
-                    src={s.imagine}
-                    widths={[480, 720, 1080, 1440]}
-                    sizes="(min-width: 1024px) 42vw, 100vw"
-                    alt={s.imagineAlt}
-                    loading="lazy"
-                    class="aspect-[4/3] w-full rounded-card object-cover lg:sticky lg:top-28"
-                  />
-                ) : (
-                  <div class="lg:sticky lg:top-28">
-                    <p class="text-[0.85rem] text-mint-700">
-                      {s.public.map((p) => publicLabels[p]).join(" · ")}
-                    </p>
-                    <h2 class="h2 mt-3">{s.titlu}</h2>
-                    {s.motto && <p class="mt-2 font-serif text-[1.05rem] italic text-cocoa-light">{s.motto}</p>}
-                    <p class="mt-4 font-serif text-[1.35rem] italic leading-snug text-cocoa md:text-[1.6rem]">
-                      {s.scurt}
-                    </p>
-                  </div>
-                )}
+              <div>
+                <div class="lg:sticky lg:top-28">
+                  <p class="text-[0.85rem] text-mint-700">
+                    {s.public.map((p) => publicLabels[p]).join(" · ")}
+                  </p>
+                  <h2 class="h2 mt-3">{s.titlu}</h2>
+                  {s.motto && <p class="mt-2 font-serif text-[1.05rem] italic text-cocoa-light">{s.motto}</p>}
+                  <p class="mt-4 font-serif text-[1.35rem] italic leading-snug text-cocoa md:text-[1.6rem]">
+                    {s.scurt}
+                  </p>
+                </div>
               </div>
 
               <div>
-                {s.imagine && (
-                  <>
-                    <p class="text-[0.85rem] text-mint-700">
-                      {s.public.map((p) => publicLabels[p]).join(" · ")}
-                    </p>
-                    <h2 class="h2 mt-3">{s.titlu}</h2>
-                    {s.motto && <p class="mt-2 font-serif text-[1.05rem] italic text-cocoa-light">{s.motto}</p>}
-                    <p class="mt-4 font-serif text-[1.35rem] italic leading-snug text-cocoa md:text-[1.6rem]">
-                      {s.scurt}
-                    </p>
-                  </>
-                )}
-
                 {s.descriere?.map((paragraf) => (
                   <p class="mt-4 max-w-2xl text-ink-soft">{paragraf}</p>
                 ))}
 
-                <h3 class={`font-serif text-[1.45rem] text-cocoa ${s.imagine || s.descriere ? "mt-9" : ""}`}>
+                <h3 class={`font-serif text-[1.45rem] text-cocoa ${s.descriere ? "mt-9" : ""}`}>
                   Cui se adresează
                 </h3>
                 <ul class="mt-2 max-w-2xl">

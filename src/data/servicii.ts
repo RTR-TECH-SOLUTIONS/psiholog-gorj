@@ -1,8 +1,3 @@
-import type { ImageMetadata } from "astro";
-import imgLimbaj from "../assets/serviciu-limbaj.webp";
-import imgEvaluare from "../assets/serviciu-evaluare.webp";
-import imgComportament from "../assets/serviciu-comportament.webp";
-
 export type Public = "copii" | "parinti" | "adulti";
 
 // Un punct de listă: „label" este partea îngroșată dinaintea două puncte, în
@@ -20,11 +15,13 @@ export type Serviciu = {
   scopFinal?: string[];
   delaVarsta?: string[];
   public: Public[];
-  imagine?: ImageMetadata;
-  imagineAlt?: string;
   // true = textul încă nu a venit de la clientă, ce scrie aici e provizoriu.
   textProvizoriu?: boolean;
 };
+
+// Imaginile de ilustrație de pe servicii au fost scoase pe 27 octombrie, la 19:03:
+// „Vreau să ștergeți pozele, lăsați-o doar pe cea cu cabinetul meu". Nu erau
+// fotografii din cabinetul ei.
 
 // Lista serviciilor este cea din contract, Anexa 1 lit. A.2.
 // Textele de la logopedie, terapia VML și ABA & TSA sunt ale clientei, primite
@@ -59,9 +56,6 @@ export const servicii: Serviciu[] = [
     ],
     delaVarsta: ["Vârsta optimă pentru corectarea propriu-zisă a pronunției este de 3-4 ani."],
     public: ["copii", "adulti"],
-    imagine: imgLimbaj,
-    imagineAlt:
-      "Cartonașe cu imagini pentru terapia limbajului pe o masă de lemn, mâna unui copil atingând un cartonaș",
   },
   {
     slug: "terapia-vml",
@@ -100,9 +94,6 @@ export const servicii: Serviciu[] = [
       "Nu există o limită de vârstă. Poate fi luată în considerare în intervenția timpurie, la copiii mici, la copiii de vârstă școlară și la adulții cu apraxie verbală.",
     ],
     public: ["copii", "adulti"],
-    // TODO(real): imagine de ilustrație, de înlocuit cu o fotografie din cabinet.
-    imagine: imgEvaluare,
-    imagineAlt: "Caiet, creion și cuburi de lemn pe o masă deschisă la culoare, materiale de lucru din cabinet",
   },
   {
     slug: "aba-tsa",
@@ -181,9 +172,6 @@ export const servicii: Serviciu[] = [
       "Fiecare program este individualizat, cu obiective stabilite în funcție de abilitățile copilului și de prioritățile familiei, urmărind progresul și dezvoltarea independenței în viața de zi cu zi.",
     ],
     public: ["copii", "parinti"],
-    imagine: imgComportament,
-    imagineAlt:
-      "Copil la măsuța din cabinet construind cu cuburi colorate, alături de mâinile terapeutului",
   },
 ];
 

@@ -1,7 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import parintiLectura from "../assets/parinti-lectura.webp";
 import CtaBand from "../components/CtaBand.astro";
 import Faq from "../components/Faq.astro";
 import { site, u } from "../data/site";
@@ -107,16 +105,10 @@ const intrebari = [
     </div>
   </section>
 
+  {/* Fotografia de ilustrație a fost scoasă pe 27 octombrie: clienta vrea pe site numai
+      fotografii din cabinetul ei. */}
   <section class="wrap py-16 md:py-24">
-    <div class="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-      <Image
-        src={parintiLectura}
-        widths={[480, 720, 1080]}
-        sizes="(min-width: 1024px) 46vw, 100vw"
-        alt="Fotoliu crem cu o carte deschisă, un pled verde împăturit și o cană de ceai pe un taburet de lemn"
-        loading="lazy"
-        class="aspect-[4/3] w-full rounded-card object-cover lg:sticky lg:top-28"
-      />
+    <div class="mx-auto max-w-3xl">
       <div>
         <h2 class="h2">Programul și programările</h2>
         <p class="mt-5 text-ink-soft">
