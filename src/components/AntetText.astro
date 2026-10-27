@@ -23,12 +23,18 @@ const caleInimaPlina =
 
 {/* Blocul de text al antetului, după macheta trimisă de clientă pe 26 octombrie, la 09:11:
     „Peste 20 de ani" cu serif cursiv, rândul al doilea cu serif drept, despărțitorul cu
-    inimioară și titlul scris de mână. Culorile sunt luate cu pipeta din macheta ei. */}
+    inimioară și titlul scris de mână. Culorile sunt luate cu pipeta din macheta ei.
+
+    Mărimile și culoarea titlului vin din mesajele ei de pe 27 octombrie: la 06:45 a retrimis
+    macheta cu „Exact așa vreau", iar la 06:46 a scris cum vrea ierarhia: „Peste 20 de ani sa
+    fie scris mai mare, apoi urmează de experiență…….. mai mic, urmează cu negru și scris mai
+    mic o altfel de cale". Deci titlul scris de mână e negru și mai mic decât primul rând.
+    Maroul s-a deschis la cererea ei de la 06:50, tocmai ca să se vadă diferența față de negru. */}
 <div class="text-center">
-  <p class="font-serif text-[2.1rem] italic leading-[1.05] text-cocoa md:text-[2.6rem]">
+  <p class="font-serif text-[2.5rem] italic leading-[1.02] text-cocoa md:text-[3.1rem]">
     Peste 20 de ani
   </p>
-  <p class="mx-auto mt-2 max-w-[20ch] font-serif text-[1.3rem] leading-[1.3] text-cocoa md:text-[1.55rem]">
+  <p class="mx-auto mt-2.5 max-w-[20ch] font-serif text-[1.6rem] leading-[1.3] text-cocoa md:text-[1.95rem]">
     de experiență dedicați copiilor cu nevoi speciale
   </p>
 
@@ -115,10 +121,10 @@ const caleInimaPlina =
   <slot name="titlu">
     <p
       class:list={[
-        "mx-auto max-w-[16ch] leading-[1.25] text-cocoa",
+        "mx-auto max-w-[16ch] leading-[1.3] text-ink",
         titlu === "serif"
-          ? "font-serif text-[2.2rem] italic md:text-[2.9rem]"
-          : "font-script text-[2.5rem] font-medium md:text-[3.2rem]",
+          ? "font-serif text-[1.65rem] italic md:text-[2.05rem]"
+          : "font-script text-[1.95rem] font-medium md:text-[2.45rem]",
       ]}
     >
       O altfel de cale către comunicare și dezvoltare

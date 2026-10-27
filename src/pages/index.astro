@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
+import portretAna from "../assets/portret-ana.webp";
+import portretAnaLat from "../assets/portret-ana-lat.webp";
 import cabinetAnsamblu from "../assets/cabinet-ansamblu.webp";
 import AntetText from "../components/AntetText.astro";
 import AntetValuri from "../components/AntetValuri.astro";
@@ -14,9 +16,19 @@ import { servicii } from "../data/servicii";
 // sunt diacriticele și greșelile evidente de tastare.
 
 // Pe 27 octombrie, la 17:52, clienta a cerut ca pe prima pagină să rămână o
-// singură fotografie, cea din cabinet. Au fost scoase portretul din antet,
-// imaginile de pe cardurile de servicii, raftul cu materiale din „Despre mine"
-// și fotografia de la „Ședințe online".
+// singură fotografie, cea din cabinet. Au fost scoase imaginile de pe cardurile
+// de servicii, raftul cu materiale din „Despre mine" și fotografia de la
+// „Ședințe online". Portretul din antet a rămas, la decizia lui Mario: e
+// fotografia ei, iar antetul fără ea ar fi rămas gol.
+
+// Hero-ul are două decupaje din aceeași fotografie. Pe ecrane late cadrul e mai
+// mult lat decât înalt, așa că acolo intră varianta cu toată încăperea; sub
+// 1280px rămâne decupajul apropiat, altfel pe telefon s-ar vedea doar camera.
+const portretLat = await getImage({
+  src: portretAnaLat,
+  widths: [900, 1120],
+  format: "webp",
+});
 
 // Recenzii lăsate de părinți pe La-Psiholog.ro, trimise de clientă pe 23 octombrie.
 // Textele sunt preluate cuvânt cu cuvânt, cu prenumele afișat acolo și luna recenziei.
@@ -63,26 +75,54 @@ const intrebari = [
 >
   {/* Hero. Blocul de text stă în AntetText.astro, ca să fie exact același și pe pagina
       cu modele. Fondul crem, valurile bej și textul maro vin din macheta clientei.
-      Fără portret, blocul stă singur pe mijloc, pe toată lățimea. */}
+      Titlul scris de mână e negru și mai mic decât „Peste 20 de ani", cum a cerut ea
+      pe 27 octombrie, la 06:46. */}
   <section class="relative overflow-hidden bg-cream">
-    <AntetValuri unde="sus" />
+    <AntetValuri />
 
-    <div class="wrap relative max-w-3xl py-16 md:py-24 lg:py-28">
-      <AntetText id="acasa">
-        <h1
-          slot="titlu"
-          class="mx-auto max-w-[16ch] font-script text-[2.5rem] font-medium leading-[1.25] text-cocoa md:text-[3.4rem]"
+    <div class="relative mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
+      <div class="order-2 flex items-center lg:order-1">
+        <div
+          class="w-full px-5 py-12 md:px-10 lg:py-24 xl:pl-[clamp(2.5rem,calc((100vw-72rem)/2),11rem)] xl:pr-16"
         >
-          O altfel de cale către comunicare și dezvoltare
-        </h1>
-      </AntetText>
+          <AntetText id="acasa">
+            <h1
+              slot="titlu"
+              class="mx-auto max-w-[16ch] font-script text-[1.95rem] font-medium leading-[1.3] text-ink md:text-[2.45rem]"
+            >
+              O altfel de cale către comunicare și dezvoltare
+            </h1>
+          </AntetText>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2">
+        <picture>
+          <source
+            media="(min-width: 1280px)"
+            srcset={portretLat.srcSet.attribute}
+            sizes="52vw"
+            width={portretAnaLat.width}
+            height={portretAnaLat.height}
+          />
+          <Image
+            src={portretAna}
+            widths={[480, 720, 900]}
+            sizes="(min-width: 1024px) 52vw, 100vw"
+            alt={`${site.nume}, psiholog clinician, la biroul din cabinetul din ${site.oras}`}
+            class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[34rem]"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </picture>
+      </div>
     </div>
   </section>
 
   {/* Bandă de încredere. Coloana cu cei peste 20 de ani a fost scoasă pe 26 octombrie:
       clienta a observat, la 10:11, că experiența se repetă. Rămâne scrisă o singură dată,
       în antet, acolo unde a cerut ea să iasă în evidență. */}
-  <section class="border-y border-line">
+  <section class="border-b border-line">
     <div class="wrap grid gap-y-6 py-8 sm:grid-cols-2 md:grid-cols-3 md:gap-x-8 md:py-9">
       <div class="md:border-r md:border-line md:pr-8">
         <p class="font-serif text-[1.6rem] leading-none">Unu-la-unu</p>
@@ -136,7 +176,7 @@ const intrebari = [
   {/* Spațiul. Secțiune cerută de clientă pe 26 octombrie, la 19:07, după un model pe
       care l-a trimis. La 19:12 a cerut o singură fotografie, nu două. Pe 27 octombrie,
       la 17:52, a cerut ca asta să fie singura fotografie de pe prima pagină. */}
-  <section class="border-b border-line bg-cream py-16 md:py-20">
+  <section class="border-y border-line bg-cream py-16 md:py-20">
     <div class="wrap text-center">
       <p class="text-[0.78rem] uppercase tracking-[0.18em] text-cocoa-light">Spațiul</p>
       <h2 class="mx-auto mt-4 max-w-[20ch] font-serif text-[2rem] leading-[1.15] text-ink md:text-[2.6rem]">
@@ -149,8 +189,7 @@ const intrebari = [
           widths={[480, 720, 1080, 1440]}
           sizes="(min-width: 1024px) 48rem, 100vw"
           alt="Colțul de lucru din cabinet: rafturile cu materiale, măsuța verde pentru copii și scăunelele"
-          loading="eager"
-          fetchpriority="high"
+          loading="lazy"
           class="aspect-[16/10] w-full rounded-card object-cover"
         />
         <figcaption
