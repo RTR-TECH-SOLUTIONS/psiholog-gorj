@@ -122,7 +122,10 @@ const intrebari = [
           programare.
         </p>
         <p class="mt-4 text-ink-soft">Mă pot contacta direct prin telefon sau WhatsApp.</p>
-        <a class="btn btn-ghost mt-8" href={u("/contact")}>Cum ajungeți la cabinet</a>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a class="btn btn-primary" href={u("/contact#programare")}>Solicitați o programare</a>
+          <a class="btn btn-ghost" href={u("/contact")}>Cum ajungeți la cabinet</a>
+        </div>
       </div>
     </div>
   </section>

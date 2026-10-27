@@ -19,7 +19,9 @@ export const site = {
   telefonAfisat: "0785 977 639",
   whatsapp: "40785977639",
   // Site-ul nu afișează adresă de e-mail: potrivit art. 1.7 din contract, contactul se
-  // face la telefon și pe WhatsApp, iar formularul a fost scos.
+  // face la telefon și pe WhatsApp. Formularul de programare cerut de clientă pe
+  // 27 octombrie nu schimbă asta: el pregătește un mesaj WhatsApp în browserul
+  // părintelui, nu trimite nimic către un server.
   program: [
     { zi: "Luni – Vineri", ore: "16:00 – 20:00" },
     { zi: "Sâmbătă – Duminică", ore: "pe bază de programare" },
