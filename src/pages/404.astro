@@ -11,7 +11,7 @@ import { site, nav, waLink, u } from "../data/site";
     <div class="wrap grid gap-10 py-20 md:py-28 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:gap-16">
       <div>
         <p class="font-serif text-[1.05rem] text-mint-700">Eroare 404</p>
-        <h1 class="h1 mt-3 max-w-[16ch]">Pagina aceasta nu există</h1>
+        <h1 class="h1 mt-3 max-w-[16ch] text-cocoa">Pagina aceasta nu există</h1>
         <p class="lead mt-5 max-w-lg text-ink">
           Probabil linkul este greșit sau pagina a fost mutată. Mai jos găsiți tot ce este pe site.
           Dacă vă grăbiți, scrieți-mi direct.
@@ -19,7 +19,7 @@ import { site, nav, waLink, u } from "../data/site";
         <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a class="btn btn-primary" href={u("/")}>Înapoi la prima pagină</a>
           <a
-            class="btn btn-ghost"
+            class="btn btn-whatsapp"
             href={waLink("Bună ziua, aș dori o programare pentru copilul meu.")}
             target="_blank"
             rel="noopener">Scrieți-mi pe WhatsApp</a
