@@ -3,20 +3,23 @@ import { site, nav, waLink, u } from "../data/site";
 const an = new Date().getFullYear();
 ---
 
-<footer class="border-t border-line bg-cream">
+{/* Subsolul e negru cu scris alb, cerut de clientă pe 27 octombrie, la 19:36, sub o captură
+    chiar cu acest bloc: „Asta aș vrea să fie pagina neagră cu scris alb". Întrebarea ei de la
+    07:17, rămasă fără răspuns, se referea tot la asta, nu la întregul site. */}
+<footer class="bg-clay-dark text-paper">
   <div class="wrap grid gap-10 py-14 md:grid-cols-3 md:gap-12 md:py-16">
     <div>
       <p class="font-serif text-[1.4rem] leading-tight">{site.nume}</p>
-      <p class="mt-1 text-[0.72rem] uppercase tracking-[0.14em] text-ink-soft">
+      <p class="mt-1 text-[0.72rem] uppercase tracking-[0.14em] text-white/60">
         {site.titulatura}
       </p>
-      <p class="mt-4 max-w-xs text-[0.95rem] text-ink-soft">
+      <p class="mt-4 max-w-xs text-[0.95rem] text-white/75">
         {site.subtitlu}, {site.oras}. Evaluare și terapie logopedică, terapia VML și terapia ABA.
       </p>
     </div>
 
     <div class="text-[0.95rem]">
-      <h2 class="mb-3 font-sans text-[0.72rem] uppercase tracking-[0.14em] text-ink-soft">
+      <h2 class="mb-3 font-sans text-[0.72rem] uppercase tracking-[0.14em] text-white/60">
         Cabinet
       </h2>
       <address class="not-italic leading-relaxed">
@@ -36,15 +39,15 @@ const an = new Date().getFullYear();
     </div>
 
     <div class="text-[0.95rem]">
-      <h2 class="mb-3 font-sans text-[0.72rem] uppercase tracking-[0.14em] text-ink-soft">
+      <h2 class="mb-3 font-sans text-[0.72rem] uppercase tracking-[0.14em] text-white/60">
         Program
       </h2>
       <ul class="leading-relaxed">
         {
           site.program.map((p) => (
-            <li class="flex justify-between gap-6 border-b border-line/70 py-1.5 last:border-0">
+            <li class="flex justify-between gap-6 border-b border-white/15 py-1.5 last:border-0">
               <span>{p.zi}</span>
-              <span class="text-ink-soft">{p.ore}</span>
+              <span class="text-white/70">{p.ore}</span>
             </li>
           ))
         }
@@ -52,30 +55,30 @@ const an = new Date().getFullYear();
     </div>
   </div>
 
-  <div class="border-t border-line/80">
+  <div class="border-t border-white/15">
     <div
-      class="wrap flex flex-col gap-4 py-6 text-[0.88rem] text-ink-soft sm:flex-row sm:items-center sm:justify-between"
+      class="wrap flex flex-col gap-4 py-6 text-[0.88rem] text-white/70 sm:flex-row sm:items-center sm:justify-between"
     >
       <nav aria-label="Navigare footer" class="flex flex-wrap gap-x-6 gap-y-2">
-        {nav.map((item) => <a class="hover:text-ink" href={item.href}>{item.label}</a>)}
+        {nav.map((item) => <a class="hover:text-paper" href={item.href}>{item.label}</a>)}
       </nav>
       <p>&copy; {an} Cabinet individual de psihologie {site.nume}, {site.oras}.</p>
     </div>
 
     <div
-      class="wrap flex flex-col gap-3 border-t border-line/70 py-5 text-[0.84rem] text-ink-soft sm:flex-row sm:items-center sm:justify-between"
+      class="wrap flex flex-col gap-3 border-t border-white/15 py-5 text-[0.84rem] text-white/60 sm:flex-row sm:items-center sm:justify-between"
     >
       <nav aria-label="Pagini legale" class="flex flex-wrap gap-x-6 gap-y-2">
-        <a class="hover:text-ink" href={u("/termeni")}>Termeni și condiții</a>
-        <a class="hover:text-ink" href={u("/confidentialitate")}>Politica de confidențialitate</a>
-        <a class="hover:text-ink" href={u("/cookies")}>Politica de cookies</a>
-        <button type="button" id="preferinte-cookies-subsol" class="text-left hover:text-ink"
+        <a class="hover:text-paper" href={u("/termeni")}>Termeni și condiții</a>
+        <a class="hover:text-paper" href={u("/confidentialitate")}>Politica de confidențialitate</a>
+        <a class="hover:text-paper" href={u("/cookies")}>Politica de cookies</a>
+        <button type="button" id="preferinte-cookies-subsol" class="text-left hover:text-paper"
           >Preferințe cookies</button
         >
       </nav>
       <p>
         Dezvoltat de <a
-          class="link-u hover:text-ink"
+          class="link-u hover:text-paper"
           href="https://rtrsolutions.ro"
           target="_blank"
           rel="noopener">RTR Tech Solutions</a

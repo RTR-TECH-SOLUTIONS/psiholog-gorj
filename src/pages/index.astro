@@ -30,6 +30,16 @@ const portretLat = await getImage({
   format: "webp",
 });
 
+// Cuvântul de sub fotografia din cabinet, despărțit în silabe, cerut de clientă pe
+// 27 octombrie: „Sub această imagine scrie ÎMPREUNĂ despărțit în silabe" (19:38) și
+// „Apoi cu scris mic la fel, silabă cu silabă" (19:39).
+const silabe = [
+  ["Î", "M"],
+  ["P", "R", "E"],
+  ["U"],
+  ["N", "Ă"],
+];
+
 // Recenzii lăsate de părinți pe La-Psiholog.ro, trimise de clientă pe 23 octombrie.
 // Textele sunt preluate cuvânt cu cuvânt, cu prenumele afișat acolo și luna recenziei.
 const testimoniale = [
@@ -119,31 +129,9 @@ const intrebari = [
     </div>
   </section>
 
-  {/* Bandă de încredere. Coloana cu cei peste 20 de ani a fost scoasă pe 26 octombrie:
-      clienta a observat, la 10:11, că experiența se repetă. Rămâne scrisă o singură dată,
-      în antet, acolo unde a cerut ea să iasă în evidență. */}
-  <section class="border-b border-line">
-    <div class="wrap grid gap-y-6 py-8 sm:grid-cols-2 md:grid-cols-3 md:gap-x-8 md:py-9">
-      <div class="md:border-r md:border-line md:pr-8">
-        <p class="font-serif text-[1.6rem] leading-none">Unu-la-unu</p>
-        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
-          ședințe desfășurate exclusiv în regim unu-la-unu (1:1)
-        </p>
-      </div>
-      <div class="md:border-r md:border-line md:pr-8">
-        <p class="font-serif text-[1.6rem] leading-none">{site.oras}</p>
-        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
-          {site.adresaStrada}
-        </p>
-      </div>
-      <div>
-        <p class="font-serif text-[1.6rem] leading-none">Online</p>
-        <p class="mt-1.5 text-[0.92rem] text-ink-soft">
-          ședințele se desfășoară atât la cabinet, cât și online
-        </p>
-      </div>
-    </div>
-  </section>
+  {/* Banda de încredere, cu cele trei coloane „Unu-la-unu", „Târgu Jiu" și „Online", a fost
+      scoasă pe 27 octombrie, la 19:35: „Asta eu zic să o ștergem", apoi, la 19:36, le-a
+      numit pe toate trei: „I-la unu, online și Tg-Jiu". */}
 
   {/* Rubrica „Cui mă adresez" a fost scoasă de pe prima pagină pe 26 octombrie, la cererea
        ei din mesajul de la 08:29: aceeași listă apare și la Servicii, în fișa terapiei ABA. */}
@@ -195,9 +183,48 @@ const intrebari = [
           loading="lazy"
           class="aspect-[16/10] w-full rounded-[0.6rem] object-cover"
         />
-        <figcaption class="mt-2.5 rounded-[0.6rem] bg-cream px-5 py-4">
-          <span class="block font-serif text-[1.25rem] text-ink">Camera de terapie</span>
-          <span class="mt-0.5 block text-[1rem] text-ink-soft">fotografie reală din cabinet</span>
+        <figcaption class="mt-2.5 rounded-[0.6rem] bg-cream px-3 py-6 md:px-5">
+          <span class="block font-serif text-[1.15rem] text-ink">Camera de terapie</span>
+
+          <div
+            class="mt-5 flex flex-wrap items-end justify-center gap-x-2.5 gap-y-4 md:gap-x-5"
+            role="img"
+            aria-label="Cuvântul «împreună», despărțit în silabe: îm-pre-u-nă"
+          >
+            {
+              silabe.map((silaba) => (
+                <div class="relative pb-4">
+                  <div class="flex gap-1 md:gap-1.5">
+                    {silaba.map((litera) => (
+                      <span class="flex h-9 w-7 items-center justify-center rounded-[0.45rem] bg-blush font-serif text-[1.05rem] text-ink md:h-12 md:w-10 md:rounded-[0.5rem] md:text-[1.5rem]">
+                        {litera}
+                      </span>
+                    ))}
+                  </div>
+                  {/* arcul stă absolut, ca să nu lățească grupul de litere */}
+                  <svg
+                    class="absolute inset-x-0 bottom-0 h-3 w-full text-cocoa"
+                    viewBox="0 0 100 12"
+                    preserveAspectRatio="none"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 1C22 11 78 11 97 1"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      vector-effect="non-scaling-stroke"
+                    />
+                  </svg>
+                </div>
+              ))
+            }
+          </div>
+
+          <p class="mt-4 text-[0.95rem] text-ink-soft">
+            îm · pre · u · nă, <em class="font-serif text-cocoa">silabă cu silabă</em>
+          </p>
         </figcaption>
       </figure>
     </div>
