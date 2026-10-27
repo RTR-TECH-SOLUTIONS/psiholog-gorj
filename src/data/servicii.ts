@@ -101,9 +101,12 @@ export const servicii: Serviciu[] = [
     motto: "Alături de copilul tău, pas cu pas",
     scurt:
       "În ședințe desfășurate exclusiv în regim unu-la-unu (1:1), transform micile reușite de zi cu zi în pași siguri spre independență.",
+    // Pe 27 octombrie, la 19:32, clienta a cerut: „Ștergem asta și lăsăm doar «Terapia ABA
+    // … este o metodă prin care….». Doar acea propoziție". Au ieșit paragraful care începea
+    // cu „Când ești părintele unui copil care se dezvoltă diferit" și ultimele două fraze ale
+    // paragrafului al doilea. A doua dintre ele era oricum identică cu fraza scurtă de mai sus.
     descriere: [
-      "Când ești părintele unui copil care se dezvoltă diferit, drumul poate părea plin de întrebări și incertitudini. Vreau să știi că nu ești singur în această călătorie. În cabinetul meu, nu privesc doar un diagnostic, ci descopăr un copil unic, cu un potențial extraordinar, și o familie care are nevoie de susținere și îndrumare.",
-      "Terapia ABA (Analiza Comportamentală Aplicată) este o metodă prin care creez o punte de comunicare cu copilul dumneavoastră. În ședințe desfășurate exclusiv în regim unu-la-unu (1:1), transform micile reușite de zi cu zi în pași siguri spre independență. În cadrul cabinetului meu, copilul dumneavoastră va beneficia în totalitate de întreaga mea atenție, experiență și energie, construind o relație stabilă de încredere, într-un mediu calm și familiar lui.",
+      "Terapia ABA (Analiza Comportamentală Aplicată) este o metodă prin care creez o punte de comunicare cu copilul dumneavoastră.",
     ],
     pentruCine: [
       {
