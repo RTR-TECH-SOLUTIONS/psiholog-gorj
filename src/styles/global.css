@@ -25,10 +25,10 @@
   --color-clay: #3c2a21;
   --color-clay-dark: #24150e;
   /* Culorile luate din macheta clientei: maroul cald al scrisului, maroul deschis al
-     ornamentului și bejul valurilor din antet. */
-  --color-cocoa: #643c28;
-  /* maroul mai deschis și mai vizibil cerut de clientă pe 26 octombrie, la 18:14 */
-  --color-cocoa-mid: #8a5433;
+     ornamentului și bejul valurilor din antet. Maroul scrisului a fost deschis pe
+     27 octombrie, la cererea clientei de la 06:50: „Încercați să folosiți un maro mai
+     deschis la scris, deoarece nu se prea vede diferența dintre negru și maro". */
+  --color-cocoa: #8a5433;
   --color-cocoa-light: #ac8c74;
   --color-blush: #f6e7da;
   --color-blush-deep: #efd8c6;

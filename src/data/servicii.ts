@@ -67,8 +67,10 @@ export const servicii: Serviciu[] = [
     slug: "terapia-vml",
     titlu: "Terapia VML (Învățare Verbală Motorie)",
     // Clienta a semnalat pe 26 octombrie, la 18:04, că rezumatul repeta primul punct din
-    // „Cui se adresează". Textul de mai jos e cel trimis de ea la 18:14.
-    motto: "Terapia VML, o altfel de cale către comunicare și dezvoltare",
+    // „Cui se adresează". Textul de mai jos e cel trimis de ea la 18:14. Mottoul a fost
+    // schimbat pe 27 octombrie, la 06:59: repeta titlul din antet, iar ea a cerut
+    // „Un pas spre comunicare" în locul lui.
+    motto: "Terapia VML, un pas spre comunicare",
     scurt:
       "Copilul tău nu vorbește sau vorbește puțin? Nu amâna intervenția! Limbajul se dezvoltă pas cu pas, iar timpul contează.",
     pentruCine: [
