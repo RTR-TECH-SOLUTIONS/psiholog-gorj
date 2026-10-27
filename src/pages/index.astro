@@ -1,33 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image, getImage } from "astro:assets";
-import portretAna from "../assets/portret-ana.webp";
-import portretAnaLat from "../assets/portret-ana-lat.webp";
+import { Image } from "astro:assets";
 import cabinetAnsamblu from "../assets/cabinet-ansamblu.webp";
-import cabinetMateriale from "../assets/cabinet-materiale.webp";
-import sedinteOnline from "../assets/sedinte-online.webp";
 import AntetText from "../components/AntetText.astro";
 import AntetValuri from "../components/AntetValuri.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Faq from "../components/Faq.astro";
-import { site, waLink, u } from "../data/site";
+import { site, u } from "../data/site";
 import { servicii } from "../data/servicii";
-
-const principale = servicii.filter((s) => s.imagine);
-const secundare = servicii.filter((s) => !s.imagine);
 
 // Textele de pe pagină sunt ale clientei, exact cum le-a trimis pe WhatsApp
 // (vezi materiale-primite.md din dosarul contractului). Singurele intervenții
 // sunt diacriticele și greșelile evidente de tastare.
 
-// Hero-ul are două decupaje din aceeași fotografie. Pe ecrane late cadrul e mai
-// mult lat decât înalt, așa că acolo intră varianta cu toată încăperea; sub
-// 1280px rămâne decupajul apropiat, altfel pe telefon s-ar vedea doar camera.
-const portretLat = await getImage({
-  src: portretAnaLat,
-  widths: [900, 1120],
-  format: "webp",
-});
+// Pe 27 octombrie, la 17:52, clienta a cerut ca pe prima pagină să rămână o
+// singură fotografie, cea din cabinet. Au fost scoase portretul din antet,
+// imaginile de pe cardurile de servicii, raftul cu materiale din „Despre mine"
+// și fotografia de la „Ședințe online".
 
 // Recenzii lăsate de părinți pe La-Psiholog.ro, trimise de clientă pe 23 octombrie.
 // Textele sunt preluate cuvânt cu cuvânt, cu prenumele afișat acolo și luna recenziei.
@@ -73,53 +62,27 @@ const intrebari = [
   intrebari={intrebari}
 >
   {/* Hero. Blocul de text stă în AntetText.astro, ca să fie exact același și pe pagina
-      cu modele. Fondul crem, valurile bej și textul maro vin din macheta clientei. */}
+      cu modele. Fondul crem, valurile bej și textul maro vin din macheta clientei.
+      Fără portret, blocul stă singur pe mijloc, pe toată lățimea. */}
   <section class="relative overflow-hidden bg-cream">
-    <AntetValuri />
+    <AntetValuri unde="sus" />
 
-    <div class="relative mx-auto grid max-w-[110rem] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]">
-      <div class="order-2 flex items-center lg:order-1">
-        <div
-          class="w-full px-5 py-12 md:px-10 lg:py-24 xl:pl-[clamp(2.5rem,calc((100vw-72rem)/2),11rem)] xl:pr-16"
+    <div class="wrap relative max-w-3xl py-16 md:py-24 lg:py-28">
+      <AntetText id="acasa">
+        <h1
+          slot="titlu"
+          class="mx-auto max-w-[16ch] font-script text-[2.5rem] font-medium leading-[1.25] text-cocoa md:text-[3.4rem]"
         >
-          <AntetText id="acasa">
-            <h1
-              slot="titlu"
-              class="mx-auto max-w-[16ch] font-script text-[2.5rem] font-medium leading-[1.25] text-cocoa md:text-[3.2rem]"
-            >
-              O altfel de cale către comunicare și dezvoltare
-            </h1>
-          </AntetText>
-        </div>
-      </div>
-
-      <div class="order-1 lg:order-2">
-        <picture>
-          <source
-            media="(min-width: 1280px)"
-            srcset={portretLat.srcSet.attribute}
-            sizes="52vw"
-            width={portretAnaLat.width}
-            height={portretAnaLat.height}
-          />
-          <Image
-            src={portretAna}
-            widths={[480, 720, 900]}
-            sizes="(min-width: 1024px) 52vw, 100vw"
-            alt={`${site.nume}, psiholog clinician, la biroul din cabinetul din ${site.oras}`}
-            class="h-[38vh] w-full object-cover object-[center_22%] sm:h-[46vh] lg:h-full lg:min-h-[34rem]"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </picture>
-      </div>
+          O altfel de cale către comunicare și dezvoltare
+        </h1>
+      </AntetText>
     </div>
   </section>
 
   {/* Bandă de încredere. Coloana cu cei peste 20 de ani a fost scoasă pe 26 octombrie:
       clienta a observat, la 10:11, că experiența se repetă. Rămâne scrisă o singură dată,
       în antet, acolo unde a cerut ea să iasă în evidență. */}
-  <section class="border-b border-line">
+  <section class="border-y border-line">
     <div class="wrap grid gap-y-6 py-8 sm:grid-cols-2 md:grid-cols-3 md:gap-x-8 md:py-9">
       <div class="md:border-r md:border-line md:pr-8">
         <p class="font-serif text-[1.6rem] leading-none">Unu-la-unu</p>
@@ -145,7 +108,8 @@ const intrebari = [
   {/* Rubrica „Cui mă adresez" a fost scoasă de pe prima pagină pe 26 octombrie, la cererea
        ei din mesajul de la 08:29: aceeași listă apare și la Servicii, în fișa terapiei ABA. */}
 
-  {/* Servicii */}
+  {/* Servicii. Cardurile aveau câte o imagine până pe 27 octombrie; au rămas doar
+      titlul, rândul de descriere și legătura către fișa completă. */}
   <section class="bg-cream py-16 md:py-24">
     <div class="wrap">
       <div class="flex flex-wrap items-end justify-between gap-4">
@@ -153,40 +117,13 @@ const intrebari = [
         <a class="link-u text-[0.98rem]" href={u("/servicii")}>Toate serviciile</a>
       </div>
 
-      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+      <div class="mt-10 grid gap-x-10 gap-y-9 md:grid-cols-3">
         {
-          principale.map((s) => (
-            <article class="flex h-full flex-col">
-              <a href={u(`/servicii#${s.slug}`)} class="group block">
-                <Image
-                  src={s.imagine}
-                  widths={[320, 480, 640, 900]}
-                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw"
-                  alt={s.imagineAlt}
-                  loading="lazy"
-                  class="aspect-[4/5] w-full rounded-card object-cover"
-                />
-                <h3 class="mt-5 font-serif text-[1.22rem] leading-snug">{s.titlu}</h3>
-              </a>
-              <p class="mt-2.5 text-[0.95rem] text-ink-soft">{s.scurt}</p>
-              <a class="link-u mt-auto inline-block pt-3.5 text-[0.92rem]" href={u(`/servicii#${s.slug}`)}>
-                Detalii
-              </a>
-            </article>
-          ))
-        }
-      </div>
-
-      <div
-        class="mt-14 grid gap-8 border-t border-line pt-10 sm:grid-cols-2 md:gap-14"
-        hidden={secundare.length === 0}
-      >
-        {
-          secundare.map((s) => (
-            <article>
-              <h3 class="font-serif text-[1.22rem] leading-snug">{s.titlu}</h3>
-              <p class="mt-2 text-[0.96rem] text-ink-soft">{s.scurt}</p>
-              <a class="link-u mt-3 inline-block text-[0.92rem]" href={u(`/servicii#${s.slug}`)}>
+          servicii.map((s) => (
+            <article class="flex h-full flex-col border-t border-line pt-6">
+              <h3 class="font-serif text-[1.3rem] leading-snug text-cocoa">{s.titlu}</h3>
+              <p class="mt-3 text-[0.97rem] text-ink-soft">{s.scurt}</p>
+              <a class="link-u mt-auto inline-block pt-5 text-[0.92rem]" href={u(`/servicii#${s.slug}`)}>
                 Detalii
               </a>
             </article>
@@ -197,8 +134,9 @@ const intrebari = [
   </section>
 
   {/* Spațiul. Secțiune cerută de clientă pe 26 octombrie, la 19:07, după un model pe
-      care l-a trimis. La 19:12 a cerut o singură fotografie, nu două. */}
-  <section class="border-y border-line bg-cream py-16 md:py-20">
+      care l-a trimis. La 19:12 a cerut o singură fotografie, nu două. Pe 27 octombrie,
+      la 17:52, a cerut ca asta să fie singura fotografie de pe prima pagină. */}
+  <section class="border-b border-line bg-cream py-16 md:py-20">
     <div class="wrap text-center">
       <p class="text-[0.78rem] uppercase tracking-[0.18em] text-cocoa-light">Spațiul</p>
       <h2 class="mx-auto mt-4 max-w-[20ch] font-serif text-[2rem] leading-[1.15] text-ink md:text-[2.6rem]">
@@ -211,7 +149,8 @@ const intrebari = [
           widths={[480, 720, 1080, 1440]}
           sizes="(min-width: 1024px) 48rem, 100vw"
           alt="Colțul de lucru din cabinet: rafturile cu materiale, măsuța verde pentru copii și scăunelele"
-          loading="lazy"
+          loading="eager"
+          fetchpriority="high"
           class="aspect-[16/10] w-full rounded-card object-cover"
         />
         <figcaption
@@ -226,70 +165,50 @@ const intrebari = [
 
   {/* Despre */}
   <section class="wrap py-16 md:py-24">
-    <div class="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-      <Image
-        src={cabinetMateriale}
-        widths={[480, 720, 900]}
-        sizes="(min-width: 1024px) 42vw, 100vw"
-        alt="Raftul din cabinet, cu jocuri de limbaj, cărți, fișe și instrumente de lucru pentru copii"
-        loading="lazy"
-        class="aspect-[4/5] w-full rounded-card object-cover"
-      />
-      <div>
-        <h2 class="h2">Despre mine</h2>
-        <p class="mt-5 text-ink-soft">
-          În activitatea mea profesională, pun accent pe înțelegerea particularităților fiecărui
-          copil, pe identificarea nevoilor sale și pe dezvoltarea abilităților care îl ajută să
-          comunice, să învețe și să se adapteze mai bine în viața de zi cu zi.
-        </p>
-        <p class="mt-4 text-ink-soft">
-          Cred cu tărie că un diagnostic nu definește limitele unui copil, ci doar stabilește
-          punctul de plecare în terapie. În cabinetul meu, fiecare mic progres este o victorie
-          uriașă, obținută prin răbdare, consecvență și tehnici moderne.
-        </p>
-        {/* Clienta a cerut pe 27 octombrie, la 07:32, ca serviciile să fie scrise cu maro. */}
-        <ul class="mt-7 grid gap-x-8 gap-y-2 text-[1.02rem] text-cocoa sm:grid-cols-2">
-          <li class="border-b border-line py-2">Terapia VML (limbaj motor-verbal)</li>
-          <li class="border-b border-line py-2">
-            Intervenții bazate pe terapia ABA (Analiza Comportamentală Aplicată)
-          </li>
-          <li class="border-b border-line py-2">
-            Evaluare și terapia logopedică în tulburările de limbaj: de pronunție și în plan
-            lexico-grafic
-          </li>
-          <li class="border-b border-line py-2">
-            Psiholog clinician, drept de liberă practică
-          </li>
-        </ul>
-        <a class="btn btn-ghost mt-8" href={u("/despre")}>Formarea și felul în care lucrez</a>
-      </div>
+    <div class="mx-auto max-w-3xl">
+      <h2 class="h2">Despre mine</h2>
+      <p class="mt-5 text-ink-soft">
+        În activitatea mea profesională, pun accent pe înțelegerea particularităților fiecărui
+        copil, pe identificarea nevoilor sale și pe dezvoltarea abilităților care îl ajută să
+        comunice, să învețe și să se adapteze mai bine în viața de zi cu zi.
+      </p>
+      <p class="mt-4 text-ink-soft">
+        Cred cu tărie că un diagnostic nu definește limitele unui copil, ci doar stabilește
+        punctul de plecare în terapie. În cabinetul meu, fiecare mic progres este o victorie
+        uriașă, obținută prin răbdare, consecvență și tehnici moderne.
+      </p>
+      {/* Clienta a cerut pe 27 octombrie, la 07:32, ca serviciile să fie scrise cu maro. */}
+      <ul class="mt-7 grid gap-x-8 gap-y-2 text-[1.02rem] text-cocoa sm:grid-cols-2">
+        <li class="border-b border-line py-2">Terapia VML (limbaj motor-verbal)</li>
+        <li class="border-b border-line py-2">
+          Intervenții bazate pe terapia ABA (Analiza Comportamentală Aplicată)
+        </li>
+        <li class="border-b border-line py-2">
+          Evaluare și terapia logopedică în tulburările de limbaj: de pronunție și în plan
+          lexico-grafic
+        </li>
+        <li class="border-b border-line py-2">
+          Psiholog clinician, drept de liberă practică
+        </li>
+      </ul>
+      <a class="btn btn-ghost mt-8" href={u("/despre")}>Formarea și felul în care lucrez</a>
     </div>
   </section>
 
   {/* Ședințe online */}
-  <section class="bg-cream py-16 md:py-24">
-    <div class="wrap grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
-      <Image
-        src={sedinteOnline}
-        widths={[480, 720, 1080, 1440]}
-        sizes="(min-width: 1024px) 46vw, 100vw"
-        alt="Ședință online: laptop deschis pe o masă de lemn, caiet de notițe alături, raft cu jucării de lemn în fundal"
-        loading="lazy"
-        class="aspect-[4/3] w-full rounded-card object-cover"
-      />
-      <div>
-        <h2 class="h2 max-w-[18ch]">Ședințe online</h2>
-        <p class="mt-5 max-w-xl text-ink-soft">
-          Ofer posibilitatea desfășurării unor ședințe online, adaptate nevoilor și
-          particularităților fiecărei persoane. Acestea pot include exerciții pentru dezvoltarea
-          atenției și memoriei, gestionarea emoțiilor, dezvoltarea abilităților sociale și
-          activități pentru stimularea comunicării și a limbajului.
-        </p>
-        <p class="mt-4 max-w-xl text-ink-soft">
-          Modalitatea de lucru se stabilește individual, în funcție de vârstă, obiectivele
-          intervenției și adecvarea serviciului la formatul online.
-        </p>
-      </div>
+  <section class="border-t border-line bg-cream py-16 md:py-24">
+    <div class="wrap max-w-3xl">
+      <h2 class="h2 max-w-[18ch]">Ședințe online</h2>
+      <p class="mt-5 text-ink-soft">
+        Ofer posibilitatea desfășurării unor ședințe online, adaptate nevoilor și
+        particularităților fiecărei persoane. Acestea pot include exerciții pentru dezvoltarea
+        atenției și memoriei, gestionarea emoțiilor, dezvoltarea abilităților sociale și
+        activități pentru stimularea comunicării și a limbajului.
+      </p>
+      <p class="mt-4 text-ink-soft">
+        Modalitatea de lucru se stabilește individual, în funcție de vârstă, obiectivele
+        intervenției și adecvarea serviciului la formatul online.
+      </p>
     </div>
   </section>
 
