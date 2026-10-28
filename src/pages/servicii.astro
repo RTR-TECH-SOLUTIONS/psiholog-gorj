@@ -4,10 +4,12 @@ import CtaBand from "../components/CtaBand.astro";
 import { site, waLink, u } from "../data/site";
 import { servicii, publicLabels } from "../data/servicii";
 
+// Filtrul „Pentru părinți" a fost scos pe 28 octombrie: după înlocuirea listei de la
+// Terapia ABA, niciun serviciu nu mai e marcat pentru părinți, iar butonul ar fi dus
+// la o listă goală.
 const filtre = [
   { val: "toate", label: "Toate" },
   { val: "copii", label: publicLabels.copii },
-  { val: "parinti", label: publicLabels.parinti },
   { val: "adulti", label: publicLabels.adulti },
 ];
 ---

@@ -108,36 +108,21 @@ export const servicii: Serviciu[] = [
     descriere: [
       "Terapia ABA (Analiza Comportamentală Aplicată) este o metodă prin care creez o punte de comunicare cu copilul dumneavoastră.",
     ],
+    // Lista a fost înlocuită în întregime pe 28 octombrie, la 07:41: „La Terapia ABA și
+    // intervenția în TSA la Cui se adresează vom înlocui textul cu acesta", cu textul
+    // trimis de ea în seara precedentă, la 21:05. Au ieșit astfel cele șapte puncte
+    // anterioare, inclusiv cel despre părinți și bunici.
     pentruCine: [
       {
-        label: "Copiii și adolescenții cu Tulburare de Spectru Autist (TSA)",
-        text: "pentru dezvoltarea comunicării, interacțiunii sociale și autonomiei.",
+        text: "Copii și adolescenți cu Tulburări din Spectru Autist (TSA).",
       },
       {
-        label: "Copiii cu întârziere în dezvoltare",
-        text: "pentru învățarea unor abilități cognitive, practice și de comunicare.",
+        label: "Copii cu alte întârzieri în dezvoltare și tulburări comportamentale",
+        text: "ADHD, întârzieri severe în dezvoltarea vorbirii și a limbajului, tulburări de opoziție și comportament sfidător, Sindromul Down sau alte dizabilități cognitive și genetice care afectează adaptarea socială.",
       },
       {
-        label: "Copiii cu dificultăți de comunicare",
-        text: "pentru dezvoltarea comunicării funcționale, inclusiv solicitarea ajutorului și exprimarea nevoilor.",
-      },
-      {
-        label: "Copiii cu comportamente problematice",
-        text: "pentru înțelegerea cauzelor comportamentelor și dezvoltarea unor alternative adecvate.",
-      },
-      {
-        label: "Micuții cu întârzieri în dezvoltarea neuropsihică sau de limbaj",
-        text: "care au nevoie de stimulare timpurie personalizată.",
-      },
-      {
-        text: "Copiii care întâmpină dificultăți de comportament (ADHD, tantrumuri intense, anxietate) sau dificultăți de adaptare și învățare.",
-      },
-      {
-        text: "Copiii care au nevoie să-și dezvolte abilitățile de autonomie și sociale, pentru a învăța să urmeze instrucțiuni, să aștepte, să împartă jucării și să participe la activități.",
-      },
-      {
-        label: "Părinți și bunici",
-        text: "terapia dă roade atunci când lucrăm împreună. De aceea, vă voi sprijini prin sesiuni de consiliere, training și tehnici practice, pentru ca mediul de acasă să devină cel mai bun spațiu de creștere. Suntem o echipă!",
+        label: "Adulți care se confruntă cu",
+        text: "leziuni cerebrale post-traumatice (pentru reînvățarea unor comportamente motorii sau cognitive de bază).",
       },
     ],
     ceUrmaresc: [
@@ -174,7 +159,8 @@ export const servicii: Serviciu[] = [
       "Intervenția poate începe de la vârste mici și poate continua la vârste mai mari, în funcție de nevoile și nivelul de dezvoltare al copilului.",
       "Fiecare program este individualizat, cu obiective stabilite în funcție de abilitățile copilului și de prioritățile familiei, urmărind progresul și dezvoltarea independenței în viața de zi cu zi.",
     ],
-    public: ["copii", "parinti"],
+    // Lista nouă se adresează copiilor și adulților, nu părinților.
+    public: ["copii", "adulti"],
   },
 ];
 
