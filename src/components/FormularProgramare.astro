@@ -5,6 +5,11 @@ import { site, u } from "../data/site";
 // macheta trimisă la 20:55: patru câmpuri, informarea privind prelucrarea datelor sub ultimul
 // chenar și butonul „Trimite solicitarea". Mesajul de confirmare e cel cerut de ea la 20:44.
 //
+// Pe 28 octombrie, la 21:36, a trimis o captură chiar cu acest bloc, iar la 21:38: „Dacă vă e
+// mai ușor, ….. de luni până duminică, fără ore" și „Înlocuim de luni până vineri cu De luni
+// până duminică, fără ore". Deci rândul cu telefonul nu mai are interval orar. Programul
+// cabinetului, din subsol și de pe pagina de contact, a rămas neatins.
+//
 // Formularul NU trimite nimic către un server: la apăsarea butonului, răspunsurile sunt puse
 // într-un mesaj WhatsApp, în browserul părintelui, iar mesajul pleacă doar dacă îl trimite el
 // din WhatsApp. Așa, site-ul rămâne fără colectare de date (art. 12.1 din contract) și nu
@@ -26,7 +31,7 @@ import { site, u } from "../data/site";
         Dacă vă e mai ușor, sunați-mă la <a
           class="link-u"
           href={`tel:${site.telefon.replace(/\s/g, "")}`}>{site.telefonAfisat}</a
-        >, luni până vineri, între 16:00 și 20:00.
+        >, de luni până duminică.
       </p>
     </div>
 
