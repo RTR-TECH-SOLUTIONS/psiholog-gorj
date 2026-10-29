@@ -1,5 +1,13 @@
 ---
-import { site, u } from "../data/site";
+import { site, u, waLink } from "../data/site";
+
+interface Props {
+  // pe prima pagină, blocul ține și invitația ei, „Primul pas e un mesaj", și butonul verde
+  // de WhatsApp, fiindcă acolo înlocuiește banda de contact
+  acasa?: boolean;
+}
+
+const { acasa = false } = Astro.props;
 
 // Formularul cerut de clientă pe 27 octombrie, la 20:38 („Ar trebui și un formular?"), cu
 // macheta trimisă la 20:55: patru câmpuri, informarea privind prelucrarea datelor sub ultimul
@@ -9,6 +17,11 @@ import { site, u } from "../data/site";
 // mai ușor, ….. de luni până duminică, fără ore" și „Înlocuim de luni până vineri cu De luni
 // până duminică, fără ore". Deci rândul cu telefonul nu mai are interval orar. Programul
 // cabinetului, din subsol și de pe pagina de contact, a rămas neatins.
+//
+// Pe 29 octombrie, la 08:59, a cerut ca informațiile să curgă firesc, fără ca părintele să
+// caute prin pagini sau să apese pe mai multe butoane, iar la 09:11 și 14:12 a cerut de două
+// ori ca tocmai acest bloc să fie ultimul de pe prima pagină. Acolo ia locul benzii de contact,
+// care spunea același lucru cu mai puțin, și preia de la ea invitația și butonul de WhatsApp.
 //
 // Formularul NU trimite nimic către un server: la apăsarea butonului, răspunsurile sunt puse
 // într-un mesaj WhatsApp, în browserul părintelui, iar mesajul pleacă doar dacă îl trimite el
@@ -23,6 +36,7 @@ import { site, u } from "../data/site";
   <div class="wrap grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
     <div>
       <h2 class="h2 max-w-[14ch]">Solicitați o programare</h2>
+      {acasa && <p class="mt-4 font-serif text-[1.35rem] text-cocoa">Primul pas e un mesaj.</p>}
       <p class="mt-5 text-ink-soft">
         Scrieți-mi în câteva rânduri despre copilul dumneavoastră. Când apăsați butonul, mesajul
         se deschide gata scris în WhatsApp, iar dumneavoastră doar îl trimiteți.
@@ -33,6 +47,18 @@ import { site, u } from "../data/site";
           href={`tel:${site.telefon.replace(/\s/g, "")}`}>{site.telefonAfisat}</a
         >, de luni până duminică.
       </p>
+      {
+        acasa && (
+          <a
+            class="btn btn-whatsapp mt-7"
+            href={waLink("Bună ziua, aș dori să discutăm despre o programare.")}
+            target="_blank"
+            rel="noopener"
+          >
+            Scrieți-mi pe WhatsApp
+          </a>
+        )
+      }
     </div>
 
     <div class="rounded-card border border-line bg-blush p-5 md:p-7">

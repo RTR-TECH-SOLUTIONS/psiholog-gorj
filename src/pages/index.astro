@@ -6,7 +6,7 @@ import portretAnaLat from "../assets/portret-ana-lat.webp";
 import cabinetAnsamblu from "../assets/cabinet-ansamblu.webp";
 import AntetText from "../components/AntetText.astro";
 import AntetValuri from "../components/AntetValuri.astro";
-import CtaBand from "../components/CtaBand.astro";
+import FormularProgramare from "../components/FormularProgramare.astro";
 import Faq from "../components/Faq.astro";
 import { site, u } from "../data/site";
 import { servicii } from "../data/servicii";
@@ -312,5 +312,9 @@ const intrebari = [
     </div>
   </section>
 
-  <CtaBand />
+  {/* Blocul de programare, mutat aici pe 29 octombrie: „Dacă puteți trece aceasta secțiune pe
+      pagina principală, ultima" (09:11) și „Solicitați o programare să fie jos, pe pagina
+      principală?" (14:12). Ia locul benzii de contact, care spunea același lucru fără formular,
+      ca părintele să nu mai treacă pe altă pagină ca să ceară o programare. */}
+  <FormularProgramare acasa />
 </Layout>
