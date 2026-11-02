@@ -22,8 +22,8 @@ import { servicii } from "../data/servicii";
 // fotografia ei, iar antetul fără ea ar fi rămas gol.
 
 // Hero-ul are două decupaje din aceeași fotografie. Pe ecrane late cadrul e mai
-// mult lat decât înalt, așa că acolo intră varianta cu toată încăperea; sub
-// 1280px rămâne decupajul apropiat, altfel pe telefon s-ar vedea doar camera.
+// înalt decât lat, așa că acolo intră fotografia întreagă, cu diplomele și biroul;
+// sub 1280px cadrul e lat și scund, deci rămâne decupajul apropiat.
 const portretLat = await getImage({
   src: portretAnaLat,
   widths: [900, 1120],
