@@ -18,12 +18,16 @@ const filtre = [
   title={`Logopedie, terapie VML și ABA pentru copii · ${site.oras}`}
   description={`Evaluare și terapie logopedică, terapia VML a limbajului și intervenția comportamentală ABA pentru copii, la cabinetul din ${site.oras}, ${site.judet}.`}
 >
-  {/* Titlul e cel trimis de clientă pe 26 octombrie, la 18:53. Fraza de dedesubt, scrisă
-      de noi, a fost scoasă: pe site rămân numai textele ei. */}
+  {/* Titlul mare e cel trimis de clientă pe 26 octombrie, la 18:53. Fraza de dedesubt, scrisă
+      de noi, a fost scoasă: pe site rămân numai textele ei. h1-ul e rândul mic de deasupra,
+      cu numele terapiilor și orașul, adică ce caută părinții (6 noiembrie 2026). */}
   <section class="border-b border-line bg-cream">
     <div class="wrap py-14 md:py-20">
-      <h1 class="h1 max-w-[20ch] text-cocoa">Comunicare și dezvoltare, sprijin la orice vârstă</h1>
-      <p class="mt-5 text-[0.95rem] text-ink-soft">{site.nume} · {site.oras}, {site.judet}</p>
+      <h1 class="font-sans text-[0.98rem] font-normal leading-normal tracking-normal text-ink-soft">
+        Logopedie, terapie VML și ABA pentru copii în {site.oras}, {site.judet}
+      </h1>
+      <p class="titlu h1 mt-3 max-w-[20ch] text-cocoa">Comunicare și dezvoltare, sprijin la orice vârstă</p>
+      <p class="mt-5 text-[0.95rem] text-ink-soft">{site.nume}, {site.titulatura.toLowerCase()}</p>
     </div>
   </section>
 

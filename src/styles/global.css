@@ -59,7 +59,9 @@
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4 {
+  /* .titlu: un rând care arată ca un titlu, dar nu e titlu în HTML. E cazul frazelor
+     clientei care au rămas mari pe ecran după ce h1-ul a trecut pe rândul cu orașul. */
+  h1, h2, h3, h4, .titlu {
     font-family: var(--font-serif);
     font-weight: 400;
     line-height: 1.15;
